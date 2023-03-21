@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using TravelAgency.Application;
 using TravelAgency.Auth;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Data;
 
 namespace TravelAgency
 {
-    public class Program
+	public class Program
 	{
 		public static async Task Main(string[] args)
 		{
@@ -60,7 +61,7 @@ namespace TravelAgency
 				builder.Services.AddSwaggerGen();
 			}
 
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			var app = builder.Build();
 
@@ -74,7 +75,7 @@ namespace TravelAgency
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
-			
+
 			app.UseStaticFiles();
 
 			app.UseRouting();

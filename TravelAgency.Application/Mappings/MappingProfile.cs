@@ -2,7 +2,7 @@
 
 namespace TravelAgency.Application.Mappings
 {
-    public class MappingProfile : Profile
-    {
-    }
+	public class MappingProfile : Profile
+	{
+	}
 }
