@@ -39,7 +39,7 @@ public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 					TokenUrl = new Uri(discoveryDocument.TokenEndpoint),
 					Scopes = new Dictionary<string, string>
 					{
-						{ "TravelAgency.API", "API access" }
+						{ "TravelAgencyAPI", "API access" }
 					}
 				}
 			},
