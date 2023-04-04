@@ -1,0 +1,1 @@
+﻿Update-Database -Project TravelAgency.Infrastructure -StartupProject TravelAgency

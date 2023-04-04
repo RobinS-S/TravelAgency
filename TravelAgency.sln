@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgency", "API\TravelAgency\TravelAgency.csproj", "{562270FA-1C36-477B-B591-92D73C0EB7F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgency.Domain", "API\TravelAgency.Domain\TravelAgency.Domain.csproj", "{4456D219-3D87-40C0-933F-DE7BF5E6A756}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgency.Application", "API\TravelAgency.Application\TravelAgency.Application.csproj", "{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgency.Infrastructure", "API\TravelAgency.Infrastructure\TravelAgency.Infrastructure.csproj", "{8663B9FE-8F2D-4CED-800E-964453D633CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{BB14D719-67A1-47F8-A248-FC79A576C987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{74833B8A-A058-4E7D-BA21-230D840711BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelAgency.Client", "Clients\TravelAgency.Client\TravelAgency.Client.csproj", "{189414CC-B591-4573-A223-A7613EEB47A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{562270FA-1C36-477B-B591-92D73C0EB7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562270FA-1C36-477B-B591-92D73C0EB7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562270FA-1C36-477B-B591-92D73C0EB7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562270FA-1C36-477B-B591-92D73C0EB7F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4456D219-3D87-40C0-933F-DE7BF5E6A756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4456D219-3D87-40C0-933F-DE7BF5E6A756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4456D219-3D87-40C0-933F-DE7BF5E6A756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4456D219-3D87-40C0-933F-DE7BF5E6A756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8663B9FE-8F2D-4CED-800E-964453D633CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8663B9FE-8F2D-4CED-800E-964453D633CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8663B9FE-8F2D-4CED-800E-964453D633CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8663B9FE-8F2D-4CED-800E-964453D633CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189414CC-B591-4573-A223-A7613EEB47A2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{562270FA-1C36-477B-B591-92D73C0EB7F9} = {BB14D719-67A1-47F8-A248-FC79A576C987}
+		{4456D219-3D87-40C0-933F-DE7BF5E6A756} = {BB14D719-67A1-47F8-A248-FC79A576C987}
+		{1BCF2026-B6A4-47AF-93FF-F3367C52A9ED} = {BB14D719-67A1-47F8-A248-FC79A576C987}
+		{8663B9FE-8F2D-4CED-800E-964453D633CD} = {BB14D719-67A1-47F8-A248-FC79A576C987}
+		{189414CC-B591-4573-A223-A7613EEB47A2} = {74833B8A-A058-4E7D-BA21-230D840711BF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D400C050-1B72-44F1-99A0-D1EA395DEABB}
+	EndGlobalSection
+EndGlobal
