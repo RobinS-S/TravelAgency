@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace TravelAgency.Client
+namespace TravelAgency.Client.Platforms.Android
 {
     [Application]
     public class MainApplication : MauiApplication

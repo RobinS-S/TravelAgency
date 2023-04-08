@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace TravelAgency.Client
+namespace TravelAgency.Client.Platforms.iOS
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace TravelAgency.Client
+namespace TravelAgency.Client.Platforms.iOS
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate
