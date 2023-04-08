@@ -2,6 +2,8 @@ using IdentityModel.Client;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Net;
+using System.Security.Authentication;
 using TravelAgency.Application;
 
 namespace TravelAgency.Auth;
@@ -39,8 +41,8 @@ public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 					TokenUrl = new Uri(discoveryDocument.TokenEndpoint),
 					Scopes = new Dictionary<string, string>
 					{
-						{ "TravelAgencyAPI", "API access" }
-					}
+						{ "TravelAgencyAPI", "Customer API access" }
+					},
 				}
 			},
 			Description = "TravelAgency API access"
@@ -49,8 +51,13 @@ public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 
 	private DiscoveryDocumentResponse GetDiscoveryDocument()
 	{
-		return _httpClientFactory
-			.CreateClient()
+		var handler = new HttpClientHandler()
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            SslProtocols = SslProtocols.Tls12,
+            ClientCertificateOptions = ClientCertificateOption.Manual
+        };
+        return new HttpClient(handler)
 			.GetDiscoveryDocumentAsync(_settings.AppUrl)
 			.GetAwaiter()
 			.GetResult();
@@ -65,4 +72,12 @@ public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 			Description = "Provides endpoints to exchange information with the TravelAgency database."
 		};
 	}
+}
+public class CustomHttpMessageHandler : HttpClientHandler
+{
+    public CustomHttpMessageHandler()
+    {
+        // Disable SSL certificate validation
+        ServerCertificateCustomValidationCallback = (message, certificate2, arg3, arg4) => true;
+    }
 }
