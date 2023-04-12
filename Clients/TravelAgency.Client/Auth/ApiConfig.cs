@@ -8,8 +8,9 @@
         public const string ClientId = "TravelAgency.Client";
         public const string Scopes = "openid offline_access profile TravelAgencyAPI";
         public const string CustomProtocolRedirectUri = "travelagency://callback";
-        public const string AppShellDefaultPageAfterLogin = "//MainPage";
-    #else
-    #endif
+        public const string AppShellDefaultPageAfterLogin = "//test";
+        public const string AppShellDefaultPageAnonymous = "//main";
+#else
+#endif
     }
 }

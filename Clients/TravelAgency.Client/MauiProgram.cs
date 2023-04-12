@@ -37,7 +37,9 @@ namespace TravelAgency.Client
             builder.Services.AddTransient<AuthenticatedContentPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<TestPage>();
+            builder.Services.AddTransient<AppShell>();
 
 #if DEBUG
             builder.Logging.AddDebug();

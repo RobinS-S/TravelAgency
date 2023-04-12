@@ -63,12 +63,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Auth\Pages\LogoutPage.xaml.cs">
+	    <DependentUpon>LogoutPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Auth\Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Auth\Pages\LogoutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Auth\Pages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

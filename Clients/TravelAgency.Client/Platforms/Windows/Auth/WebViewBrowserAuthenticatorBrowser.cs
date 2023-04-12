@@ -5,6 +5,8 @@ namespace TravelAgency.Client.Platforms.Windows.Auth
     public class WebViewBrowserAuthenticatorBrowser : IdentityModel.OidcClient.Browser.IBrowser
     {
         private readonly WebView _webView;
+        private TaskCompletionSource<BrowserResult> _tcs;
+        private string _endUrl;
 
         public WebViewBrowserAuthenticatorBrowser(WebView webView)
         {
@@ -13,30 +15,37 @@ namespace TravelAgency.Client.Platforms.Windows.Auth
 
         public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
         {
-            var tcs = new TaskCompletionSource<BrowserResult>();
+            _tcs = new TaskCompletionSource<BrowserResult>();
+            _endUrl = options.EndUrl;
 
-            _webView.Navigating += (sender, e) =>
-            {
-                if (e.Url.StartsWith(options.EndUrl))
-                {
-                    _webView.WidthRequest = 0;
-                    _webView.HeightRequest = 0;
-                    if (tcs.Task.Status != TaskStatus.RanToCompletion)
-                    {
-                        tcs.SetResult(new BrowserResult
-                        {
-                            ResultType = BrowserResultType.Success,
-                            Response = e.Url.ToString()
-                        });
-                    }
-                }
-            };
+            _webView.Navigating += WebViewOnNavigating;
 
             _webView.WidthRequest = 800;
             _webView.HeightRequest = 800;
             _webView.Source = new UrlWebViewSource { Url = options.StartUrl };
 
-            return await tcs.Task;
+            return await _tcs.Task;
+        }
+
+        private void WebViewOnNavigating(object sender, WebNavigatingEventArgs e)
+        {
+            if (!e.Url.StartsWith(_endUrl)) return;
+
+            _webView.WidthRequest = 0;
+            _webView.HeightRequest = 0;
+            if (_tcs.Task.Status != TaskStatus.RanToCompletion)
+            {
+                _tcs.SetResult(new BrowserResult
+                {
+                    ResultType = BrowserResultType.Success,
+                    Response = e.Url
+                });
+            }
+        }
+
+        public void Unsubscribe()
+        {
+            _webView.Navigating -= WebViewOnNavigating;
         }
     }
 }

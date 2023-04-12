@@ -65,7 +65,7 @@ namespace TravelAgency.Client.Auth.Pages
 
         private async void OpenLoginPage()
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("//login");
         }
     }
 }

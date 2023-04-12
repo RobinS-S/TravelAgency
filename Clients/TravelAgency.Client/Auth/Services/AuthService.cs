@@ -10,6 +10,8 @@ namespace TravelAgency.Client.Auth.Services
         private readonly HttpClient _httpClient;
         private readonly OidcClient _openIdClient;
         private bool _loggingIn;
+        private bool _hasAuthToken;
+        public event EventHandler<bool> AuthStatusChanged;
 
         public AuthService(HttpClient httpClient)
         {
@@ -25,9 +27,11 @@ namespace TravelAgency.Client.Auth.Services
             });
         }
 
+        public bool HasAuthToken => _hasAuthToken;
+        
         public async Task StartLoginProcess()
         {
-            if (_loggingIn || Shell.Current.CurrentState.Location.ToString() == "//LoginPage")
+            if (_loggingIn || Shell.Current.CurrentState.Location.ToString() == "//login")
             {
                 return;
             }
@@ -39,7 +43,7 @@ namespace TravelAgency.Client.Auth.Services
 
         public bool CanStartLoginProcess()
         {
-            if (_loggingIn || Shell.Current.CurrentState.Location.ToString() == "//LoginPage")
+            if (_loggingIn || Shell.Current.CurrentState.Location.ToString() == "//login")
             {
                 return false;
             }
@@ -75,6 +79,12 @@ namespace TravelAgency.Client.Auth.Services
         {
             _httpClient.DefaultRequestHeaders.Remove("Authorization");
             _httpClient.DefaultRequestHeaders.Authorization = accessToken == null ? null : new AuthenticationHeaderValue("Bearer", accessToken);
+            var hasToken = accessToken != null;
+            if (_hasAuthToken != hasToken)
+            {
+                _hasAuthToken = hasToken;
+                this.AuthStatusChanged?.Invoke(this, _hasAuthToken);
+            }
         }
 
         private async Task HandleResult(bool isError, string accessToken, string refreshToken)
@@ -99,6 +109,7 @@ namespace TravelAgency.Client.Auth.Services
             SecureStorage.Default.Remove("authToken");
             SecureStorage.Default.Remove("refreshToken");
             LoadToken(null);
+            _hasAuthToken = false;
         }
 
         public async Task<string> GetAuthToken() => await SecureStorage.Default.GetAsync("authToken");
@@ -133,6 +144,22 @@ namespace TravelAgency.Client.Auth.Services
                 Console.WriteLine("ERROR: {0}", loginResult.Error);
             }
             return loginResult;
+        }
+
+        public async Task<LogoutResult> Logout(IdentityModel.OidcClient.Browser.IBrowser browser)
+        {
+            _loggingIn = true;
+            _openIdClient.Options.Browser = browser;
+            var logoutResult = await _openIdClient.LogoutAsync(new LogoutRequest());
+
+            if (logoutResult.IsError)
+            {
+                Console.WriteLine("ERROR: {0}", logoutResult.Error);
+            }
+
+            ResetCredentials();
+            _loggingIn = false;
+            return logoutResult;
         }
     }
 }

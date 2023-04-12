@@ -3,11 +3,10 @@
     x:Class="TravelAgency.Client.Pages.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TravelAgency.Client.Pages"
     xmlns:main="using:TravelAgency.Client.Pages.Main"
     xmlns:login="using:TravelAgency.Client.Auth.Pages"
     xmlns:test="using:TravelAgency.Client.Pages.Test"
-    Shell.FlyoutBehavior="Flyout">
+    FlyoutBehavior="Flyout">
 
     <ShellContent
         Title="Main"
@@ -21,7 +20,13 @@
 
     <ShellContent
         Title="Login"
+        x:Name="LoginContent"
         ContentTemplate="{DataTemplate login:LoginPage}"
-        Route="LoginPage" FlyoutItemIsVisible="False" />
+        Route="LoginPage" FlyoutItemIsVisible="True"/>
+    <ShellContent
+        Title="Logout"
+        x:Name="LogoutContent"
+        ContentTemplate="{DataTemplate login:LogoutPage}"
+        Route="LogoutPage" FlyoutItemIsVisible="True"/>
 
 </Shell>
