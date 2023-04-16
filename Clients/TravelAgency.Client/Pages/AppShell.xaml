@@ -11,22 +11,22 @@
     <ShellContent
         Title="Main"
         ContentTemplate="{DataTemplate main:MainPage}"
-        Route="MainPage" FlyoutItemIsVisible="True" />
+        Route="main" FlyoutItemIsVisible="True" />
 
     <ShellContent
         Title="Test"
         ContentTemplate="{DataTemplate test:TestPage}"
-        Route="TestPage" FlyoutItemIsVisible="True" />
+        Route="test" FlyoutItemIsVisible="True" />
 
     <ShellContent
         Title="Login"
         x:Name="LoginContent"
         ContentTemplate="{DataTemplate login:LoginPage}"
-        Route="LoginPage" FlyoutItemIsVisible="True"/>
+        Route="login" FlyoutItemIsVisible="True"/>
     <ShellContent
         Title="Logout"
         x:Name="LogoutContent"
         ContentTemplate="{DataTemplate login:LogoutPage}"
-        Route="LogoutPage" FlyoutItemIsVisible="True"/>
+        Route="logout" FlyoutItemIsVisible="True"/>
 
 </Shell>
