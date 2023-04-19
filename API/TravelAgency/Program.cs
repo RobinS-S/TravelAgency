@@ -1,4 +1,8 @@
+using Duende.IdentityServer;
+using Duende.IdentityServer.Validation;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -7,10 +11,11 @@ using TravelAgency.Application;
 using TravelAgency.Auth;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Data;
+using static IdentityModel.ClaimComparer;
 
 namespace TravelAgency
 {
-	public class Program
+    public class Program
 	{
 		public static async Task Main(string[] args)
 		{
@@ -27,44 +32,52 @@ namespace TravelAgency
 
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-				.AddEntityFrameworkStores<TravelAgencyDbContext>()
-				.AddDefaultUI()
-				.AddDefaultTokenProviders();
+            builder.Services
+                .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<TravelAgencyDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
 			builder.Services
 				.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>();
 
-			builder.Services.AddIdentityServer(options =>
-			{
-				if (!builder.Environment.IsDevelopment()) return;
-				options.Events.RaiseErrorEvents = true;
-				options.Events.RaiseInformationEvents = true;
-				options.Events.RaiseFailureEvents = true;
-				options.Events.RaiseSuccessEvents = true;
-			}).AddApiAuthorization<ApplicationUser, TravelAgencyDbContext>(o =>
-			{
-				if (builder.Environment.IsDevelopment())
-				{
-					o.Clients[0].RedirectUris.Add("/swagger/oauth2-redirect.html");
-				}
-			});
-			builder.Services.AddAuthentication()
-				.AddIdentityServerJwt();
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
+            builder.Services.AddControllers();
 
-			builder.Services.AddControllersWithViews();
-			builder.Services.AddRazorPages();
-			builder.Services.AddControllers();
+            builder.Services.AddAuthentication()
+                .AddIdentityServerJwt();
 
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			if (builder.Environment.IsDevelopment())
+            builder.Services.AddIdentityServer(options =>
+            {
+                if (!builder.Environment.IsDevelopment()) return;
+                options.Events.RaiseErrorEvents = true;
+                options.Events.RaiseInformationEvents = true;
+                options.Events.RaiseFailureEvents = true;
+                options.Events.RaiseSuccessEvents = true;
+            }).AddJwtBearerClientAuthentication()
+                .AddApiAuthorization<ApplicationUser, TravelAgencyDbContext>(o =>
+            {
+                if (builder.Environment.IsDevelopment())
+                {
+                    var client = o.Clients[0];
+                    client.RedirectUris.Add("/swagger/oauth2-redirect.html");
+                    client.RedirectUris.Add("travelagency://callback");
+                    client.AllowedScopes.Add("TravelAgencyAPI");
+                    client.AllowOfflineAccess = true;
+                }
+            });
+			
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            if (builder.Environment.IsDevelopment())
 			{
 				builder.Services.AddSwaggerGen();
 			}
 
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddTransient<IRedirectUriValidator, TestAuthRedirectUriValidator>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 
@@ -72,9 +85,9 @@ namespace TravelAgency
 
 			app.UseStaticFiles();
 
-			app.UseRouting();
+            app.UseRouting();
 
-			app.UseIdentityServer();
+            app.UseIdentityServer();
 			app.UseAuthorization();
 
 			await DatabaseSeeder.SeedDatabase(app.Services); // Ensure the roles and a default user exists
@@ -85,8 +98,8 @@ namespace TravelAgency
 				app.UseSwaggerUI(setup =>
 				{
 					setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1.0");
-					setup.OAuthClientId("TravelAgency.Swagger");
-					setup.OAuthAppName("TravelAgency.Swagger");
+					setup.OAuthClientId("TravelAgency.Client");
+					setup.OAuthAppName("TravelAgency.Client");
 					setup.OAuthScopeSeparator(" ");
 					setup.OAuthUsePkce();
 				});

@@ -53,7 +53,8 @@ namespace TravelAgency.Infrastructure.Data
 		}
 
 		private static async Task SeedSampleData(TravelAgencyDbContext dbContext, ApplicationUser user)
-		{
-		}
+        {
+            await Task.Delay(0);
+        }
 	}
 }

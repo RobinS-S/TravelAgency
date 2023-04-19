@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TravelAgency.Client.Pages.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:main="using:TravelAgency.Client.Pages.Main"
+    xmlns:login="using:TravelAgency.Client.Auth.Pages"
+    xmlns:test="using:TravelAgency.Client.Pages.Test"
+    FlyoutBehavior="Flyout">
+
+    <ShellContent
+        Title="Main"
+        ContentTemplate="{DataTemplate main:MainPage}"
+        Route="main" FlyoutItemIsVisible="True" />
+
+    <ShellContent
+        Title="Test"
+        ContentTemplate="{DataTemplate test:TestPage}"
+        Route="test" FlyoutItemIsVisible="True" />
+
+    <ShellContent
+        Title="Login"
+        x:Name="LoginContent"
+        ContentTemplate="{DataTemplate login:LoginPage}"
+        Route="login" FlyoutItemIsVisible="True"/>
+    <ShellContent
+        Title="Logout"
+        x:Name="LogoutContent"
+        ContentTemplate="{DataTemplate login:LogoutPage}"
+        Route="logout" FlyoutItemIsVisible="True"/>
+
+</Shell>

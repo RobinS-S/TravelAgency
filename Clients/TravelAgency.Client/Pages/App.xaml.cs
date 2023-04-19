@@ -1,4 +1,4 @@
-﻿namespace TravelAgency.Client
+﻿namespace TravelAgency.Client.Pages
 {
     public partial class App : Application
     {

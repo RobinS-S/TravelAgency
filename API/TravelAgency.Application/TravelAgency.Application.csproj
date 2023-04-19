@@ -19,4 +19,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\TravelAgency.Shared\TravelAgency.Shared.csproj" />
+    <ProjectReference Include="..\TravelAgency.Domain\TravelAgency.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
