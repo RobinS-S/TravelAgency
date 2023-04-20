@@ -1,8 +1,5 @@
-using Duende.IdentityServer;
 using Duende.IdentityServer.Validation;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -11,7 +8,7 @@ using TravelAgency.Application;
 using TravelAgency.Auth;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Data;
-using static IdentityModel.ClaimComparer;
+using TravelAgency.Infrastructure.Repositories;
 
 namespace TravelAgency
 {
@@ -28,7 +25,7 @@ namespace TravelAgency
 
 			var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 			builder.Services.AddDbContext<TravelAgencyDbContext>(options =>
-				options.UseMySql(connectionString, new MySqlServerVersion(new Version())));
+				options.UseMySql(connectionString, new MySqlServerVersion(new Version()), o => o.UseNetTopologySuite()));
 
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -76,6 +73,10 @@ namespace TravelAgency
 
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IRedirectUriValidator, TestAuthRedirectUriValidator>();
+            
+			builder.Services.AddScoped<CountryRepository>();
+            builder.Services.AddScoped<LocationRepository>();
+            builder.Services.AddScoped<ResidenceRepository>();
 
             var app = builder.Build();
 
