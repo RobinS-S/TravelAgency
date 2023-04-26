@@ -1,14 +1,22 @@
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TravelAgency.Application;
+using TravelAgency.Application.Services;
+using TravelAgency.Application.Services.Interfaces;
 using TravelAgency.Auth;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Repositories.Interfaces;
 using TravelAgency.Infrastructure.Data;
 using TravelAgency.Infrastructure.Repositories;
+using TravelAgency.Services;
 
 namespace TravelAgency
 {
@@ -45,31 +53,20 @@ namespace TravelAgency
             builder.Services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            builder.Services.AddIdentityServer(options =>
-            {
-                if (!builder.Environment.IsDevelopment()) return;
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-            }).AddJwtBearerClientAuthentication()
-                .AddApiAuthorization<ApplicationUser, TravelAgencyDbContext>(o =>
-            {
-                if (builder.Environment.IsDevelopment())
-                {
-                    var client = o.Clients[0];
-                    client.RedirectUris.Add("/swagger/oauth2-redirect.html");
-                    client.RedirectUris.Add("travelagency://callback");
-                    client.AllowedScopes.Add("TravelAgencyAPI");
-                    client.AllowOfflineAccess = true;
-                }
-            });
-			
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            if (builder.Environment.IsDevelopment())
+			builder.Services.AddIdentityServer(options =>
 			{
-				builder.Services.AddSwaggerGen();
-			}
+				if (!builder.Environment.IsDevelopment()) return;
+				options.Events.RaiseErrorEvents = true;
+				options.Events.RaiseInformationEvents = true;
+				options.Events.RaiseFailureEvents = true;
+				options.Events.RaiseSuccessEvents = true;
+			})
+			.AddInMemoryIdentityResources(IdentityConfig.IdentityResources)
+			.AddInMemoryApiScopes(IdentityConfig.ApiScopes)
+			.AddInMemoryClients(IdentityConfig.Clients)
+			.AddDeveloperSigningCredential()
+			.AddJwtBearerClientAuthentication()
+			.AddAspNetIdentity<ApplicationUser>();
 
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IRedirectUriValidator, TestAuthRedirectUriValidator>();

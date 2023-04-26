@@ -1,42 +1,31 @@
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using AutoMapper;
-using TravelAgency.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TravelAgency.Services;
 using TravelAgency.Shared.Dto;
 
 namespace TravelAgency.Controllers.Api
 {
-    [Authorize(AuthenticationSchemes = IdentityServerJwtConstants.IdentityServerJwtBearerScheme)]
+    [Authorize]
     [ApiController]
-	[Route("api/[controller]")]
-	public class AccountController : ControllerBase
+    [Route("api/[controller]")]
+    public class AccountController : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserService _userService;
         private readonly IMapper _mapper;
 
-        public AccountController(ILogger<AccountController> logger, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public AccountController(UserService userManager, IMapper mapper)
         {
-            _logger = logger;
-            _userManager = userManager;
+            _userService = userManager;
             _mapper = mapper;
         }
 
-		[HttpGet("profile")]
+        [HttpGet("profile")]
         [ProducesResponseType(typeof(ProfileDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetCurrentProfile()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userService.GetUserAsync(User);
             if (user == null)
             {
                 return BadRequest();
@@ -45,5 +34,5 @@ namespace TravelAgency.Controllers.Api
             var userDto = _mapper.Map<ProfileDto>(user);
             return Ok(userDto);
         }
-	}
+    }
 }
