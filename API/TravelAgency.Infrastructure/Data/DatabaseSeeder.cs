@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TravelAgency.Application;
+using TravelAgency.Application.Services.Interfaces;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Helpers;
 using TravelAgency.Shared.Enum;
@@ -16,7 +19,9 @@ namespace TravelAgency.Infrastructure.Data
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var configuration = scope.ServiceProvider.GetRequiredService<Config>();
+            var imageService = scope.ServiceProvider.GetRequiredService<IImageService>();
             var adminRoleName = Roles.AdminRoleName;
+            var dataExists = await dbContext.Users.AnyAsync();
 
             var roleExist = await roleManager.RoleExistsAsync(adminRoleName);
             if (!roleExist) await roleManager.CreateAsync(new IdentityRole(adminRoleName));
@@ -48,17 +53,26 @@ namespace TravelAgency.Infrastructure.Data
                 if (!isAdmin) await userManager.AddToRoleAsync(user, Roles.AdminRoleName);
             }
 
-            if (user != null)
+            if (user != null && !dataExists)
             {
-                await SeedSampleData(dbContext, user);
+                await SeedSampleData(dbContext, imageService, user);
             }
         }
 
-        private static async Task SeedSampleData(TravelAgencyDbContext dbContext, ApplicationUser user)
+        private static async Task SeedSampleData(TravelAgencyDbContext dbContext, IImageService imageService, ApplicationUser user)
         {
+            var esImage = await UploadImageFromSeedingImages("country-es.jpg", user, imageService);
+            var frImage = await UploadImageFromSeedingImages("country-fr.jpg", user, imageService);
+
             var countries = new[] {
-              new Country("ES", new GeoCoordinates(40.2085, -3.713)),
-              new Country("FR", new GeoCoordinates(46.603354, 1.888334))
+              new Country("ES", new GeoCoordinates(40.2085, -3.713), new List<CountryImage>()
+              {
+                  { new CountryImage(true, esImage!.Id) }
+              }),
+              new Country("FR", new GeoCoordinates(46.603354, 1.888334), new List<CountryImage>()
+              {
+                  { new CountryImage(true, frImage!.Id) }
+              }),
             };
 
             var locations = new[] {
@@ -168,6 +182,36 @@ namespace TravelAgency.Infrastructure.Data
             dbContext.Residences.AddRange(residences);
 
             await dbContext.SaveChangesAsync();
+        }
+
+        private static async Task<Image?> UploadImageFromSeedingImages(string fileName, ApplicationUser user, IImageService imageService)
+        {
+            string imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seeding\\Images");
+            string imagePath = Path.Combine(imageFolderPath, fileName);
+
+            if (File.Exists(imagePath))
+            {
+                byte[] imageData = await File.ReadAllBytesAsync(imagePath);
+                var formFile = CreateIFormFile(fileName, imageData);
+                if(formFile != null)
+                {
+                    return await imageService.AddImage(formFile, user);
+                }
+            }
+
+            return null;
+        }
+
+        private static IFormFile? CreateIFormFile(string fileName, byte[] fileBytes)
+        {
+            if (string.IsNullOrEmpty(fileName) || fileBytes == null || fileBytes.Length == 0)
+            {
+                return null;
+            }
+
+            var stream = new MemoryStream(fileBytes);
+            var formFile = new FormFile(stream, 0, fileBytes.Length, "file", fileName);
+            return formFile;
         }
     }
 }

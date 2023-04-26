@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Repositories.Interfaces;
 using TravelAgency.Infrastructure.Data;
 
 namespace TravelAgency.Infrastructure.Repositories
 {
-    public class LocationRepository
+    public class LocationRepository : ILocationRepository
     {
         private readonly TravelAgencyDbContext _context;
 

@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Repositories.Interfaces;
 using TravelAgency.Infrastructure.Data;
 
 namespace TravelAgency.Infrastructure.Repositories
 {
-    public class CountryRepository
+    public class CountryRepository : ICountryRepository
     {
         private readonly TravelAgencyDbContext _context;
 

@@ -17,6 +17,16 @@ namespace TravelAgency.Infrastructure.Data.Configuration
 
             builder.Property(c => c.Coordinates)
                 .UseGeoCoordinateConversion();
+
+            builder.OwnsMany(c => c.Images, b =>
+            {
+                b.HasOne<Image>()
+                    .WithMany()
+                    .IsRequired(true)
+                    .HasForeignKey(c => c.ImageId);
+
+                b.WithOwner();
+            });
         }
     }
 }

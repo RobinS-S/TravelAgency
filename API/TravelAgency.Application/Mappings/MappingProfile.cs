@@ -11,6 +11,7 @@ namespace TravelAgency.Application.Mappings
         {
             CreateMap<ApplicationUser, ProfileDto>();
             CreateMap<Country, CountryDto>();
+            CreateMap<CountryImage, CountryImageDto>();
             CreateMap<Location, LocationDto>();
             CreateMap<Residence, ResidenceDto>();
             CreateMap<TranslatedText, TranslatedTextDto>();

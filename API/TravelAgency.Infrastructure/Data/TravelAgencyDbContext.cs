@@ -15,6 +15,8 @@ namespace TravelAgency.Infrastructure.Data
 
         public DbSet<Residence> Residences { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         public TravelAgencyDbContext(
 			DbContextOptions options,
 			IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

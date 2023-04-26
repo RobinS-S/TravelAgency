@@ -70,10 +70,19 @@ namespace TravelAgency
 
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddTransient<IRedirectUriValidator, TestAuthRedirectUriValidator>();
-            
-			builder.Services.AddScoped<CountryRepository>();
-            builder.Services.AddScoped<LocationRepository>();
-            builder.Services.AddScoped<ResidenceRepository>();
+
+            builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+            builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+            builder.Services.AddScoped<IResidenceRepository, ResidenceRepository>();
+			builder.Services.AddScoped<IImageRepository, ImageRepository>();
+            builder.Services.AddScoped<IProfileService, ProfileService>();
+
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddSwaggerGen();
+                builder.Services.AddScoped<IImageService, LocalImageService>();
+            }
 
             var app = builder.Build();
 

@@ -11,7 +11,7 @@ namespace TravelAgency.Domain.Entities
 
         public LocationType LocationType { get; set; }
 
-        public Country Country { get; set; }
+        public Country Country { get; set; } = null!;
 
         public long? CountryId { get; set; }
 
