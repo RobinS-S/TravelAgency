@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using TravelAgency.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TravelAgency.Infrastructure.Data;
 namespace TravelAgency.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TravelAgencyDbContext))]
-    partial class TravelAgencyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230419195827_TravelAgencyBasics")]
+    partial class TravelAgencyBasics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -373,26 +376,6 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("TravelAgency.Domain.Entities.Image", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(95)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("TravelAgency.Domain.Entities.Location", b =>
                 {
                     b.Property<long>("Id")
@@ -403,8 +386,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("point");
 
-                    b.Property<long?>("CountryId")
-                        .IsRequired()
+                    b.Property<long>("CountryId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("LocationType")
@@ -485,51 +467,6 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TravelAgency.Domain.Entities.Country", b =>
-                {
-                    b.OwnsMany("TravelAgency.Domain.Entities.CountryImage", "Images", b1 =>
-                        {
-                            b1.Property<long>("CountryId")
-                                .HasColumnType("bigint");
-
-                            b1.Property<long>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint");
-
-                            b1.Property<long>("ImageId")
-                                .HasColumnType("bigint");
-
-                            b1.Property<bool>("IsPrimary")
-                                .HasColumnType("tinyint(1)");
-
-                            b1.HasKey("CountryId", "Id");
-
-                            b1.HasIndex("ImageId");
-
-                            b1.ToTable("CountryImage");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CountryId");
-
-                            b1.HasOne("TravelAgency.Domain.Entities.Image", null)
-                                .WithMany()
-                                .HasForeignKey("ImageId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-                        });
-
-                    b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("TravelAgency.Domain.Entities.Image", b =>
-                {
-                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Location", b =>

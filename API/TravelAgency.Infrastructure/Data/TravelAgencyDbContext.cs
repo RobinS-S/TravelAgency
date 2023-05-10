@@ -9,11 +9,20 @@ namespace TravelAgency.Infrastructure.Data
 {
 	public class TravelAgencyDbContext : ApiAuthorizationDbContext<ApplicationUser>
 	{
-		public TravelAgencyDbContext(
+		public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Residence> Residences { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public TravelAgencyDbContext(
 			DbContextOptions options,
 			IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
 		{
 		}
+
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
