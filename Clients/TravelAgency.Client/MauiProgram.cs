@@ -1,11 +1,19 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Nager.Country;
+using Nager.Country.Translation;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+using System.Globalization;
 using TravelAgency.Client.Auth.Http;
 using TravelAgency.Client.Auth.Pages;
 using TravelAgency.Client.Auth.Services;
 using TravelAgency.Client.Pages;
+using TravelAgency.Client.Pages.Account;
+using TravelAgency.Client.Pages.Countries;
+using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Pages.Main;
-using TravelAgency.Client.Pages.Test;
+using TravelAgency.Client.Repositories;
+using TravelAgency.Client.Services;
 
 namespace TravelAgency.Client
 {
@@ -13,10 +21,26 @@ namespace TravelAgency.Client
     {
         public static MauiApp CreateMauiApp()
         {
+            // TEST REMOVE THIS DO NOT COMMIT
+            CultureInfo forcedCulture = new("nl-NL");
+            CultureInfo.DefaultThreadCurrentCulture = forcedCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = forcedCulture;
+            // END TEST 
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()
+#if DEBUG
+            .UseMauiCommunityToolkit()
+#else
+            .UseMauiCommunityToolkit(options =>
+        {
+	        options.SetShouldSuppressExceptionsInAnimations(true);
+	        options.SetShouldSuppressExceptionsInBehaviors(true);
+	        options.SetShouldSuppressExceptionsInConverters(true);
+        })
+#endif
+                .UseSkiaSharp(true)
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -33,12 +57,27 @@ namespace TravelAgency.Client
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<HttpService>();
 
-            // Add all pages here for dependency injection to work
+            // Location
+            builder.Services.AddSingleton(Geolocation.Default);
+            builder.Services.AddSingleton<GeolocationService>();
+
+            // Other services
+            builder.Services.AddSingleton<TranslationProvider>();
+            builder.Services.AddSingleton<CountryProvider>();
+
+            // Repositories (that call APIs)
+            builder.Services.AddSingleton<CountryRepository>();
+
+            // Add all pages and viewmodels here for dependency injection to work
             builder.Services.AddTransient<AuthenticatedContentPage>();
             builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<CountriesPage>();
+            builder.Services.AddTransient<CountriesPageViewModel>();
+            builder.Services.AddTransient<CountryDetailPage>();
+            builder.Services.AddTransient<CountryDetailPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<LogoutPage>();
-            builder.Services.AddTransient<TestPage>();
+            builder.Services.AddTransient<AccountPage>();
             builder.Services.AddTransient<AppShell>();
 
 #if DEBUG

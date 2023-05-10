@@ -5,26 +5,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:main="using:TravelAgency.Client.Pages.Main"
     xmlns:login="using:TravelAgency.Client.Auth.Pages"
-    xmlns:test="using:TravelAgency.Client.Pages.Test"
+    xmlns:account="using:TravelAgency.Client.Pages.Account"
+    xmlns:countries="using:TravelAgency.Client.Pages.Countries"
+    xmlns:countrydetails="using:TravelAgency.Client.Pages.Countries.Detail"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Main"
+        Title="{localization:Translate PageCountriesTitle}"
+        ContentTemplate="{DataTemplate countries:CountriesPage}"
+        Route="countries" FlyoutItemIsVisible="True" />
+
+    <ShellContent
+        Title="{localization:Translate PageMainTitle}"
         ContentTemplate="{DataTemplate main:MainPage}"
         Route="main" FlyoutItemIsVisible="True" />
 
     <ShellContent
-        Title="Test"
-        ContentTemplate="{DataTemplate test:TestPage}"
-        Route="test" FlyoutItemIsVisible="True" />
+        Title="{localization:Translate PageAccountTitle}"
+        ContentTemplate="{DataTemplate account:AccountPage}"
+        Route="account" FlyoutItemIsVisible="True" />
 
     <ShellContent
-        Title="Login"
+        Title="{localization:Translate PageLoginTitle}"
         x:Name="LoginContent"
         ContentTemplate="{DataTemplate login:LoginPage}"
         Route="login" FlyoutItemIsVisible="True"/>
+
     <ShellContent
-        Title="Logout"
+        Title="{localization:Translate PageLogoutTitle}"
         x:Name="LogoutContent"
         ContentTemplate="{DataTemplate login:LogoutPage}"
         Route="logout" FlyoutItemIsVisible="True"/>

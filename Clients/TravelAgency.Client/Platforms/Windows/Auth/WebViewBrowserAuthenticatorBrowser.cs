@@ -5,8 +5,8 @@ namespace TravelAgency.Client.Platforms.Windows.Auth
     public class WebViewBrowserAuthenticatorBrowser : IdentityModel.OidcClient.Browser.IBrowser
     {
         private readonly WebView _webView;
-        private TaskCompletionSource<BrowserResult> _tcs;
-        private string _endUrl;
+        private TaskCompletionSource<BrowserResult> _tcs = new();
+        private string _endUrl = "";
 
         public WebViewBrowserAuthenticatorBrowser(WebView webView)
         {
@@ -15,7 +15,6 @@ namespace TravelAgency.Client.Platforms.Windows.Auth
 
         public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
         {
-            _tcs = new TaskCompletionSource<BrowserResult>();
             _endUrl = options.EndUrl;
 
             _webView.Navigating += WebViewOnNavigating;
@@ -27,7 +26,7 @@ namespace TravelAgency.Client.Platforms.Windows.Auth
             return await _tcs.Task;
         }
 
-        private void WebViewOnNavigating(object sender, WebNavigatingEventArgs e)
+        private void WebViewOnNavigating(object? sender, WebNavigatingEventArgs e)
         {
             if (!e.Url.StartsWith(_endUrl)) return;
 
