@@ -11,7 +11,7 @@ namespace TravelAgency.Client.Auth.Services
         private readonly OidcClient _openIdClient;
         private bool _loggingIn;
         private bool _hasAuthToken;
-        public event EventHandler<bool> AuthStatusChanged;
+        public event EventHandler<bool>? AuthStatusChanged;
 
         public AuthService(HttpClient httpClient)
         {
@@ -63,7 +63,7 @@ namespace TravelAgency.Client.Auth.Services
             await HandleResult(result.IsError, result.AccessToken, result.RefreshToken);
         }
 
-        public async Task SetAuthResult(RefreshTokenResult result)
+        private async Task SetAuthResult(RefreshTokenResult result)
         {
             await HandleResult(result.IsError, result.AccessToken, result.RefreshToken);
         }
@@ -75,7 +75,7 @@ namespace TravelAgency.Client.Auth.Services
             return token != null;
         }
 
-        public void LoadToken(string accessToken)
+        private void LoadToken(string? accessToken)
         {
             _httpClient.DefaultRequestHeaders.Remove("Authorization");
             _httpClient.DefaultRequestHeaders.Authorization = accessToken == null ? null : new AuthenticationHeaderValue("Bearer", accessToken);
@@ -104,7 +104,7 @@ namespace TravelAgency.Client.Auth.Services
             }
         }
 
-        public void ResetCredentials()
+        private void ResetCredentials()
         {
             SecureStorage.Default.Remove("authToken");
             SecureStorage.Default.Remove("refreshToken");
@@ -112,8 +112,8 @@ namespace TravelAgency.Client.Auth.Services
             _hasAuthToken = false;
         }
 
-        public async Task<string> GetAuthToken() => await SecureStorage.Default.GetAsync("authToken");
-        public async Task<string> GetRefreshToken() => await SecureStorage.Default.GetAsync("refreshToken");
+        public static async Task<string> GetAuthToken() => await SecureStorage.Default.GetAsync("authToken");
+        public static async Task<string> GetRefreshToken() => await SecureStorage.Default.GetAsync("refreshToken");
 
         public async Task<bool> RefreshToken()
         {

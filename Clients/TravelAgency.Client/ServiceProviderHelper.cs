@@ -2,7 +2,7 @@
 {
     public static class ServiceProviderHelper
     {
-        public static TService GetService<TService>()
+        public static TService? GetService<TService>()
             => Current.GetService<TService>();
 
         public static IServiceProvider Current

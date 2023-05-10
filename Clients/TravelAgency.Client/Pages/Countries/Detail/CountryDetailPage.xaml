@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelAgency.Client.Pages.Countries.Detail.CountryDetailPage"
+             xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries.Detail"
+             xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+             xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
+             xmlns:maps="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+             xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+             x:DataType="local:CountryDetailPageViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
+            <converters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
+            <Style TargetType="Label" x:Key="TitleStyle">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="DarkSlateBlue" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Label" x:Key="DescriptionStyle">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="Blue" />
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView>
+            <VerticalStackLayout x:DataType="local:CountryDetailPageViewModel">
+                <Label Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}" Style="{StaticResource TitleStyle}" />
+
+                <CarouselView ItemsSource="{Binding Country.Images}" HeightRequest="400" Loop="False" HorizontalOptions="Center">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout
+                                    Orientation="Horizontal"
+                                    SnapPointsAlignment="Center"
+                                    SnapPointsType="MandatorySingle" />
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:CountryImageDto">
+                            <StackLayout>
+                                <Frame HasShadow="True"
+                                   BorderColor="DarkGray"
+                                   CornerRadius="5"
+                                   HeightRequest="300"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="CenterAndExpand"
+                                   IsClippedToBounds="True">
+                                    <StackLayout>
+                                        <Image Source="{Binding ImageId, StringFormat='https://travelagency.local:7070/api/Images/{0}'}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="300"
+                                           WidthRequest="300"
+                                           HorizontalOptions="Center" />
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <Label FontAttributes="Bold" Style="{StaticResource DescriptionStyle}" Text="{localization:Translate Languages, StringFormat='{0}:'}" />
+                <Label Style="{StaticResource DescriptionStyle}" Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
+                <controls:CrossPlatformMapControl x:Name="map" HeightRequest="600" Margin="8,5,8,5" MyLocationFollow="False" MyLocationEnabled="False" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

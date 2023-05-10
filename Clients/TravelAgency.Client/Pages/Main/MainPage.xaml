@@ -1,48 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelAgency.Client.Pages.Main.MainPage">
-
+             x:Class="TravelAgency.Client.Pages.Main.MainPage"
+             xmlns:local="clr-namespace:TravelAgency.Client.Pages.Main"
+             xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+             x:DataType="local:MainPageViewModel">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="TitleStyle">
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="DarkSlateBlue" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+            </Style>
+            <Style TargetType="Label" x:Key="DescriptionStyle">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="Gray" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Label Text="Your Nice Title" Style="{StaticResource TitleStyle}" />
+            <Label Text="Your description goes here." Style="{StaticResource DescriptionStyle}" />
 
-            <Label
-                Text="Hello from MainPage!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <CarouselView>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="dotnet_bot.png" Grid.Row="0" Grid.ColumnSpan="1" Aspect="AspectFill" />
+                            <Label Text="Title here" Grid.Row="1" Style="{StaticResource TitleStyle}" />
+                            <Label Text="Description here" Grid.Row="2" Style="{StaticResource DescriptionStyle}" />
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
-            <Label
-                x:Name="TokenLabel"
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="RemoveLoginBtn"
-                Text="Remove login"
-                SemanticProperties.Hint="Removes existing login if available"
-                Clicked="OnRemoveLoginClicked"
-                HorizontalOptions="Center" />
-
+            
         </VerticalStackLayout>
     </ScrollView>
 

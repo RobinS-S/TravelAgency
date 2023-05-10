@@ -13,7 +13,7 @@ namespace TravelAgency.Client.Auth.Services
             _authService = authService;
         }
 
-        public async Task<HttpResponseMessage> GetResponseAsync(Uri uri, CancellationToken cancellationToken = default)
+        public async Task<HttpResponseMessage?> GetResponseAsync(Uri uri, CancellationToken cancellationToken = default)
         {
             var response = await _httpClient.GetAsync(uri, cancellationToken);
 
@@ -21,7 +21,7 @@ namespace TravelAgency.Client.Auth.Services
             {
                 case HttpStatusCode.Unauthorized:
                     {
-                        var token = await _authService.GetRefreshToken();
+                        var token = await AuthService.GetRefreshToken();
                         if (token == null)
                         {
                             await _authService.StartLoginProcess();
