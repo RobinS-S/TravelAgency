@@ -7,8 +7,7 @@ namespace TravelAgency.Client.ValueConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var labelConverter = new TranslateExtension();
-            return labelConverter.Convert($"Theme.{value}", typeof(string), parameter, CultureInfo.CurrentUICulture);
+            return LocalizationResourceManager.Instance[$"Theme.{value}"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
