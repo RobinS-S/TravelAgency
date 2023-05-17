@@ -21,12 +21,6 @@ namespace TravelAgency.Client
     {
         public static MauiApp CreateMauiApp()
         {
-            // TEST REMOVE THIS DO NOT COMMIT
-            CultureInfo forcedCulture = new("nl-NL");
-            CultureInfo.DefaultThreadCurrentCulture = forcedCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = forcedCulture;
-            // END TEST 
-
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -66,7 +60,7 @@ namespace TravelAgency.Client
             builder.Services.AddSingleton<CountryProvider>();
 
             // Theming
-            builder.Services.AddSingleton<ThemeService>();
+            builder.Services.AddSingleton<SettingsService>();
 
             // Repositories (that call APIs)
             builder.Services.AddSingleton<CountryRepository>();

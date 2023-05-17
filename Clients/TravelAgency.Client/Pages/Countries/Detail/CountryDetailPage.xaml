@@ -4,7 +4,8 @@
              x:Class="TravelAgency.Client.Pages.Countries.Detail.CountryDetailPage"
              xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries.Detail"
              xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
-             xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
+             xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+             xmlns:countryconverters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
              xmlns:maps="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
@@ -12,8 +13,10 @@
              x:DataType="local:CountryDetailPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
-            <converters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
+            <countryconverters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
+            <countryconverters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
+            <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
+            
             <Style TargetType="Label" x:Key="TitleStyle">
                 <Setter Property="FontSize" Value="40" />
                 <Setter Property="FontAttributes" Value="Bold" />
@@ -50,7 +53,7 @@
                                    VerticalOptions="CenterAndExpand"
                                    IsClippedToBounds="True">
                                     <StackLayout>
-                                        <Image Source="{Binding ImageId, StringFormat='https://travelagency.local:7070/api/Images/{0}'}"
+                                        <Image Source="{Binding ImageId, Converter={StaticResource ImageIdToImageLinkConverter}}"
                                            Aspect="AspectFill"
                                            HeightRequest="300"
                                            WidthRequest="300"

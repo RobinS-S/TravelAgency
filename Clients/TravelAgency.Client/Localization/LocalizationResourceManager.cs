@@ -19,6 +19,11 @@ namespace TravelAgency.Client.Localization
 
         public void SetCulture(CultureInfo culture)
         {
+            if(Translations.Culture == culture)
+            {
+                return;
+            }
+
             Translations.Culture = culture;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
         }

@@ -7,16 +7,16 @@ namespace TravelAgency.Client.Pages
     public partial class AppShell : Shell
     {
         private AuthService _authService;
-        private ThemeService _themeService;
+        private SettingsService _settingsService;
 
         public AppShell()
         {
             InitializeComponent();
             _authService = ServiceProviderHelper.GetService<AuthService>()!;
-            _themeService = ServiceProviderHelper.GetService<ThemeService>()!;
+            _settingsService = ServiceProviderHelper.GetService<SettingsService>()!;
 
             Routing.RegisterRoute(nameof(CountryDetailPage), typeof(CountryDetailPage));
-            BindingContext = _themeService;
+            BindingContext = _settingsService;
         }
     }
 }
