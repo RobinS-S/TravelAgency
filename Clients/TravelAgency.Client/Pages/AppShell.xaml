@@ -9,6 +9,10 @@
     xmlns:countries="using:TravelAgency.Client.Pages.Countries"
     xmlns:countrydetails="using:TravelAgency.Client.Pages.Countries.Detail"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:services="clr-namespace:TravelAgency.Client.Services"
+    xmlns:appmodel="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    x:DataType="services:ThemeService"
     FlyoutBehavior="Flyout">
 
     <ShellContent
@@ -37,5 +41,15 @@
         x:Name="LogoutContent"
         ContentTemplate="{DataTemplate login:LogoutPage}"
         Route="logout" FlyoutItemIsVisible="True"/>
+
+    <Shell.FlyoutFooter>
+        <StackLayout>
+            <Picker
+                HorizontalTextAlignment="Center"
+                ItemsSource="{Binding Themes}"
+                ItemDisplayBinding="{Binding ., Converter={StaticResource ThemeNameConverter}}"
+                SelectedItem="{Binding Theme}"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>

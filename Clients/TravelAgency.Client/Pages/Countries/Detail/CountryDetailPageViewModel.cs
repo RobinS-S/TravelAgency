@@ -52,7 +52,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
                 await LoadData();
             }
 
-            else if(e.PropertyName == nameof(Country))
+            else if(e.PropertyName == nameof(Country) && Country != null)
             {
                 AddPin(Country.Coordinates.Latitude, Country.Coordinates.Longitude, Colors.Red);
             }

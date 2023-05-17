@@ -34,7 +34,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
 
         private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Country")
+            if(e.PropertyName == "Country" && _viewModel.Country != null)
             {
                 if(_countryPin != null)
                 {

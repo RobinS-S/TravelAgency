@@ -135,4 +135,13 @@
   <data name="PageMainTitle" xml:space="preserve">
     <value>Main page</value>
   </data>
+  <data name="Theme.Dark" xml:space="preserve">
+    <value>Dark theme</value>
+  </data>
+  <data name="Theme.Light" xml:space="preserve">
+    <value>Light theme</value>
+  </data>
+  <data name="Theme.Unspecified" xml:space="preserve">
+    <value>Follow system theme</value>
+  </data>
 </root>

@@ -65,6 +65,9 @@ namespace TravelAgency.Client
             builder.Services.AddSingleton<TranslationProvider>();
             builder.Services.AddSingleton<CountryProvider>();
 
+            // Theming
+            builder.Services.AddSingleton<ThemeService>();
+
             // Repositories (that call APIs)
             builder.Services.AddSingleton<CountryRepository>();
 

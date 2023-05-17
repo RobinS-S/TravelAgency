@@ -113,5 +113,32 @@ namespace TravelAgency.Client.Resources.Localization {
                 return ResourceManager.GetString("PageMainTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark theme.
+        /// </summary>
+        internal static string Theme_Dark {
+            get {
+                return ResourceManager.GetString("Theme.Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light theme.
+        /// </summary>
+        internal static string Theme_Light {
+            get {
+                return ResourceManager.GetString("Theme.Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow system theme.
+        /// </summary>
+        internal static string Theme_Unspecified {
+            get {
+                return ResourceManager.GetString("Theme.Unspecified", resourceCulture);
+            }
+        }
     }
 }
