@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
@@ -33,7 +32,7 @@ namespace TravelAgency.Client.Pages.Countries
         private async Task LoadData()
         {
             var countries = await countryRepository.GetAllAsync();
-            if(countries != null)
+            if (countries != null)
             {
                 CountriesList = new(countries);
             }

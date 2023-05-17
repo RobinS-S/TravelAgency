@@ -1,5 +1,5 @@
-﻿using Mapsui.Projections;
-using Mapsui;
+﻿using Mapsui;
+using Mapsui.Projections;
 using Mapsui.UI.Maui;
 
 namespace TravelAgency.Client.Controls

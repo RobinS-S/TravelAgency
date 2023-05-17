@@ -15,7 +15,7 @@ namespace TravelAgency.Client.ValueConverters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var country = countryTranslationProvider.GetLanguage((string)value);
-            if(country == null)
+            if (country == null)
             {
                 return "";
             }

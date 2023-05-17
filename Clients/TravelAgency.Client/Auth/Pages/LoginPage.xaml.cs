@@ -38,7 +38,7 @@ public partial class LoginPage
                     Dispatcher.Dispatch(NavigateToDefaultAuthenticatedPage);
                 }
 
-                #if DEBUG
+#if DEBUG
                 else
                 {
                     await this.DisplaySnackbar("LOGIN ERROR: " + loginResult.Error, null, "OK", TimeSpan.FromSeconds(5));

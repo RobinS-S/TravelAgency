@@ -70,12 +70,12 @@ namespace TravelAgency.Client.Services
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            
+
             if (e.PropertyName == nameof(Theme))
             {
                 SaveTheme();
             }
-            else if(e.PropertyName == nameof(Language))
+            else if (e.PropertyName == nameof(Language))
             {
                 SaveLanguage();
             }

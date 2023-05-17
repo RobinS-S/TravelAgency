@@ -47,12 +47,12 @@ namespace TravelAgency.Client.Pages.Countries.Detail
         {
             base.OnPropertyChanged(e);
 
-            if(e.PropertyName == nameof(Id))
+            if (e.PropertyName == nameof(Id))
             {
                 await LoadData();
             }
 
-            else if(e.PropertyName == nameof(Country) && Country != null)
+            else if (e.PropertyName == nameof(Country) && Country != null)
             {
                 AddPin(Country.Coordinates.Latitude, Country.Coordinates.Longitude, Colors.Red);
             }
