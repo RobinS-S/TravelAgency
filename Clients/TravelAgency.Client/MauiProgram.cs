@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Nager.Country;
 using Nager.Country.Translation;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using System.Globalization;
 using TravelAgency.Client.Auth.Http;
 using TravelAgency.Client.Auth.Pages;
 using TravelAgency.Client.Auth.Services;
@@ -42,9 +41,9 @@ namespace TravelAgency.Client
                 });
 
             builder.Services.AddSingleton(new HttpClient(
-                #if DEBUG
+#if DEBUG
                     new NonSecureHttpMessageHandler()) // This ignores HTTPS certificate validation errors, for example self-signed ones
-                #endif
+#endif
             );
 
             // Authentication and API services
@@ -79,7 +78,7 @@ namespace TravelAgency.Client
 
 #if DEBUG
             builder.Logging.AddDebug();
-        #endif
+#endif
 
             return builder.Build();
         }

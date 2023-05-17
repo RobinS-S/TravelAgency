@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using TravelAgency.Client.Auth.Services;
 using TravelAgency.Shared.Dto;
 
@@ -20,7 +19,7 @@ namespace TravelAgency.Client.Repositories
             if (response != null)
             {
                 var responseText = await response.Content.ReadAsStringAsync();
-                if(response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadFromJsonAsync<IEnumerable<CountryDto>>();
                 }

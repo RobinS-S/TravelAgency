@@ -24,11 +24,11 @@ public partial class LogoutPage
             if (hasToken || await _authService.TestLogin())
             {
                 var logoutResult = await _authService.Logout(
-                #if WINDOWS
+#if WINDOWS
                     new Platforms.Windows.Auth.WebViewBrowserAuthenticatorBrowser(WebViewInstance) // Uses a WebView to avoid known issue: https://github.com/dotnet/maui/issues/2702
-                #else
+#else
                     new TravelAgency.Client.Auth.Browser() // Implementation for iOS (Catalyst) and Android
-                #endif
+#endif
                 );
 
                 if (!logoutResult.IsError)
@@ -36,12 +36,12 @@ public partial class LogoutPage
                     Dispatcher.Dispatch(NavigateToDefaultAnonymousPage);
                 }
 
-                #if DEBUG
+#if DEBUG
                 else
                 {
                     await this.DisplaySnackbar("LOGOUT ERROR: " + logoutResult.Error, null, "OK", TimeSpan.FromSeconds(5));
                 }
-                #endif
+#endif
             }
             else
             {

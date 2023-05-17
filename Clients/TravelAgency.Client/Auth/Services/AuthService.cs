@@ -28,7 +28,7 @@ namespace TravelAgency.Client.Auth.Services
         }
 
         public bool HasAuthToken => _hasAuthToken;
-        
+
         public async Task StartLoginProcess()
         {
             if (_loggingIn || Shell.Current.CurrentState.Location.ToString() == "//login")
