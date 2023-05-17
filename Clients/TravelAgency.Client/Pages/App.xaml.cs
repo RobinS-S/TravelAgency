@@ -1,10 +1,12 @@
-﻿using TravelAgency.Client.Services;
+﻿using System.Globalization;
+using TravelAgency.Client.Localization;
+using TravelAgency.Client.Services;
 
 namespace TravelAgency.Client.Pages
 {
     public partial class App : Application
     {
-        private ThemeService _themeService;
+        private SettingsService _settingsService;
 
         public App()
         {
@@ -12,23 +14,33 @@ namespace TravelAgency.Client.Pages
 
             MainPage = new AppShell();
 
-            _themeService = ServiceProviderHelper.GetService<ThemeService>()!;
-            _themeService.PropertyChanged += _themeService_PropertyChanged;
+            _settingsService = ServiceProviderHelper.GetService<SettingsService>()!;
+            _settingsService.PropertyChanged += _SettingsService_PropertyChanged;
 
             SetTheme();
+            SetLanguage();
         }
 
-        private void _themeService_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void _SettingsService_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_themeService.Theme))
+            if (e.PropertyName == nameof(_settingsService.Theme))
             {
                 SetTheme();
+            }
+            else if (e.PropertyName == nameof(_settingsService.Language))
+            {
+                SetLanguage();
             }
         }
 
         private void SetTheme()
         {
-            UserAppTheme = _themeService.Theme;
+            UserAppTheme = _settingsService.Theme;
+        }
+
+        private void SetLanguage()
+        {
+            LocalizationResourceManager.Instance.SetCulture(new CultureInfo(_settingsService.Language));
         }
     }
 }

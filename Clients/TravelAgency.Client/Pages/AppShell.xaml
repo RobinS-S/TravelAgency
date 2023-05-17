@@ -12,7 +12,7 @@
     xmlns:services="clr-namespace:TravelAgency.Client.Services"
     xmlns:appmodel="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    x:DataType="services:ThemeService"
+    x:DataType="services:SettingsService"
     FlyoutBehavior="Flyout">
 
     <ShellContent
@@ -49,6 +49,11 @@
                 ItemsSource="{Binding Themes}"
                 ItemDisplayBinding="{Binding ., Converter={StaticResource ThemeNameConverter}}"
                 SelectedItem="{Binding Theme}"/>
+            <Picker
+                HorizontalTextAlignment="Center"
+                ItemsSource="{Binding Languages}"
+                ItemDisplayBinding="{Binding ., Converter={StaticResource LanguageNameConverter}}"
+                SelectedItem="{Binding Language}"/>
         </StackLayout>
     </Shell.FlyoutFooter>
 
