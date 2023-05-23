@@ -72,11 +72,12 @@ namespace TravelAgency
             builder.Services.AddTransient<IRedirectUriValidator, TestAuthRedirectUriValidator>();
 
             builder.Services.AddScoped<UserService>();
+            builder.Services.AddScoped<IProfileService, ProfileService>();
+
             builder.Services.AddScoped<ICountryRepository, CountryRepository>();
             builder.Services.AddScoped<ILocationRepository, LocationRepository>();
             builder.Services.AddScoped<IResidenceRepository, ResidenceRepository>();
 			builder.Services.AddScoped<IImageRepository, ImageRepository>();
-            builder.Services.AddScoped<IProfileService, ProfileService>();
 
             if (builder.Environment.IsDevelopment())
             {

@@ -22,16 +22,17 @@ namespace TravelAgency.Client.Pages.Countries.Detail
         private bool _isRefreshing;
 
         [ObservableProperty]
-        private List<Pin> _pins = new();
+        private bool _errorStateEnabled;
 
-        public IAsyncRelayCommand LoadDataCommand;
+        [ObservableProperty]
+        private List<Pin> _pins = new();
 
         public CountryDetailPageViewModel(CountryRepository countryRepository)
         {
             this.countryRepository = countryRepository;
-            LoadDataCommand = new AsyncRelayCommand(LoadData);
         }
 
+        [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
@@ -40,6 +41,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
             {
                 Country = country;
             }
+            ErrorStateEnabled = country == null;
             IsRefreshing = false;
         }
 

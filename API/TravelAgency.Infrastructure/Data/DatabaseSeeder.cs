@@ -63,15 +63,23 @@ namespace TravelAgency.Infrastructure.Data
         {
             var esImage = await UploadImageFromSeedingImages("country-es.jpg", user, imageService);
             var frImage = await UploadImageFromSeedingImages("country-fr.jpg", user, imageService);
+            var barcelonaBungalowParkImage = await UploadImageFromSeedingImages("bungalow-park-barcelona.jpg", user, imageService);
+            var barcelonaBungalowImage = await UploadImageFromSeedingImages("bungalow-barcelona.jpg", user, imageService);
+            var hotelMadridImage = await UploadImageFromSeedingImages("hotel-madrid.jpg", user, imageService);
+            var hotelMadridDeluxeSuiteImage = await UploadImageFromSeedingImages("hotel-madrid-deluxe-suite.jpg", user, imageService);
+            var niceGuesthouse = await UploadImageFromSeedingImages("nice-guesthouse.jpg", user, imageService);
+            var niceGuesthouseRoom = await UploadImageFromSeedingImages("nice-guesthouse-room.jpg", user, imageService);
+            var villaParis = await UploadImageFromSeedingImages("villa-paris.jpg", user, imageService);
+            var villaParisSuite = await UploadImageFromSeedingImages("villa-paris-parisian-suite.jpg", user, imageService);
 
             var countries = new[] {
-              new Country("ES", new GeoCoordinates(40.2085, -3.713), new List<CountryImage>()
+              new Country("ES", new GeoCoordinates(40.2085, -3.713), new List<EntityImage>()
               {
-                  { new CountryImage(true, esImage!.Id) }
+                  { new EntityImage(true, esImage!.Id) }
               }),
-              new Country("FR", new GeoCoordinates(46.603354, 1.888334), new List<CountryImage>()
+              new Country("FR", new GeoCoordinates(46.603354, 1.888334), new List<EntityImage>()
               {
-                  { new CountryImage(true, frImage!.Id) }
+                  { new EntityImage(true, frImage!.Id) }
               }),
             };
 
@@ -87,7 +95,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een prachtig hotel in het hart van Madrid."),
                       new TranslatedText("es", "Un hermoso hotel en el corazón de Madrid.")
                   },
-                  LocationType.Hotel, countries[0], new GeoCoordinates(40.4167, -3.7038)),
+                  LocationType.Hotel, countries[0], new GeoCoordinates(40.4167, -3.7038), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, hotelMadridImage!.Id) }
+                  }),
                 new Location(
                   new [] {
                     new TranslatedText("en", "Barcelona Bungalow Park"),
@@ -99,7 +110,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een charmant bungalowpark in Barcelona."),
                       new TranslatedText("es", "Un encantador parque de bungalows en Barcelona.")
                   },
-                  LocationType.BungalowPark, countries[0], new GeoCoordinates(41.3851, 2.1734)),
+                  LocationType.BungalowPark, countries[0], new GeoCoordinates(41.3851, 2.1734), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, barcelonaBungalowParkImage!.Id) }
+                  }),
                 new Location(
                   new [] {
                     new TranslatedText("en", "Paris Villa"),
@@ -111,7 +125,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een prachtige villa in Parijs, Frankrijk."),
                       new TranslatedText("es", "Una hermosa villa en París, Francia.")
                   },
-                  LocationType.Villa, countries[1], new GeoCoordinates(48.8566, 2.3522)),
+                  LocationType.Villa, countries[1], new GeoCoordinates(48.8566, 2.3522), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, villaParis!.Id) }
+                  }),
                 new Location(
                   new [] {
                     new TranslatedText("en", "Nice Guesthouse"),
@@ -123,7 +140,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een gezellig pension in Nice, Frankrijk."),
                       new TranslatedText("es", "Una acogedora casa de huéspedes en Niza, Francia.")
                   },
-                  LocationType.GuestHouse, countries[1], new GeoCoordinates(43.7102, 7.2620))
+                  LocationType.GuestHouse, countries[1], new GeoCoordinates(43.7102, 7.2620), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, niceGuesthouse!.Id) }
+                  })
             };
 
             var residences = new[] {
@@ -138,7 +158,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een ruime suite met een kingsize bed en een prachtig uitzicht op de stad."),
                       new TranslatedText("es", "Una suite espaciosa con una cama king-size y vistas impresionantes de la ciudad.")
                   },
-                  locations[0], new GeoCoordinates(40.4182, -3.7008)),
+                  locations[0], new GeoCoordinates(40.4182, -3.7008), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, hotelMadridDeluxeSuiteImage!.Id) }
+                  }),
                 new Residence(
                   new [] {
                     new TranslatedText("en", "Barcelona Bungalow"),
@@ -150,7 +173,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een stijlvolle bungalow met een privétuin en uitzicht op de stad."),
                       new TranslatedText("es", "Un bungalow elegante con jardín privado y vista a la ciudad.")
                   },
-                  locations[1], new GeoCoordinates(41.3875, 2.1699)),
+                  locations[1], new GeoCoordinates(41.3875, 2.1699), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, barcelonaBungalowImage!.Id) }
+                  }),
                 new Residence(
                   new [] {
                     new TranslatedText("en", "Parisian Suite"),
@@ -162,7 +188,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een luxe suite met uitzicht op de Eiffeltoren."),
                       new TranslatedText("es", "Una suite de lujo con vista a la Torre Eiffel.")
                   },
-                  locations[2], new GeoCoordinates(48.8578, 2.2950)),
+                  locations[2], new GeoCoordinates(48.8578, 2.2950), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, villaParisSuite!.Id) }
+                  }),
                 new Residence(
                   new [] {
                     new TranslatedText("en", "Comfort Room"),
@@ -174,7 +203,10 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een gezellige kamer met moderne voorzieningen en uitzicht op de stad."),
                       new TranslatedText("es", "Una habitación acogedora con comodidades modernas y vista a la ciudad.")
                   },
-                  locations[3], new GeoCoordinates(43.7122, 7.2608))
+                  locations[3], new GeoCoordinates(43.7122, 7.2608), new List<EntityImage>()
+                  {
+                      { new EntityImage(true, niceGuesthouseRoom!.Id) }
+                  })
             };
 
             dbContext.Countries.AddRange(countries);

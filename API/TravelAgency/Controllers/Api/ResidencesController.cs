@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TravelAgency.Infrastructure.Repositories;
+using TravelAgency.Domain.Repositories.Interfaces;
 using TravelAgency.Shared.Dto;
 
 namespace TravelAgency.Controllers.Api
@@ -9,10 +9,10 @@ namespace TravelAgency.Controllers.Api
     [Route("api/[controller]")]
     public class ResidencesController : ControllerBase
     {
-        private readonly ResidenceRepository _repository;
+        private readonly IResidenceRepository _repository;
         private readonly IMapper _mapper;
 
-        public ResidencesController(ResidenceRepository repository, IMapper mapper)
+        public ResidencesController(IResidenceRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

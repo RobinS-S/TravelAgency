@@ -5,6 +5,6 @@
         public long Id { get; set; }
         public string IsoName { get; set; } = null!;
         public GeoCoordinatesDto Coordinates { get; set; } = null!;
-        public ICollection<CountryImageDto> Images { get; set; } = null!;
+        public ICollection<EntityImageDto> Images { get; set; } = null!;
     }
 }

@@ -10,7 +10,7 @@ namespace TravelAgency.Client.Repositories
 
         public CountryRepository(HttpService httpService)
         {
-            this._httpService = httpService;
+            _httpService = httpService;
         }
 
         public async Task<IEnumerable<CountryDto>?> GetAllAsync()
@@ -18,7 +18,6 @@ namespace TravelAgency.Client.Repositories
             var response = await _httpService.GetResponseAsync(new Uri(ApiConfig.ApiUrl + "/api/Countries"));
             if (response != null)
             {
-                var responseText = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.ReadFromJsonAsync<IEnumerable<CountryDto>>();

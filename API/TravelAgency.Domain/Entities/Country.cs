@@ -1,8 +1,9 @@
 ﻿using TravelAgency.Domain.Helpers;
+using TravelAgency.Domain.Interfaces;
 
 namespace TravelAgency.Domain.Entities
 {
-    public class Country : Entity
+    public class Country : Entity, IImageOwningEntity, IGeolocationOwningEntity
     {
         public string IsoName { get; set; } = null!;
 
@@ -10,17 +11,17 @@ namespace TravelAgency.Domain.Entities
 
         public GeoCoordinates Coordinates { get; set; } = null!;
 
-        public ICollection<CountryImage> Images { get; set; } = null!;
+        public ICollection<EntityImage> Images { get; set; } = null!;
 
         public Country()
         {
         }
 
-        public Country(string isoName, GeoCoordinates coordinates, ICollection<CountryImage>? images = null)
+        public Country(string isoName, GeoCoordinates coordinates, ICollection<EntityImage>? images = null)
         {
             IsoName = isoName;
             Coordinates = coordinates;
-            Images = images ?? new HashSet<CountryImage>();
+            Images = images ?? new HashSet<EntityImage>();
         }
     }
 }

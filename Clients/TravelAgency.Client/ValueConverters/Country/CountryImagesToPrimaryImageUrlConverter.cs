@@ -7,7 +7,7 @@ namespace TravelAgency.Client.ValueConverters.Country
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ICollection<CountryImageDto> collection)
+            if (value is ICollection<EntityImageDto> collection)
             {
                 var primaryObject = collection
                     .FirstOrDefault(item => item.IsPrimary == true);

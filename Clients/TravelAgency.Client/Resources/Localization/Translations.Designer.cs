@@ -61,6 +61,15 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, an error occurred while loading this page..
+        /// </summary>
+        internal static string ErrorLoadingPage {
+            get {
+                return ResourceManager.GetString("ErrorLoadingPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Languages.
         /// </summary>
         internal static string Languages {
@@ -138,6 +147,15 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string Theme_Unspecified {
             get {
                 return ResourceManager.GetString("Theme.Unspecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try again.
+        /// </summary>
+        internal static string TryAgain {
+            get {
+                return ResourceManager.GetString("TryAgain", resourceCulture);
             }
         }
     }

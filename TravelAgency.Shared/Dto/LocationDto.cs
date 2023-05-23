@@ -10,6 +10,7 @@ namespace TravelAgency.Shared.Dto
         public LocationType LocationType { get; set; }
         public long CountryId { get; set; }
         public GeoCoordinatesDto Coordinates { get; set; } = null!;
+        public ICollection<EntityImageDto> Images { get; set; } = null!;
     }
 
 }

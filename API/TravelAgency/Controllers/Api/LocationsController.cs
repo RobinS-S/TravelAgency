@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TravelAgency.Infrastructure.Repositories;
+using TravelAgency.Domain.Repositories.Interfaces;
 using TravelAgency.Shared.Dto;
 
 namespace TravelAgency.Controllers.Api
@@ -9,10 +9,10 @@ namespace TravelAgency.Controllers.Api
     [Route("api/[controller]")]
     public class LocationsController : ControllerBase
     {
-        private readonly LocationRepository _repository;
+        private readonly ILocationRepository _repository;
         private readonly IMapper _mapper;
 
-        public LocationsController(LocationRepository repository, IMapper mapper)
+        public LocationsController(ILocationRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

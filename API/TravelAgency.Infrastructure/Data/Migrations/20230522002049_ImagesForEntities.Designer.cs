@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using TravelAgency.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TravelAgency.Infrastructure.Data;
 namespace TravelAgency.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TravelAgencyDbContext))]
-    partial class TravelAgencyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230522002049_ImagesForEntities")]
+    partial class ImagesForEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

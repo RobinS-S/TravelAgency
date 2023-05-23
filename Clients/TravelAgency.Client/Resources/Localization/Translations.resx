@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorLoadingPage" xml:space="preserve">
+    <value>Sorry, an error occurred while loading this page.</value>
+  </data>
   <data name="Languages" xml:space="preserve">
     <value>Languages</value>
   </data>
@@ -143,5 +146,8 @@
   </data>
   <data name="Theme.Unspecified" xml:space="preserve">
     <value>Follow system theme</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again</value>
   </data>
 </root>
