@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using TravelAgency.Domain;
 using TravelAgency.Domain.Entities;
-using TravelAgency.Domain.Helpers;
 using TravelAgency.Shared.Dto;
 
 namespace TravelAgency.Application.Mappings
 {
-	public class MappingProfile : Profile
+    public class MappingProfile : Profile
 	{
         public MappingProfile()
         {

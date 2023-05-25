@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error" xml:space="preserve">
+    <value>Foutmelding</value>
+  </data>
   <data name="ErrorLoadingPage" xml:space="preserve">
     <value>Sorry, er is een fout opgetreden tijdens het laden van deze pagina.</value>
   </data>
   <data name="Languages" xml:space="preserve">
     <value>Talen</value>
+  </data>
+  <data name="LoginCancelled" xml:space="preserve">
+    <value>Inloggen geannuleerd</value>
+  </data>
+  <data name="LogoutCancelled" xml:space="preserve">
+    <value>Uitloggen geannuleerd</value>
   </data>
   <data name="PageAccountTitle" xml:space="preserve">
     <value>Mijn account</value>

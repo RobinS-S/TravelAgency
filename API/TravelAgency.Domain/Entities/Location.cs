@@ -1,10 +1,9 @@
-﻿using TravelAgency.Domain.Helpers;
-using TravelAgency.Domain.Interfaces;
+﻿using TravelAgency.Domain.Interfaces;
 using TravelAgency.Shared.Enum;
 
 namespace TravelAgency.Domain.Entities
 {
-    public class Location : Entity, IImageOwningEntity, IGeolocationOwningEntity
+    public class Location : Entity, IImageOwningEntity, IGeolocationOwningEntity, IUserOwnedEntity
     {
         public ICollection<TranslatedText> Names { get; set; } = null!;
 

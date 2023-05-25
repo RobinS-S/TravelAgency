@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Reflection;
-using System.Reflection.Emit;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Interfaces;
 using TravelAgency.Infrastructure.Data.Configuration.Generic;
@@ -33,6 +32,7 @@ namespace TravelAgency.Infrastructure.Data
             {
                 builder.ApplyConfiguration<IImageOwningEntity>(typeof(ImageOwningEntityTypeConfiguration<>), entityType.ClrType);
                 builder.ApplyConfiguration<IGeolocationOwningEntity>(typeof(GeolocationOwningEntityTypeConfiguration<>), entityType.ClrType);
+                builder.ApplyConfiguration<IUserOwnedEntity>(typeof(UserOwnedEntityTypeConfiguration<>), entityType.ClrType);
             }
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

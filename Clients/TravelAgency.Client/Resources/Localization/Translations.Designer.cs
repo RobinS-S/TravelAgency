@@ -61,6 +61,15 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, an error occurred while loading this page..
         /// </summary>
         internal static string ErrorLoadingPage {
@@ -75,6 +84,24 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string Languages {
             get {
                 return ResourceManager.GetString("Languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login was cancelled.
+        /// </summary>
+        internal static string LoginCancelled {
+            get {
+                return ResourceManager.GetString("LoginCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout was cancelled.
+        /// </summary>
+        internal static string LogoutCancelled {
+            get {
+                return ResourceManager.GetString("LogoutCancelled", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿namespace TravelAgency.Domain.Helpers
+﻿namespace TravelAgency.Domain
 {
     public class GeoCoordinates
     {

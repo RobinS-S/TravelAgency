@@ -62,7 +62,7 @@ namespace TravelAgency.Controllers.Api
             }
 
             var roles = await userService.GetUserRoles(user);
-            if ((image.User == null || image.UserId != user.Id) && !roles.Contains(Roles.AdminRoleName))
+            if ((image.Owner == null || image.UserId != user.Id) && !roles.Contains(Roles.AdminRoleName))
             {
                 return Forbid("This image does not belong to you.");
             }

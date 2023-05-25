@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NetTopologySuite.Geometries;
-using TravelAgency.Domain.Helpers;
+using TravelAgency.Domain;
 
 namespace TravelAgency.Infrastructure.Helpers
 {

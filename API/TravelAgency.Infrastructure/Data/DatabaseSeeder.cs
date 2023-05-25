@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TravelAgency.Application;
 using TravelAgency.Application.Services.Interfaces;
 using TravelAgency.Domain.Entities;
-using TravelAgency.Domain.Helpers;
+using TravelAgency.Domain;
 using TravelAgency.Shared.Enum;
 
 namespace TravelAgency.Infrastructure.Data
@@ -95,7 +95,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een prachtig hotel in het hart van Madrid."),
                       new TranslatedText("es", "Un hermoso hotel en el corazón de Madrid.")
                   },
-                  LocationType.Hotel, countries[0], new GeoCoordinates(40.4167, -3.7038), new List<EntityImage>()
+                  LocationType.Hotel, countries[0], new GeoCoordinates(40.4167, -3.7038), user, new List<EntityImage>()
                   {
                       { new EntityImage(true, hotelMadridImage!.Id) }
                   }),
@@ -110,7 +110,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een charmant bungalowpark in Barcelona."),
                       new TranslatedText("es", "Un encantador parque de bungalows en Barcelona.")
                   },
-                  LocationType.BungalowPark, countries[0], new GeoCoordinates(41.3851, 2.1734), new List<EntityImage>()
+                  LocationType.BungalowPark, countries[0], new GeoCoordinates(41.3851, 2.1734), user, new List<EntityImage>()
                   {
                       { new EntityImage(true, barcelonaBungalowParkImage!.Id) }
                   }),
@@ -125,7 +125,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een prachtige villa in Parijs, Frankrijk."),
                       new TranslatedText("es", "Una hermosa villa en París, Francia.")
                   },
-                  LocationType.Villa, countries[1], new GeoCoordinates(48.8566, 2.3522), new List<EntityImage>()
+                  LocationType.Villa, countries[1], new GeoCoordinates(48.8566, 2.3522), user, new List<EntityImage>()
                   {
                       { new EntityImage(true, villaParis!.Id) }
                   }),
@@ -140,7 +140,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een gezellig pension in Nice, Frankrijk."),
                       new TranslatedText("es", "Una acogedora casa de huéspedes en Niza, Francia.")
                   },
-                  LocationType.GuestHouse, countries[1], new GeoCoordinates(43.7102, 7.2620), new List<EntityImage>()
+                  LocationType.GuestHouse, countries[1], new GeoCoordinates(43.7102, 7.2620), user, new List<EntityImage>()
                   {
                       { new EntityImage(true, niceGuesthouse!.Id) }
                   })
