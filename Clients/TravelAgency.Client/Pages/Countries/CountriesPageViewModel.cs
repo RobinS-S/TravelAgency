@@ -23,8 +23,6 @@ namespace TravelAgency.Client.Pages.Countries
         public CountriesPageViewModel(CountryRepository countryRepository)
         {
             this.countryRepository = countryRepository;
-
-            LoadDataCommand.ExecuteAsync(this);
         }
 
         [RelayCommand]
