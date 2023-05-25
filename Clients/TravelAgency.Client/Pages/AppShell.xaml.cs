@@ -14,9 +14,9 @@ namespace TravelAgency.Client.Pages
             InitializeComponent();
             _authService = ServiceProviderHelper.GetService<AuthService>()!;
             _settingsService = ServiceProviderHelper.GetService<SettingsService>()!;
+            BindingContext = _settingsService;
 
             Routing.RegisterRoute(nameof(CountryDetailPage), typeof(CountryDetailPage));
-            BindingContext = _settingsService;
         }
     }
 }

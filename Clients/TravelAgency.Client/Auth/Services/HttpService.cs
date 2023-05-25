@@ -15,37 +15,44 @@ namespace TravelAgency.Client.Auth.Services
 
         public async Task<HttpResponseMessage?> GetResponseAsync(Uri uri, CancellationToken cancellationToken = default)
         {
-            var response = await _httpClient.GetAsync(uri, cancellationToken);
-
-            switch (response.StatusCode)
+            try
             {
-                case HttpStatusCode.Unauthorized:
-                    {
-                        var token = await AuthService.GetRefreshToken();
-                        if (token == null)
-                        {
-                            await _authService.StartLoginProcess();
-                            return null;
-                        }
+                var response = await _httpClient.GetAsync(uri, cancellationToken);
 
-                        var refreshed = await _authService.RefreshToken();
-                        if (!refreshed)
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
                         {
-                            await _authService.StartLoginProcess();
-                            return null;
-                        }
+                            var token = await AuthService.GetRefreshToken();
+                            if (token == null)
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
 
-                        response = await _httpClient.GetAsync(uri, cancellationToken);
-                        if (response.StatusCode == HttpStatusCode.Unauthorized)
-                        {
-                            await _authService.StartLoginProcess();
-                            return null;
+                            var refreshed = await _authService.RefreshToken();
+                            if (!refreshed)
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
+
+                            response = await _httpClient.GetAsync(uri, cancellationToken);
+                            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
+                            break;
                         }
-                        break;
-                    }
+                }
+
+                return response;
             }
-
-            return response;
+            catch
+            {
+                return null;
+            }
         }
     }
 }

@@ -33,7 +33,8 @@
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
         <ScrollView>
             <VerticalStackLayout x:DataType="local:CountryDetailPageViewModel">
-                <Label Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}" Style="{StaticResource TitleStyle}" />
+                <Label Style="{StaticResource DangerStyle}" Text="{localization:Translate ErrorLoadingPage}" IsVisible="{Binding ErrorStateEnabled}" HorizontalTextAlignment="Center" />
+                <Button Command="{Binding LoadDataCommand}"  Text="{localization:Translate TryAgain}" IsVisible="{Binding ErrorStateEnabled}" HorizontalOptions="Center" />
 
                 <CarouselView ItemsSource="{Binding Country.Images}" HeightRequest="400" Loop="False" HorizontalOptions="Center">
                     <CarouselView.ItemsLayout>
@@ -43,7 +44,7 @@
                                     SnapPointsType="MandatorySingle" />
                     </CarouselView.ItemsLayout>
                     <CarouselView.ItemTemplate>
-                        <DataTemplate x:DataType="dto:CountryImageDto">
+                        <DataTemplate x:DataType="dto:EntityImageDto">
                             <StackLayout>
                                 <Frame HasShadow="True"
                                    BorderColor="DarkGray"

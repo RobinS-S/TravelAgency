@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TravelAgency.Domain.Entities;
-using TravelAgency.Infrastructure.Helpers;
 
 namespace TravelAgency.Infrastructure.Data.Configuration
 {
@@ -20,10 +19,6 @@ namespace TravelAgency.Infrastructure.Data.Configuration
                 b.Property(n => n.IsoLanguageName).HasMaxLength(3);
                 b.Property(n => n.Text).HasMaxLength(256);
             });
-
-
-            builder.Property(r => r.Coordinates)
-                .UseGeoCoordinateConversionNullable();
         }
     }
 }

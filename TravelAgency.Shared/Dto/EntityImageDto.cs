@@ -1,6 +1,6 @@
 ﻿namespace TravelAgency.Shared.Dto
 {
-    public class CountryImageDto
+    public class EntityImageDto
     {
         public long? Id { get; set; }
         public bool IsPrimary { get; set; }

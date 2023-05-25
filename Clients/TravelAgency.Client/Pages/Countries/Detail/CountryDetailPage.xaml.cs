@@ -48,7 +48,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
 
         private async Task Init()
         {
-            await _geolocationService.GetLocation();
+            //await _geolocationService.GetLocation();
             //map.AddPin(_geolocationService.Location.Latitude, _geolocationService.Location.Longitude, Colors.Blue, 0.7F, "You", "You", false);
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TravelAgency.Domain.Entities;
-using TravelAgency.Infrastructure.Helpers;
 
 namespace TravelAgency.Infrastructure.Data.Configuration
 {
@@ -26,9 +25,6 @@ namespace TravelAgency.Infrastructure.Data.Configuration
 
             builder.HasMany(l => l.Residences)
                 .WithOne(c => c.Location);
-
-            builder.Property(l => l.Coordinates)
-                .UseGeoCoordinateConversion();
         }
     }
 }

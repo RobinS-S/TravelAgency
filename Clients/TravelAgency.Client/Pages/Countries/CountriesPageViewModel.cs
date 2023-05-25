@@ -15,30 +15,32 @@ namespace TravelAgency.Client.Pages.Countries
         private bool _isRefreshing;
 
         [ObservableProperty]
-        private ObservableCollection<CountryDto> _countriesList = new();
+        private bool _errorStateEnabled;
 
-        public IAsyncRelayCommand LoadDataCommand;
-        public IAsyncRelayCommand<long> ViewDetailsCommand;
+        [ObservableProperty]
+        private ObservableCollection<CountryDto> _countriesList = new();
 
         public CountriesPageViewModel(CountryRepository countryRepository)
         {
             this.countryRepository = countryRepository;
-            LoadDataCommand = new AsyncRelayCommand(LoadData);
-            ViewDetailsCommand = new AsyncRelayCommand<long>(ViewDetails);
 
-            LoadDataCommand.Execute(this);
+            LoadDataCommand.ExecuteAsync(this);
         }
 
+        [RelayCommand]
         private async Task LoadData()
         {
+            IsRefreshing = true;
             var countries = await countryRepository.GetAllAsync();
             if (countries != null)
             {
                 CountriesList = new(countries);
             }
+            ErrorStateEnabled = countries == null;
             IsRefreshing = false;
         }
 
+        [RelayCommand]
         public async Task ViewDetails(long id) => await Shell.Current.GoToAsync(nameof(CountryDetailPage), new Dictionary<string, object> { { "id", id } });
     }
 }

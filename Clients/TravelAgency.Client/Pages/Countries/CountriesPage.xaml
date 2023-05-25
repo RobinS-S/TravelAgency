@@ -26,51 +26,56 @@
 
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
-            <CollectionView ItemsSource="{Binding CountriesList}" ItemsLayout="VerticalGrid, 2" Margin="0,5">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="dto:CountryDto">
-                        <Frame CornerRadius="5" HasShadow="False" x:Name="ItemFrame" Margin="5">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="DarkGray" TargetName="ItemFrame"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="LightGray" TargetName="ItemFrame"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Grid Margin="5" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*">
-                                <Image Grid.RowSpan="5" Grid.ColumnSpan="3" Margin="5" HeightRequest="500" WidthRequest="500"
-                               Source="{Binding Images, Converter={StaticResource CountryImagesToPrimaryImageUrlConverter}}"
-                               HorizontalOptions="Center" VerticalOptions="Center"
-                                Aspect="AspectFit"/>
-                                <Label Grid.Row="1" Grid.Column="4" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
-                                   FontAttributes="Bold" 
-                                   HorizontalOptions="Center"
-                                   Grid.ColumnSpan="2"
-                                   Style="{StaticResource TitleStyle}" />
-                                <Label Grid.Row="2" Grid.Column="3" Text="{localization:Translate Languages, StringFormat='{0}:'}"
-                                   HorizontalOptions="Center"
-                                   Grid.ColumnSpan="2"
-                                   Style="{StaticResource DescriptionStyle}" 
-                                   FontAttributes="Bold"/>
-                                <Label Grid.Row="3" Grid.Column="3" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}"
-                                   HorizontalOptions="Center"
-                                   Grid.ColumnSpan="2"
-                                   Style="{StaticResource DescriptionStyle}" />
-                            </Grid>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnItemTapped"/>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <StackLayout>
+                <Label Style="{StaticResource DangerStyle}" Text="{localization:Translate ErrorLoadingPage}" IsVisible="{Binding ErrorStateEnabled}" HorizontalTextAlignment="Center" />
+                <Button Command="{Binding LoadDataCommand}"  Text="{localization:Translate TryAgain}" IsVisible="{Binding ErrorStateEnabled}" HorizontalOptions="Center" />
+
+                <CollectionView ItemsSource="{Binding CountriesList}" ItemsLayout="VerticalGrid, 2" Margin="0,1">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:CountryDto">
+                            <Frame CornerRadius="5" HasShadow="False" x:Name="ItemFrame" Margin="5">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="DarkGray" TargetName="ItemFrame"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="LightGray" TargetName="ItemFrame"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid Margin="5" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*">
+                                    <Image Grid.RowSpan="5" Grid.ColumnSpan="3" Margin="5" HeightRequest="500" WidthRequest="500"
+                                   Source="{Binding Images, Converter={StaticResource CountryImagesToPrimaryImageUrlConverter}}"
+                                   HorizontalOptions="Center" VerticalOptions="Center"
+                                    Aspect="AspectFit"/>
+                                    <Label Grid.Row="1" Grid.Column="4" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
+                                       FontAttributes="Bold" 
+                                       HorizontalOptions="Center"
+                                       Grid.ColumnSpan="2"
+                                       Style="{StaticResource TitleStyle}" />
+                                    <Label Grid.Row="2" Grid.Column="3" Text="{localization:Translate Languages, StringFormat='{0}:'}"
+                                       HorizontalOptions="Center"
+                                       Grid.ColumnSpan="2"
+                                       Style="{StaticResource DescriptionStyle}" 
+                                       FontAttributes="Bold"/>
+                                    <Label Grid.Row="3" Grid.Column="3" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}"
+                                       HorizontalOptions="Center"
+                                       Grid.ColumnSpan="2"
+                                       Style="{StaticResource DescriptionStyle}" />
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnItemTapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </ScrollView>
     </RefreshView>
 

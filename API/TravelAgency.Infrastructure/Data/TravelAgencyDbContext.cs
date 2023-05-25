@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using System.Reflection.Emit;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Interfaces;
+using TravelAgency.Infrastructure.Data.Configuration.Generic;
 
 namespace TravelAgency.Infrastructure.Data
 {
@@ -25,9 +28,16 @@ namespace TravelAgency.Infrastructure.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            var entityTypes = builder.Model.GetEntityTypes().ToList();
+            foreach (var entityType in entityTypes)
+            {
+                builder.ApplyConfiguration<IImageOwningEntity>(typeof(ImageOwningEntityTypeConfiguration<>), entityType.ClrType);
+                builder.ApplyConfiguration<IGeolocationOwningEntity>(typeof(GeolocationOwningEntityTypeConfiguration<>), entityType.ClrType);
+            }
 
-			base.OnModelCreating(builder);
-		}
-	}
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(builder);
+        }
+    }
 }

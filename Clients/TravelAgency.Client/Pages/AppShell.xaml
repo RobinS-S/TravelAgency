@@ -45,11 +45,13 @@
     <Shell.FlyoutFooter>
         <StackLayout>
             <Picker
+                x:Name="ThemePicker"
                 HorizontalTextAlignment="Center"
                 ItemsSource="{Binding Themes}"
                 ItemDisplayBinding="{Binding ., Converter={StaticResource ThemeNameConverter}}"
                 SelectedItem="{Binding Theme}"/>
             <Picker
+                x:Name="LanguagePicker"
                 HorizontalTextAlignment="Center"
                 ItemsSource="{Binding Languages}"
                 ItemDisplayBinding="{Binding ., Converter={StaticResource LanguageNameConverter}}"
