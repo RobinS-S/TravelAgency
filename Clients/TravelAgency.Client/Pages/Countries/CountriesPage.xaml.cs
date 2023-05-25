@@ -6,22 +6,27 @@ namespace TravelAgency.Client.Pages.Countries
     {
         private readonly CountriesPageViewModel _viewModel;
 
-        public CountriesPage()
+        public CountriesPage(CountriesPageViewModel viewModel)
         {
-            _viewModel = ServiceProviderHelper.GetService<CountriesPageViewModel>()!;
+            _viewModel = viewModel;
             BindingContext = _viewModel;
+
+            SizeChanged += CountriesPage_SizeChanged;
 
             InitializeComponent();
         }
 
-        protected override void OnParentSet()
+        private void CountriesPage_SizeChanged(object? sender, EventArgs e)
         {
-            base.OnParentSet();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+            bool isPortrait = Height > Width;
+            if (isPortrait)
+            {
+                CountryCollection.ItemsLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical);
+            }
+            else
+            {
+                CountryCollection.ItemsLayout = new GridItemsLayout(2, ItemsLayoutOrientation.Horizontal);
+            }
         }
 
         private async void OnItemTapped(object sender, EventArgs e)

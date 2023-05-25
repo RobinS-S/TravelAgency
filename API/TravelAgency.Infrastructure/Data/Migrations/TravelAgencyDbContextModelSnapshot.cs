@@ -381,14 +381,20 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1024)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1024)");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("varchar(95)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(95)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Images");
                 });
@@ -410,11 +416,54 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                     b.Property<int>("LocationType")
                         .HasColumnType("int");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("varchar(95)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("OwnerId");
+
                     b.ToTable("Locations");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Reservation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("varchar(95)");
+
+                    b.Property<long>("ResidenceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(95)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("ResidenceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Residence", b =>
@@ -424,6 +473,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<Point>("Coordinates")
+                        .IsRequired()
                         .HasColumnType("point");
 
                     b.Property<long>("LocationId")
@@ -525,11 +575,13 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Image", b =>
                 {
-                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "User")
+                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Location", b =>
@@ -537,6 +589,12 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                     b.HasOne("TravelAgency.Domain.Entities.Country", "Country")
                         .WithMany("Locations")
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -632,6 +690,35 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Names");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Reservation", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.Residence", "Residence")
+                        .WithMany()
+                        .HasForeignKey("ResidenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("Residence");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Residence", b =>
@@ -658,8 +745,8 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.Property<string>("Text")
                                 .IsRequired()
-                                .HasMaxLength(256)
-                                .HasColumnType("varchar(256)");
+                                .HasMaxLength(1024)
+                                .HasColumnType("varchar(1024)");
 
                             b1.HasKey("ResidenceId", "Id");
 

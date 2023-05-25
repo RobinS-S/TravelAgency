@@ -1,6 +1,4 @@
-﻿using TravelAgency.Domain.Helpers;
-
-namespace TravelAgency.Domain.Interfaces
+﻿namespace TravelAgency.Domain.Interfaces
 {
     public interface IGeolocationOwningEntity
     {

@@ -16,49 +16,40 @@
             <countryconverters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
             <countryconverters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
             <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
-            
-            <Style TargetType="Label" x:Key="TitleStyle">
-                <Setter Property="FontSize" Value="40" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="0,20,0,10" />
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            </Style>
-            <Style TargetType="Label" x:Key="DescriptionStyle">
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
-        <ScrollView>
+        <ScrollView x:Name="MainScrollView">
             <VerticalStackLayout x:DataType="local:CountryDetailPageViewModel">
-                <Label Style="{StaticResource DangerStyle}" Text="{localization:Translate ErrorLoadingPage}" IsVisible="{Binding ErrorStateEnabled}" HorizontalTextAlignment="Center" />
-                <Button Command="{Binding LoadDataCommand}"  Text="{localization:Translate TryAgain}" IsVisible="{Binding ErrorStateEnabled}" HorizontalOptions="Center" />
+                <controls:ErrorReloadControl />
 
+                <Label Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       Style="{StaticResource TitleStyle}" />
                 <CarouselView ItemsSource="{Binding Country.Images}" HeightRequest="400" Loop="False" HorizontalOptions="Center">
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout
-                                    Orientation="Horizontal"
-                                    SnapPointsAlignment="Center"
-                                    SnapPointsType="MandatorySingle" />
+                            Orientation="Horizontal"
+                            SnapPointsAlignment="Center"
+                            SnapPointsType="MandatorySingle" />
                     </CarouselView.ItemsLayout>
                     <CarouselView.ItemTemplate>
                         <DataTemplate x:DataType="dto:EntityImageDto">
                             <StackLayout>
                                 <Frame HasShadow="True"
-                                   BorderColor="DarkGray"
-                                   CornerRadius="5"
-                                   HeightRequest="300"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="CenterAndExpand"
-                                   IsClippedToBounds="True">
+                                       CornerRadius="5"
+                                       HeightRequest="300"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="CenterAndExpand"
+                                       IsClippedToBounds="True">
                                     <StackLayout>
                                         <Image Source="{Binding ImageId, Converter={StaticResource ImageIdToImageLinkConverter}}"
-                                           Aspect="AspectFill"
-                                           HeightRequest="300"
-                                           WidthRequest="300"
-                                           HorizontalOptions="Center" />
+                                               Aspect="AspectFill"
+                                               HeightRequest="300"
+                                               WidthRequest="300"
+                                               HorizontalOptions="Center" />
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
@@ -66,8 +57,9 @@
                     </CarouselView.ItemTemplate>
                 </CarouselView>
 
-                <Label FontAttributes="Bold" Style="{StaticResource DescriptionStyle}" Text="{localization:Translate Languages, StringFormat='{0}:'}" />
-                <Label Style="{StaticResource DescriptionStyle}" Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
+                <Label HorizontalOptions="Center" FontAttributes="Bold" Style="{StaticResource DescriptionStyle}" Text="{localization:Translate Languages, StringFormat='{0}:'}" />
+                <Label HorizontalOptions="Center" Style="{StaticResource DescriptionStyle}" Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
+                
                 <controls:CrossPlatformMapControl x:Name="map" HeightRequest="600" Margin="8,5,8,5" MyLocationFollow="False" MyLocationEnabled="False" />
             </VerticalStackLayout>
         </ScrollView>

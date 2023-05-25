@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
 using TravelAgency.Client.Auth.Services;
+using TravelAgency.Client.Resources.Localization;
 
 namespace TravelAgency.Client.Auth.Pages;
 
@@ -41,7 +42,7 @@ public partial class LoginPage
 #if DEBUG
                 else
                 {
-                    await this.DisplaySnackbar("LOGIN ERROR: " + loginResult.Error, null, "OK", TimeSpan.FromSeconds(5));
+                    await this.DisplaySnackbar($"{Translations.Error}: {loginResult.Error}", null, "OK", TimeSpan.FromSeconds(5));
                 }
 #endif
 #if WINDOWS
@@ -55,7 +56,7 @@ public partial class LoginPage
         }
         catch (TaskCanceledException)
         {
-            await this.DisplaySnackbar("Login was cancelled.", null, "OK", TimeSpan.FromSeconds(3));
+            await this.DisplaySnackbar(Translations.LoginCancelled, null, "OK", TimeSpan.FromSeconds(3));
             await Shell.Current.Navigation.PopAsync(true);
         }
         Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;

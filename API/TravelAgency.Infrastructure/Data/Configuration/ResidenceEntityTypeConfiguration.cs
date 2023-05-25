@@ -17,7 +17,7 @@ namespace TravelAgency.Infrastructure.Data.Configuration
             builder.OwnsMany(r => r.Descriptions, b =>
             {
                 b.Property(n => n.IsoLanguageName).HasMaxLength(3);
-                b.Property(n => n.Text).HasMaxLength(256);
+                b.Property(n => n.Text).HasMaxLength(1024);
             });
         }
     }

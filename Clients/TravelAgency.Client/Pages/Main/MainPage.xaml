@@ -8,14 +8,6 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label" x:Key="TitleStyle">
-                <Setter Property="FontSize" Value="30" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="0,20,0,10" />
-            </Style>
-            <Style TargetType="Label" x:Key="DescriptionStyle">
-                <Setter Property="FontSize" Value="18" />
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     

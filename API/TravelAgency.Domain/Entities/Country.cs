@@ -1,5 +1,4 @@
-﻿using TravelAgency.Domain.Helpers;
-using TravelAgency.Domain.Interfaces;
+﻿using TravelAgency.Domain.Interfaces;
 
 namespace TravelAgency.Domain.Entities
 {

@@ -8,8 +8,10 @@ namespace TravelAgency.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Image> builder)
         {
-            builder.HasOne(i => i.User)
-                .WithMany();
+            builder.Property(i => i.ImageUrl)
+                .IsRequired()
+                .HasMaxLength(1024)
+                .IsUnicode(false);
         }
     }
 }

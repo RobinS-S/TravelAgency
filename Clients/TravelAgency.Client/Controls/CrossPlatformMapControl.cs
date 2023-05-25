@@ -4,6 +4,7 @@ using Mapsui.UI.Maui;
 
 namespace TravelAgency.Client.Controls
 {
+    // TODO: find a fix for https://github.com/dotnet/maui/issues/13628
     public class CrossPlatformMapControl : MapView
     {
         private MapControl _mapControl = new();
@@ -23,7 +24,7 @@ namespace TravelAgency.Client.Controls
                 Label = label,
                 Address = address,
                 Scale = scale,
-                Color = c,
+                Color = c
             };
             Pins.Add(myPin);
 

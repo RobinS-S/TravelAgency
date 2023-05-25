@@ -1,17 +1,19 @@
-﻿namespace TravelAgency.Domain.Entities
+﻿using TravelAgency.Domain.Interfaces;
+
+namespace TravelAgency.Domain.Entities
 {
-    public class Image : Entity
+    public class Image : Entity, IUserOwnedEntity
     {
         public string ImageUrl { get; set; } = null!;
 
-        public ApplicationUser? User { get; set; } = null;
+        public ApplicationUser Owner { get; set; } = null!;
 
         public string? UserId { get; set; }
 
-        public Image(string imageUrl, ApplicationUser? user = null)
+        public Image(string imageUrl, ApplicationUser user)
         {
             ImageUrl = imageUrl;
-            User = user;
+            Owner = user;
         }
 
         public Image()

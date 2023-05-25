@@ -6,7 +6,7 @@
         public ICollection<TranslatedTextDto> Names { get; set; } = null!;
         public ICollection<TranslatedTextDto> Descriptions { get; set; } = null!;
         public long? LocationId { get; set; }
-        public GeoCoordinatesDto? Coordinates { get; set; }
+        public GeoCoordinatesDto Coordinates { get; set; } = null!;
         public ICollection<EntityImageDto> Images { get; set; } = null!;
     }
 }
