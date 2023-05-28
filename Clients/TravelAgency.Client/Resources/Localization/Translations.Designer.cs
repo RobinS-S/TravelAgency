@@ -223,6 +223,15 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Suitable for amount of people.
+        /// </summary>
+        internal static string SuitableFor {
+            get {
+                return ResourceManager.GetString("SuitableFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dark theme.
         /// </summary>
         internal static string Theme_Dark {
@@ -264,6 +273,15 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string ViewLocations {
             get {
                 return ResourceManager.GetString("ViewLocations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View residences.
+        /// </summary>
+        internal static string ViewResidences {
+            get {
+                return ResourceManager.GetString("ViewResidences", resourceCulture);
             }
         }
     }

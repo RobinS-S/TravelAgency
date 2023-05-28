@@ -1,19 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.UI.Maui;
-using TravelAgency.Client.Pages.Locations;
+using TravelAgency.Client.Pages.Residences;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
 
-namespace TravelAgency.Client.Pages.Countries.Detail
+namespace TravelAgency.Client.Pages.Locations.Detail
 {
     [QueryProperty("Id", "id")]
-    public partial class CountryDetailPageViewModel : ObservableObject
+    public partial class LocationDetailPageViewModel : ObservableObject
     {
-        private readonly CountryRepository countryRepository;
+        private readonly LocationRepository locationRepository;
 
         [ObservableProperty]
-        private CountryDto? _country;
+        private LocationDto? _location;
 
         [ObservableProperty]
         private long _id;
@@ -27,30 +27,30 @@ namespace TravelAgency.Client.Pages.Countries.Detail
         [ObservableProperty]
         private List<Pin> _pins = new();
 
-        public CountryDetailPageViewModel(CountryRepository countryRepository)
+        public LocationDetailPageViewModel(LocationRepository locationRepository)
         {
-            this.countryRepository = countryRepository;
+            this.locationRepository = locationRepository;
         }
 
         [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
-            var country = await countryRepository.GetByIdAsync(Id);
-            if (country != null)
+            var location = await locationRepository.GetByIdAsync(Id);
+            if (location != null)
             {
-                Country = country;
+                Location = location;
             }
-            ErrorStateEnabled = country == null;
+            ErrorStateEnabled = location == null;
             IsRefreshing = false;
         }
 
         [RelayCommand]
-        private async Task ViewLocations()
+        private async Task ViewResidences()
         {
-            if(Country != null)
+            if (Location != null)
             {
-                await Shell.Current.GoToAsync(nameof(LocationsPage), new Dictionary<string, object> { { "country", Country } });
+                await Shell.Current.GoToAsync(nameof(ResidencesPage), new Dictionary<string, object> { { "location", Location } });
             }
         }
 

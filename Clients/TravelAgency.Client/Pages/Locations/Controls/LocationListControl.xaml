@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="TravelAgency.Client.Pages.Locations.Controls.LocationListControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:locationconverters="clr-namespace:TravelAgency.Client.ValueConverters.Location">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
+            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
+            <locationconverters:LocationTypeToStringConverter x:Key="LocationTypeToStringConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <CollectionView
+        x:Name="LocationCollection"
+        Margin="0,1"
+        ItemsLayout="VerticalGrid, 2"
+        ItemsSource="{Binding LocationsList}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="dto:LocationDto">
+                <Frame HeightRequest="600" Style="{StaticResource ClickableStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Row="0"
+                            Aspect="AspectFit"
+                            Source="{Binding Images, Converter={StaticResource ImagesListToPrimaryImageUrlConverter}}"
+                            VerticalOptions="FillAndExpand" />
+                        <Label
+                            Grid.Row="1"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource TitleStyle}"
+                            Text="{Binding Names, Converter={StaticResource TranslatedTextConverter}}" />
+                        <Label
+                            Grid.Row="2"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource DescriptionStyle}"
+                            Text="{Binding LocationType, Converter={StaticResource LocationTypeToStringConverter}}" />
+                        <Label
+                            Grid.Row="3"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="{Binding Descriptions, Converter={StaticResource TranslatedTextConverter}}" />
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnItemTapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

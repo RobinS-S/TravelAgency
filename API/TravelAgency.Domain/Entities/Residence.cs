@@ -16,14 +16,17 @@ namespace TravelAgency.Domain.Entities
 
         public ICollection<EntityImage> Images { get; set; } = null!;
 
+        public int SuitableFor { get; set; }
+
         public Residence() { }
 
-        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, ICollection<EntityImage>? images = null)
+        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, int suitableFor, ICollection<EntityImage>? images = null)
         {
             Names = names;
             Descriptions = descriptions;
             Location = location;
             Coordinates = coordinates;
+            SuitableFor = suitableFor;
             Images = images ?? new HashSet<EntityImage>();
         }
     }
