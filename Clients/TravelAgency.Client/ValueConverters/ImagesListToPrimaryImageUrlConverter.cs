@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using TravelAgency.Shared.Dto;
 
-namespace TravelAgency.Client.ValueConverters.Country
+namespace TravelAgency.Client.ValueConverters
 {
-    public class CountryImagesToPrimaryImageUrlConverter : IValueConverter
+    public class ImagesListToPrimaryImageUrlConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -32,7 +32,7 @@ namespace TravelAgency.Client.Localization
                 return string.Format(format, translatedValue);
             }
 
-            return value;
+            return Name ?? "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

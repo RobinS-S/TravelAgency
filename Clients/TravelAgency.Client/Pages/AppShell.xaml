@@ -9,8 +9,10 @@
     xmlns:countries="using:TravelAgency.Client.Pages.Countries"
     xmlns:countrydetails="using:TravelAgency.Client.Pages.Countries.Detail"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:locations="using:TravelAgency.Client.Pages.Locations"
     xmlns:login="using:TravelAgency.Client.Auth.Pages"
     xmlns:main="using:TravelAgency.Client.Pages.Main"
+    xmlns:residences="using:TravelAgency.Client.Pages.Residences"
     xmlns:services="clr-namespace:TravelAgency.Client.Services"
     x:DataType="services:SettingsService"
     FlyoutBehavior="Flyout">
@@ -20,6 +22,16 @@
         ContentTemplate="{DataTemplate countries:CountriesPage}"
         FlyoutItemIsVisible="True"
         Route="countries" />
+
+    <ShellContent
+        Title="{localization:Translate PageLocationsTitle}"
+        ContentTemplate="{DataTemplate locations:LocationsPage}"
+        FlyoutItemIsVisible="True" />
+
+    <ShellContent
+        Title="{localization:Translate PageResidencesTitle}"
+        ContentTemplate="{DataTemplate residences:ResidencesPage}"
+        FlyoutItemIsVisible="True" />
 
     <ShellContent
         Title="{localization:Translate PageMainTitle}"

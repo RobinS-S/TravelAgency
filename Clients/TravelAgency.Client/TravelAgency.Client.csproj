@@ -89,6 +89,12 @@
 	  <Compile Update="Pages\Countries\CountriesPage.xaml.cs">
 	    <DependentUpon>CountriesPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Locations\LocationsPage.xaml.cs">
+	    <DependentUpon>LocationsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Residences\ResidencesPage.xaml.cs">
+	    <DependentUpon>ResidencesPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Localization\Translations.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -116,13 +122,16 @@
 	  <MauiXaml Update="Pages\Countries\CountriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Countries\CountryItemTemplate.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\Countries\Detail\CountryDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Account\Account.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Locations\LocationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Residences\ResidencesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -126,6 +126,24 @@
   <data name="Languages" xml:space="preserve">
     <value>Talen</value>
   </data>
+  <data name="LocationType" xml:space="preserve">
+    <value>Locatie type</value>
+  </data>
+  <data name="LocationType.BungalowPark" xml:space="preserve">
+    <value>Bungalowpark</value>
+  </data>
+  <data name="LocationType.CampGround" xml:space="preserve">
+    <value>Camping</value>
+  </data>
+  <data name="LocationType.GuestHouse" xml:space="preserve">
+    <value>Gasthuis</value>
+  </data>
+  <data name="LocationType.Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="LocationType.Villa" xml:space="preserve">
+    <value>Villa</value>
+  </data>
   <data name="LoginCancelled" xml:space="preserve">
     <value>Inloggen geannuleerd</value>
   </data>
@@ -138,6 +156,9 @@
   <data name="PageCountriesTitle" xml:space="preserve">
     <value>Landen</value>
   </data>
+  <data name="PageLocationsTitle" xml:space="preserve">
+    <value>Locaties</value>
+  </data>
   <data name="PageLoginTitle" xml:space="preserve">
     <value>Inloggen</value>
   </data>
@@ -146,6 +167,9 @@
   </data>
   <data name="PageMainTitle" xml:space="preserve">
     <value>Hoofdpagina</value>
+  </data>
+  <data name="PageResidencesTitle" xml:space="preserve">
+    <value>Verblijven</value>
   </data>
   <data name="Theme.Dark" xml:space="preserve">
     <value>Donker thema</value>
@@ -158,5 +182,8 @@
   </data>
   <data name="TryAgain" xml:space="preserve">
     <value>Probeer opnieuw</value>
+  </data>
+  <data name="ViewLocations" xml:space="preserve">
+    <value>Bekijk locaties</value>
   </data>
 </root>

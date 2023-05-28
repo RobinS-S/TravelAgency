@@ -7,6 +7,7 @@ namespace TravelAgency.Domain.Repositories.Interfaces
         Task AddAsync(Location location);
         Task DeleteAsync(long id);
         Task<IEnumerable<Location>> GetAllAsync();
+        Task<IEnumerable<Location>> GetAllByCountryIdAsync(long countryId);
         Task<Location?> GetByIdAsync(long id);
         Task UpdateAsync(Location location);
     }
