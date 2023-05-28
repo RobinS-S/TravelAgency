@@ -6,6 +6,7 @@ namespace TravelAgency.Client.Repositories
 {
     public class CountryRepository
     {
+        private const string EntityName = "countries";
         private readonly HttpService _httpService;
 
         public CountryRepository(HttpService httpService)
@@ -15,7 +16,7 @@ namespace TravelAgency.Client.Repositories
 
         public async Task<IEnumerable<CountryDto>?> GetAllAsync()
         {
-            var response = await _httpService.GetResponseAsync(new Uri(ApiConfig.ApiUrl + "/api/Countries"));
+            var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}"));
             if (response != null)
             {
                 if (response.IsSuccessStatusCode)
@@ -29,7 +30,7 @@ namespace TravelAgency.Client.Repositories
 
         public async Task<CountryDto?> GetByIdAsync(long id)
         {
-            var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/Countries/{id}"));
+            var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}/{id}"));
             if (response != null)
             {
                 if (response.IsSuccessStatusCode)

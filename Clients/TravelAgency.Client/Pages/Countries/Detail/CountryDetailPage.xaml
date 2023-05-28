@@ -69,6 +69,11 @@
                     Style="{StaticResource DescriptionStyle}"
                     Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
 
+                <Button
+                    Command="{Binding ViewLocationsCommand}"
+                    HorizontalOptions="Center"
+                    Text="{localization:Translate ViewLocations}" />
+
                 <controls:CrossPlatformMapControl
                     x:Name="map"
                     Margin="8,5,8,5"

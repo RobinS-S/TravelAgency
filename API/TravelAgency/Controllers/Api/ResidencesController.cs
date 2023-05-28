@@ -35,6 +35,14 @@ namespace TravelAgency.Controllers.Api
             }
             return Ok(_mapper.Map<ResidenceDto>(residence));
         }
+
+
+        [HttpGet("byLocation")]
+        public async Task<ActionResult<ResidenceDto>> GetAllByLocationId([FromQuery] long locationId)
+        {
+            var residences = await _repository.GetAllByLocationIdAsync(locationId);
+            return Ok(_mapper.Map<IEnumerable<ResidenceDto>>(residences));
+        }
     }
 
 }

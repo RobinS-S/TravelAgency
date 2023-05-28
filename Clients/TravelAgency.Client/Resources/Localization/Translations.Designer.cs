@@ -88,6 +88,60 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location type.
+        /// </summary>
+        internal static string LocationType {
+            get {
+                return ResourceManager.GetString("LocationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bungalow park.
+        /// </summary>
+        internal static string LocationType_BungalowPark {
+            get {
+                return ResourceManager.GetString("LocationType.BungalowPark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campground.
+        /// </summary>
+        internal static string LocationType_CampGround {
+            get {
+                return ResourceManager.GetString("LocationType.CampGround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guesthouse.
+        /// </summary>
+        internal static string LocationType_GuestHouse {
+            get {
+                return ResourceManager.GetString("LocationType.GuestHouse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hotel.
+        /// </summary>
+        internal static string LocationType_Hotel {
+            get {
+                return ResourceManager.GetString("LocationType.Hotel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Villa.
+        /// </summary>
+        internal static string LocationType_Villa {
+            get {
+                return ResourceManager.GetString("LocationType.Villa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login was cancelled.
         /// </summary>
         internal static string LoginCancelled {
@@ -124,6 +178,15 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locations.
+        /// </summary>
+        internal static string PageLocationsTitle {
+            get {
+                return ResourceManager.GetString("PageLocationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         internal static string PageLoginTitle {
@@ -147,6 +210,15 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string PageMainTitle {
             get {
                 return ResourceManager.GetString("PageMainTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Residences.
+        /// </summary>
+        internal static string PageResidencesTitle {
+            get {
+                return ResourceManager.GetString("PageResidencesTitle", resourceCulture);
             }
         }
         
@@ -183,6 +255,15 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string TryAgain {
             get {
                 return ResourceManager.GetString("TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View locations.
+        /// </summary>
+        internal static string ViewLocations {
+            get {
+                return ResourceManager.GetString("ViewLocations", resourceCulture);
             }
         }
     }

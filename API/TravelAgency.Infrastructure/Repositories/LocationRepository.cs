@@ -41,6 +41,9 @@ namespace TravelAgency.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Location>> GetAllByCountryIdAsync(long countryId) =>
+            await _context.Locations.Where(l => l.CountryId == countryId).ToListAsync();
     }
 
 }

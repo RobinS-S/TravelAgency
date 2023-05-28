@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.UI.Maui;
+using TravelAgency.Client.Pages.Locations;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
 
@@ -42,6 +43,15 @@ namespace TravelAgency.Client.Pages.Countries.Detail
             }
             ErrorStateEnabled = country == null;
             IsRefreshing = false;
+        }
+
+        [RelayCommand]
+        private async Task ViewLocations()
+        {
+            if(Country != null)
+            {
+                await Shell.Current.GoToAsync(nameof(LocationsPage), new Dictionary<string, object> { { "country", Country } });
+            }
         }
 
         async partial void OnIdChanged(long value)
