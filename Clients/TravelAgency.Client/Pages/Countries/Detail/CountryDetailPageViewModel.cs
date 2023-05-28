@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.UI.Maui;
-using System.ComponentModel;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
 
@@ -45,16 +44,14 @@ namespace TravelAgency.Client.Pages.Countries.Detail
             IsRefreshing = false;
         }
 
-        protected override async void OnPropertyChanged(PropertyChangedEventArgs e)
+        async partial void OnIdChanged(long value)
         {
-            base.OnPropertyChanged(e);
+            await LoadData();
+        }
 
-            if (e.PropertyName == nameof(Id))
-            {
-                await LoadData();
-            }
-
-            else if (e.PropertyName == nameof(Country) && Country != null)
+        partial void OnCountryChanged(CountryDto? value)
+        {
+            if(Country != null)
             {
                 AddPin(Country.Coordinates.Latitude, Country.Coordinates.Longitude, Colors.Red);
             }

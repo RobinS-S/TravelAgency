@@ -16,6 +16,13 @@ namespace TravelAgency.Client.Pages.Countries
             InitializeComponent();
         }
 
+        protected override async void OnParentSet()
+        {
+            base.OnAppearing();
+
+            await _viewModel.LoadDataCommand.ExecuteAsync(null);
+        }
+
         private void CountriesPage_SizeChanged(object? sender, EventArgs e)
         {
             bool isPortrait = Height > Width;

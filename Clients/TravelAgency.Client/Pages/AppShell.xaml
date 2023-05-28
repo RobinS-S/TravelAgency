@@ -3,59 +3,64 @@
     x:Class="TravelAgency.Client.Pages.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:main="using:TravelAgency.Client.Pages.Main"
-    xmlns:login="using:TravelAgency.Client.Auth.Pages"
     xmlns:account="using:TravelAgency.Client.Pages.Account"
+    xmlns:appmodel="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
     xmlns:countries="using:TravelAgency.Client.Pages.Countries"
     xmlns:countrydetails="using:TravelAgency.Client.Pages.Countries.Detail"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:login="using:TravelAgency.Client.Auth.Pages"
+    xmlns:main="using:TravelAgency.Client.Pages.Main"
     xmlns:services="clr-namespace:TravelAgency.Client.Services"
-    xmlns:appmodel="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
-    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
     x:DataType="services:SettingsService"
     FlyoutBehavior="Flyout">
 
     <ShellContent
         Title="{localization:Translate PageCountriesTitle}"
         ContentTemplate="{DataTemplate countries:CountriesPage}"
-        Route="countries" FlyoutItemIsVisible="True" />
+        FlyoutItemIsVisible="True"
+        Route="countries" />
 
     <ShellContent
         Title="{localization:Translate PageMainTitle}"
         ContentTemplate="{DataTemplate main:MainPage}"
-        Route="main" FlyoutItemIsVisible="True" />
+        FlyoutItemIsVisible="True"
+        Route="main" />
 
     <ShellContent
         Title="{localization:Translate PageAccountTitle}"
         ContentTemplate="{DataTemplate account:AccountPage}"
-        Route="account" FlyoutItemIsVisible="True" />
+        FlyoutItemIsVisible="True"
+        Route="account" />
 
     <ShellContent
-        Title="{localization:Translate PageLoginTitle}"
         x:Name="LoginContent"
+        Title="{localization:Translate PageLoginTitle}"
         ContentTemplate="{DataTemplate login:LoginPage}"
-        Route="login" FlyoutItemIsVisible="True"/>
+        FlyoutItemIsVisible="True"
+        Route="login" />
 
     <ShellContent
-        Title="{localization:Translate PageLogoutTitle}"
         x:Name="LogoutContent"
+        Title="{localization:Translate PageLogoutTitle}"
         ContentTemplate="{DataTemplate login:LogoutPage}"
-        Route="logout" FlyoutItemIsVisible="True"/>
+        FlyoutItemIsVisible="True"
+        Route="logout" />
 
     <Shell.FlyoutFooter>
         <StackLayout>
             <Picker
                 x:Name="ThemePicker"
                 HorizontalTextAlignment="Center"
-                ItemsSource="{Binding Themes}"
                 ItemDisplayBinding="{Binding ., Converter={StaticResource ThemeNameConverter}}"
-                SelectedItem="{Binding Theme}"/>
+                ItemsSource="{Binding Themes}"
+                SelectedItem="{Binding Theme}" />
             <Picker
                 x:Name="LanguagePicker"
                 HorizontalTextAlignment="Center"
-                ItemsSource="{Binding Languages}"
                 ItemDisplayBinding="{Binding ., Converter={StaticResource LanguageNameConverter}}"
-                SelectedItem="{Binding Language}"/>
+                ItemsSource="{Binding Languages}"
+                SelectedItem="{Binding Language}" />
         </StackLayout>
     </Shell.FlyoutFooter>
 

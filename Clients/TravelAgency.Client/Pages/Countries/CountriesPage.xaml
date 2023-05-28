@@ -1,61 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelAgency.Client.Pages.Countries.CountriesPage"
-             xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries"
-             xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
-             xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
-             xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-             xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
-             x:DataType="local:CountriesPageViewModel">
+<ContentPage
+    x:Class="TravelAgency.Client.Pages.Countries.CountriesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    x:DataType="local:CountriesPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:CountryImagesToPrimaryImageUrlConverter x:Key="CountryImagesToPrimaryImageUrlConverter" />
             <converters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
             <converters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
+            <local:CountryItemTemplate x:Key="CountryItemTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDataCommand}">
+    <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
             <StackLayout>
                 <controls:ErrorReloadControl />
 
-                <CollectionView x:Name="CountryCollection" ItemsSource="{Binding CountriesList}" Margin="0,1" ItemsLayout="VerticalGrid, 2">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="dto:CountryDto">
-                            <Frame Style="{StaticResource ClickableStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="300" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Grid.Row="0" Aspect="AspectFit" Source="{Binding Images, Converter={StaticResource CountryImagesToPrimaryImageUrlConverter}}"
-                                           VerticalOptions="FillAndExpand"/>
-                                    <Label Grid.Row="1" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
-                                           FontAttributes="Bold" 
-                                           HorizontalOptions="Center"
-                                           Style="{StaticResource TitleStyle}" />
-                                    <Label Grid.Row="2" Text="{localization:Translate Languages, StringFormat='{0}:'}"
-                                           HorizontalOptions="Center"
-                                           Style="{StaticResource DescriptionStyle}"
-                                           FontAttributes="Bold"/>
-                                    <Label Grid.Row="3" Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}"
-                                           HorizontalOptions="Center"
-                                           Style="{StaticResource DescriptionStyle}" />
-                                </Grid>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <CollectionView
+                    x:Name="CountryCollection"
+                    Margin="0,1"
+                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                    ItemsLayout="VerticalGrid, 2"
+                    ItemsSource="{Binding CountriesList}" />
             </StackLayout>
         </ScrollView>
     </RefreshView>
