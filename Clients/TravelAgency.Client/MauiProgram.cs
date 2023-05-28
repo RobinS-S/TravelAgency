@@ -11,8 +11,10 @@ using TravelAgency.Client.Pages.Account;
 using TravelAgency.Client.Pages.Countries;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Pages.Locations;
+using TravelAgency.Client.Pages.Locations.Detail;
 using TravelAgency.Client.Pages.Main;
 using TravelAgency.Client.Pages.Residences;
+using TravelAgency.Client.Pages.Residences.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Client.Services;
 
@@ -75,10 +77,14 @@ namespace TravelAgency.Client
             builder.Services.AddTransient<CountriesPageViewModel>();
             builder.Services.AddTransient<LocationsPage>();
             builder.Services.AddTransient<LocationsPageViewModel>();
+            builder.Services.AddTransient<LocationDetailPage>();
+            builder.Services.AddTransient<LocationDetailPageViewModel>();
             builder.Services.AddTransient<CountryDetailPage>();
             builder.Services.AddTransient<CountryDetailPageViewModel>();
             builder.Services.AddTransient<ResidencesPage>();
             builder.Services.AddTransient<ResidencesPageViewModel>();
+            builder.Services.AddTransient<ResidenceDetailPage>();
+            builder.Services.AddTransient<ResidenceDetailPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<AccountPage>();

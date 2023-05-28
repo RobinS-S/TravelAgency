@@ -1,39 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="TravelAgency.Client.Pages.Countries.Detail.CountryDetailPage"
+    x:Class="TravelAgency.Client.Pages.Locations.Detail.LocationDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    xmlns:countryconverters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
-    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries.Detail"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Locations.Detail"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-    xmlns:maps="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
-    Title="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
-    x:DataType="local:CountryDetailPageViewModel">
+    Title="{Binding Location.Names, Converter={StaticResource TranslatedTextConverter}}"
+    x:DataType="local:LocationDetailPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <countryconverters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
-            <countryconverters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
             <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
+            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
-            <VerticalStackLayout x:DataType="local:CountryDetailPageViewModel">
+            <VerticalStackLayout x:DataType="local:LocationDetailPageViewModel">
                 <controls:ErrorReloadControl />
 
-                <Label
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource TitleStyle}"
-                    Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}" />
                 <CarouselView
                     HeightRequest="400"
                     HorizontalOptions="Center"
-                    ItemsSource="{Binding Country.Images}"
+                    ItemsSource="{Binding Location.Images}"
                     Loop="False">
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout
@@ -63,17 +54,18 @@
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     Style="{StaticResource DescriptionStyle}"
-                    Text="{localization:Translate Languages,
-                                                  StringFormat='{0}:'}" />
+                    Text="{Binding Location.Descriptions, Converter={StaticResource TranslatedTextConverter}}" />
                 <Label
+                    FontAttributes="Bold"
                     HorizontalOptions="Center"
-                    Style="{StaticResource DescriptionStyle}"
-                    Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
+                    LineBreakMode="WordWrap"
+                    Style="{StaticResource SubtitleStyle}"
+                    Text="{Binding Location.LocationType, Converter={StaticResource LocationTypeToStringConverter}}" />
 
                 <Button
-                    Command="{Binding ViewLocationsCommand}"
+                    Command="{Binding ViewResidencesCommand}"
                     HorizontalOptions="Center"
-                    Text="{localization:Translate ViewLocations}" />
+                    Text="{localization:Translate ViewResidences}" />
 
                 <controls:CrossPlatformMapControl
                     x:Name="map"
@@ -84,4 +76,5 @@
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>
+
 </ContentPage>

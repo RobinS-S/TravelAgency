@@ -1,39 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="TravelAgency.Client.Pages.Countries.Detail.CountryDetailPage"
+    x:Class="TravelAgency.Client.Pages.Residences.Detail.ResidenceDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    xmlns:countryconverters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
-    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries.Detail"
-    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-    xmlns:maps="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
-    Title="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}"
-    x:DataType="local:CountryDetailPageViewModel">
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Residences.Detail"
+    Title="{Binding Residence.Names, Converter={StaticResource TranslatedTextConverter}}"
+    x:DataType="local:ResidenceDetailPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <countryconverters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
-            <countryconverters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
             <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
+            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
-            <VerticalStackLayout x:DataType="local:CountryDetailPageViewModel">
+            <VerticalStackLayout x:DataType="local:ResidenceDetailPageViewModel">
                 <controls:ErrorReloadControl />
 
-                <Label
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource TitleStyle}"
-                    Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}" />
                 <CarouselView
                     HeightRequest="400"
                     HorizontalOptions="Center"
-                    ItemsSource="{Binding Country.Images}"
+                    ItemsSource="{Binding Residence.Images}"
                     Loop="False">
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout
@@ -63,17 +54,7 @@
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     Style="{StaticResource DescriptionStyle}"
-                    Text="{localization:Translate Languages,
-                                                  StringFormat='{0}:'}" />
-                <Label
-                    HorizontalOptions="Center"
-                    Style="{StaticResource DescriptionStyle}"
-                    Text="{Binding Country.IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
-
-                <Button
-                    Command="{Binding ViewLocationsCommand}"
-                    HorizontalOptions="Center"
-                    Text="{localization:Translate ViewLocations}" />
+                    Text="{Binding Residence.Descriptions, Converter={StaticResource TranslatedTextConverter}}" />
 
                 <controls:CrossPlatformMapControl
                     x:Name="map"
@@ -84,4 +65,5 @@
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>
+
 </ContentPage>

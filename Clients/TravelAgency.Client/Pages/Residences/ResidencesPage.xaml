@@ -4,77 +4,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
-    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
     xmlns:local="clr-namespace:TravelAgency.Client.Pages.Residences"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-    xmlns:locationconverters="clr-namespace:TravelAgency.Client.ValueConverters.Location"
+    xmlns:residencecontrols="clr-namespace:TravelAgency.Client.Pages.Residences.Controls"
+    Title="{localization:Translate PageResidencesTitle}"
     x:DataType="local:ResidencesPageViewModel">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
-            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
-            <locationconverters:LocationTypeToStringConverter x:Key="LocationTypeToStringConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
-            <StackLayout>
-                <controls:ErrorReloadControl />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <CollectionView
-                    x:Name="LocationCollection"
-                    Margin="0,1"
-                    ItemsLayout="VerticalGrid, 2"
-                    ItemsSource="{Binding ResidencesList}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="dto:ResidenceDto">
-                            <Frame HeightRequest="600" Style="{StaticResource ClickableStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="300" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Image
-                                        Grid.Row="0"
-                                        Aspect="AspectFit"
-                                        Source="{Binding Images, Converter={StaticResource ImagesListToPrimaryImageUrlConverter}}"
-                                        VerticalOptions="FillAndExpand" />
-                                    <Label
-                                        Grid.Row="1"
-                                        FontAttributes="Bold"
-                                        HorizontalOptions="Center"
-                                        LineBreakMode="WordWrap"
-                                        Style="{StaticResource TitleStyle}"
-                                        Text="{Binding Names, Converter={StaticResource TranslatedTextConverter}}" />
-                                    <Label
-                                        Grid.Row="2"
-                                        FontAttributes="Bold"
-                                        HorizontalOptions="Center"
-                                        LineBreakMode="WordWrap"
-                                        Style="{StaticResource DescriptionStyle}"
-                                        Text="dsasdaasd" />
-                                    <Label
-                                        Grid.Row="3"
-                                        HorizontalOptions="Center"
-                                        LineBreakMode="WordWrap"
-                                        Style="{StaticResource SubtitleStyle}"
-                                        Text="{Binding Descriptions, Converter={StaticResource TranslatedTextConverter}}" />
-                                </Grid>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" />
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
+                <controls:ErrorReloadControl Grid.Row="0" />
+                <residencecontrols:ResidenceListControl Grid.Row="1" BindingContext="{Binding}" />
+            </Grid>
         </ScrollView>
     </RefreshView>
 </ContentPage>

@@ -86,11 +86,17 @@
 	  <Compile Update="Pages\Account\Account.xaml.cs">
 	    <DependentUpon>Account.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Countries\Controls\CountryListControl.xaml.cs">
+	    <DependentUpon>CountryListControl.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Countries\CountriesPage.xaml.cs">
 	    <DependentUpon>CountriesPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Locations\LocationsPage.xaml.cs">
 	    <DependentUpon>LocationsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Residences\Detail\ResidenceDetailPage.xaml.cs">
+	    <DependentUpon>ResidenceDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Residences\ResidencesPage.xaml.cs">
 	    <DependentUpon>ResidencesPage.xaml</DependentUpon>
@@ -122,13 +128,28 @@
 	  <MauiXaml Update="Pages\Countries\CountriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Countries\Controls\CountryListControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Countries\Detail\CountryDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Account\Account.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Locations\Controls\LocationListControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Locations\Detail\LocationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Locations\LocationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Residences\Controls\ResidenceListControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Residences\Detail\ResidenceDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Residences\ResidencesPage.xaml">

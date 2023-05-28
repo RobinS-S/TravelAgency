@@ -4,75 +4,22 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
-    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    xmlns:countryconverters="clr-namespace:TravelAgency.Client.ValueConverters.Country"
+    xmlns:countrycontrols="clr-namespace:TravelAgency.Client.Pages.Countries.Controls"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
     xmlns:local="clr-namespace:TravelAgency.Client.Pages.Countries"
-    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     x:DataType="local:CountriesPageViewModel">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
-            <countryconverters:CountryIsoNameToCountryNameConverter x:Key="CountryIsoNameToCountryNameConverter" />
-            <countryconverters:CountryIsoNameToLanguageNamesConverter x:Key="CountryIsoNameToLanguageNamesConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
-            <StackLayout>
-                <controls:ErrorReloadControl />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <CollectionView
-                    x:Name="CountryCollection"
-                    Margin="0,1"
-                    ItemsLayout="VerticalGrid, 2"
-                    ItemsSource="{Binding CountriesList}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="dto:CountryDto">
-                            <Frame x:Name="ItemFrame" Style="{StaticResource ClickableStyle}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="300" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Image
-                                        Grid.Row="0"
-                                        Aspect="AspectFit"
-                                        Source="{Binding Images, Converter={StaticResource ImagesListToPrimaryImageUrlConverter}}"
-                                        VerticalOptions="FillAndExpand" />
-                                    <Label
-                                        Grid.Row="1"
-                                        FontAttributes="Bold"
-                                        HorizontalOptions="Center"
-                                        Style="{StaticResource TitleStyle}"
-                                        Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToCountryNameConverter}}" />
-                                    <Label
-                                        Grid.Row="2"
-                                        FontAttributes="Bold"
-                                        HorizontalOptions="Center"
-                                        Style="{StaticResource DescriptionStyle}"
-                                        Text="{localization:Translate Languages,
-                                                                      StringFormat='{0}:'}" />
-                                    <Label
-                                        Grid.Row="3"
-                                        HorizontalOptions="Center"
-                                        Style="{StaticResource DescriptionStyle}"
-                                        Text="{Binding IsoName, Converter={StaticResource CountryIsoNameToLanguageNamesConverter}}" />
-                                </Grid>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnItemTapped" />
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </StackLayout>
+                <controls:ErrorReloadControl Grid.Row="0" />
+                <countrycontrols:CountryListControl Grid.Row="1" BindingContext="{Binding}" />
+            </Grid>
         </ScrollView>
     </RefreshView>
 </ContentPage>

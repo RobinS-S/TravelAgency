@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using TravelAgency.Client.Pages.Countries.Detail;
+using TravelAgency.Client.Pages.Residences.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
 
@@ -43,6 +43,6 @@ namespace TravelAgency.Client.Pages.Residences
         }
 
         [RelayCommand]
-        public async Task ViewDetails(long id) => await Shell.Current.GoToAsync(nameof(CountryDetailPage), new Dictionary<string, object> { { "id", id } });
+        public async Task ViewDetails(long id) => await Shell.Current.GoToAsync(nameof(ResidenceDetailPage), new Dictionary<string, object> { { "id", id } });
     }
 }

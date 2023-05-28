@@ -171,6 +171,9 @@
   <data name="PageResidencesTitle" xml:space="preserve">
     <value>Residences</value>
   </data>
+  <data name="SuitableFor" xml:space="preserve">
+    <value>Suitable for amount of people</value>
+  </data>
   <data name="Theme.Dark" xml:space="preserve">
     <value>Dark theme</value>
   </data>
@@ -185,5 +188,8 @@
   </data>
   <data name="ViewLocations" xml:space="preserve">
     <value>View locations</value>
+  </data>
+  <data name="ViewResidences" xml:space="preserve">
+    <value>View residences</value>
   </data>
 </root>

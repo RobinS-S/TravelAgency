@@ -171,6 +171,9 @@
   <data name="PageResidencesTitle" xml:space="preserve">
     <value>Verblijven</value>
   </data>
+  <data name="SuitableFor" xml:space="preserve">
+    <value>Geschikte hoeveelheid personen</value>
+  </data>
   <data name="Theme.Dark" xml:space="preserve">
     <value>Donker thema</value>
   </data>
@@ -185,5 +188,8 @@
   </data>
   <data name="ViewLocations" xml:space="preserve">
     <value>Bekijk locaties</value>
+  </data>
+  <data name="ViewResidences" xml:space="preserve">
+    <value>Bekijk verblijven</value>
   </data>
 </root>

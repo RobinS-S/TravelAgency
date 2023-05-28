@@ -15,7 +15,7 @@ namespace TravelAgency.Client.Controls
             Map = _mapControl.Map!;
         }
 
-        public Pin AddPin(double latitude, double longitude, Color c, float scale = 0.7F, string label = "Pin", string address = "", bool focus = true)
+        public Pin AddPin(double latitude, double longitude, Color c, float scale = 0.7F, string label = "Pin", string address = "", bool focus = true, int resolution = 6)
         {
             var myPin = new Pin(this)
             {
@@ -31,7 +31,7 @@ namespace TravelAgency.Client.Controls
             if (focus)
             {
                 var (x, y) = SphericalMercator.FromLonLat(longitude, latitude);
-                Map.Home = (nav) => nav.CenterOnAndZoomTo(new MPoint(x, y), nav.Resolutions[6]);
+                Map.Home = (nav) => nav.CenterOnAndZoomTo(new MPoint(x, y), nav.Resolutions[resolution]);
             }
 
             return myPin;

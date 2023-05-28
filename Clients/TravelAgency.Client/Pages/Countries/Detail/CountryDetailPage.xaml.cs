@@ -32,7 +32,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
                     _countryPin.Dispose();
                 }
 
-                _countryPin = map.AddPin(_viewModel.Country.Coordinates.Latitude, _viewModel.Country.Coordinates.Longitude, Colors.Red, 0.7F, "Country");
+                _countryPin = map.AddPin(_viewModel.Country.Coordinates.Latitude, _viewModel.Country.Coordinates.Longitude, Colors.Red, 0.7F, "Country", "", true, 7);
             }
         }
     }
