@@ -9,7 +9,8 @@ namespace TravelAgency.Infrastructure.Data.Configuration.Generic
         public void Configure(EntityTypeBuilder<T> builder)
         {
             builder.HasOne(i => i.Owner)
-                .WithMany();
+                .WithMany()
+                .HasForeignKey(i => i.OwnerId);
         }
     }
 }

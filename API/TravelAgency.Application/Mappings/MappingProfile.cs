@@ -16,6 +16,12 @@ namespace TravelAgency.Application.Mappings
             CreateMap<Residence, ResidenceDto>();
             CreateMap<TranslatedText, TranslatedTextDto>();
             CreateMap<GeoCoordinates, GeoCoordinatesDto>();
+            CreateMap<ReservationCreateResult, ReservationCreateResultDto>();
+
+            CreateMap<Flight, FlightDto>()
+                .ForMember(f => f.Seats, b => b.MapFrom(s => s.Seats.Select(s => s.SeatNumber)));
+
+            CreateMap<Reservation, ReservationDto>();
         }
 	}
 }

@@ -23,6 +23,8 @@ namespace TravelAgency.Domain.Entities
 
         public ApplicationUser Owner { get; set; } = null!;
 
+        public string OwnerId { get; set; } = null!;
+
         public Location() { }
 
         public Location(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, LocationType locationType, Country country, GeoCoordinates coordinates, ApplicationUser owner, ICollection<EntityImage>? images = null)

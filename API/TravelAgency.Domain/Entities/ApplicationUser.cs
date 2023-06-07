@@ -2,7 +2,17 @@
 
 namespace TravelAgency.Domain.Entities
 {
-	public class ApplicationUser : IdentityUser
-	{
-	}
+    public class ApplicationUser : IdentityUser
+    {
+        public override bool Equals(object? obj)
+        {
+            return obj is ApplicationUser user &&
+                   Id == user.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
+    }
 }

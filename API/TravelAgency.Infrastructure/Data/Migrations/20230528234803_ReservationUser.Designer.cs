@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using TravelAgency.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TravelAgency.Infrastructure.Data;
 namespace TravelAgency.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TravelAgencyDbContext))]
-    partial class TravelAgencyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230528234803_ReservationUser")]
+    partial class ReservationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -389,6 +392,9 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(95)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
@@ -460,7 +466,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservation");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Residence", b =>
@@ -475,9 +481,6 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.Property<long>("LocationId")
                         .HasColumnType("bigint");
-
-                    b.Property<decimal>("PricePerDay")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("SuitableFor")
                         .HasColumnType("int");
@@ -716,90 +719,6 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.OwnsMany("TravelAgency.Domain.Entities.Flight", "Flights", b1 =>
-                        {
-                            b1.Property<long>("ReservationId")
-                                .HasColumnType("bigint");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
-
-                            b1.Property<string>("AirportCode")
-                                .IsRequired()
-                                .HasMaxLength(32)
-                                .HasColumnType("varchar(32)");
-
-                            b1.Property<Point>("Coordinates")
-                                .IsRequired()
-                                .HasColumnType("point");
-
-                            b1.Property<string>("DestinationAirportCode")
-                                .IsRequired()
-                                .HasColumnType("longtext");
-
-                            b1.Property<string>("FlightNumber")
-                                .IsRequired()
-                                .HasMaxLength(32)
-                                .HasColumnType("varchar(32)");
-
-                            b1.Property<DateTime>("FromDeparture")
-                                .HasColumnType("datetime");
-
-                            b1.Property<string>("OwnerId")
-                                .IsRequired()
-                                .HasColumnType("varchar(95)");
-
-                            b1.Property<DateTime>("Until")
-                                .HasColumnType("datetime");
-
-                            b1.HasKey("ReservationId", "Id");
-
-                            b1.HasIndex("OwnerId");
-
-                            b1.ToTable("Flight");
-
-                            b1.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "Owner")
-                                .WithMany()
-                                .HasForeignKey("OwnerId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.WithOwner()
-                                .HasForeignKey("ReservationId");
-
-                            b1.OwnsMany("TravelAgency.Domain.Entities.FlightSeat", "Seats", b2 =>
-                                {
-                                    b2.Property<long>("FlightReservationId")
-                                        .HasColumnType("bigint");
-
-                                    b2.Property<int>("FlightId")
-                                        .HasColumnType("int");
-
-                                    b2.Property<int>("Id")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("int");
-
-                                    b2.Property<string>("SeatNumber")
-                                        .IsRequired()
-                                        .HasMaxLength(8)
-                                        .HasColumnType("varchar(8)");
-
-                                    b2.HasKey("FlightReservationId", "FlightId", "Id");
-
-                                    b2.ToTable("FlightSeat");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("FlightReservationId", "FlightId");
-                                });
-
-                            b1.Navigation("Owner");
-
-                            b1.Navigation("Seats");
-                        });
-
-                    b.Navigation("Flights");
 
                     b.Navigation("Owner");
 

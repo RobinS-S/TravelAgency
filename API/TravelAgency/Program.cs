@@ -78,6 +78,9 @@ namespace TravelAgency
             builder.Services.AddScoped<ILocationRepository, LocationRepository>();
             builder.Services.AddScoped<IResidenceRepository, ResidenceRepository>();
 			builder.Services.AddScoped<IImageRepository, ImageRepository>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+
+            builder.Services.AddScoped<ReservationService>();
 
             if (builder.Environment.IsDevelopment())
             {

@@ -9,7 +9,7 @@ using TravelAgency.Infrastructure.Data.Configuration.Generic;
 
 namespace TravelAgency.Infrastructure.Data
 {
-	public class TravelAgencyDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class TravelAgencyDbContext : ApiAuthorizationDbContext<ApplicationUser>
 	{
 		public DbSet<Country> Countries { get; set; }
 
@@ -18,6 +18,8 @@ namespace TravelAgency.Infrastructure.Data
         public DbSet<Residence> Residences { get; set; }
 
         public DbSet<Image> Images { get; set; }
+
+        public DbSet<Reservation> Reservations { get; set; }
 
         public TravelAgencyDbContext(
 			DbContextOptions options,
