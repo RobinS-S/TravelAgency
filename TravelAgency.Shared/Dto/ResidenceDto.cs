@@ -9,5 +9,6 @@
         public GeoCoordinatesDto Coordinates { get; set; } = null!;
         public ICollection<EntityImageDto> Images { get; set; } = null!;
         public int SuitableFor { get; set; }
+        public decimal PricePerDay { get; set; }
     }
 }

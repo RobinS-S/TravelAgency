@@ -8,7 +8,7 @@ namespace TravelAgency.Domain.Entities
 
         public ApplicationUser Owner { get; set; } = null!;
 
-        public string? UserId { get; set; }
+        public string OwnerId { get; set; } = null!;
 
         public Image(string imageUrl, ApplicationUser user)
         {

@@ -18,15 +18,18 @@ namespace TravelAgency.Domain.Entities
 
         public int SuitableFor { get; set; }
 
+        public decimal PricePerDay { get; set; }
+
         public Residence() { }
 
-        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, int suitableFor, ICollection<EntityImage>? images = null)
+        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, int suitableFor, decimal pricePerDay, ICollection<EntityImage>? images = null)
         {
             Names = names;
             Descriptions = descriptions;
             Location = location;
             Coordinates = coordinates;
             SuitableFor = suitableFor;
+            PricePerDay = pricePerDay;
             Images = images ?? new HashSet<EntityImage>();
         }
     }

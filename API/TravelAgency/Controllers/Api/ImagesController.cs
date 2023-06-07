@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TravelAgency.Application;
 using TravelAgency.Application.Helpers;
 using TravelAgency.Application.Services.Interfaces;
@@ -52,6 +53,7 @@ namespace TravelAgency.Controllers.Api
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.AdminRoleName)]
         public async Task<IActionResult> RemoveImage(long id)
         {
             var user = await userService.GetUserAsync(User);
@@ -62,7 +64,7 @@ namespace TravelAgency.Controllers.Api
             }
 
             var roles = await userService.GetUserRoles(user);
-            if ((image.Owner == null || image.UserId != user.Id) && !roles.Contains(Roles.AdminRoleName))
+            if ((image.Owner == null || image.OwnerId != user.Id) && !roles.Contains(Roles.AdminRoleName))
             {
                 return Forbid("This image does not belong to you.");
             }

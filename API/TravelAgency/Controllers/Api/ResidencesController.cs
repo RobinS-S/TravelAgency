@@ -19,6 +19,7 @@ namespace TravelAgency.Controllers.Api
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ResidenceDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ResidenceDto>>> GetAll()
         {
             var residences = await _repository.GetAllAsync();
@@ -26,6 +27,7 @@ namespace TravelAgency.Controllers.Api
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ResidenceDto), StatusCodes.Status200OK)]
         public async Task<ActionResult<ResidenceDto>> GetById(long id)
         {
             var residence = await _repository.GetByIdAsync(id);
@@ -38,6 +40,7 @@ namespace TravelAgency.Controllers.Api
 
 
         [HttpGet("byLocation")]
+        [ProducesResponseType(typeof(IEnumerable<ResidenceDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ResidenceDto>> GetAllByLocationId([FromQuery] long locationId)
         {
             var residences = await _repository.GetAllByLocationIdAsync(locationId);

@@ -7,6 +7,8 @@ using TravelAgency.Application.Services.Interfaces;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain;
 using TravelAgency.Shared.Enum;
+using TravelAgency.Infrastructure.Helpers;
+using TravelAgency.Application.Services;
 
 namespace TravelAgency.Infrastructure.Data
 {
@@ -20,6 +22,7 @@ namespace TravelAgency.Infrastructure.Data
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var configuration = scope.ServiceProvider.GetRequiredService<Config>();
             var imageService = scope.ServiceProvider.GetRequiredService<IImageService>();
+            var reservationService = scope.ServiceProvider.GetRequiredService<ReservationService>();
             var adminRoleName = Roles.AdminRoleName;
             var dataExists = await dbContext.Users.AnyAsync();
 
@@ -55,11 +58,11 @@ namespace TravelAgency.Infrastructure.Data
 
             if (user != null && !dataExists)
             {
-                await SeedSampleData(dbContext, imageService, user);
+                await SeedSampleData(dbContext, imageService, user, reservationService);
             }
         }
 
-        private static async Task SeedSampleData(TravelAgencyDbContext dbContext, IImageService imageService, ApplicationUser user)
+        private static async Task SeedSampleData(TravelAgencyDbContext dbContext, IImageService imageService, ApplicationUser user, ReservationService reservationService)
         {
             var esImage = await UploadImageFromSeedingImages("country-es.jpg", user, imageService);
             var frImage = await UploadImageFromSeedingImages("country-fr.jpg", user, imageService);
@@ -158,7 +161,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een ruime suite met een kingsize bed en een prachtig uitzicht op de stad."),
                       new TranslatedText("es", "Una suite espaciosa con una cama king-size y vistas impresionantes de la ciudad.")
                   },
-                  locations[0], new GeoCoordinates(40.4182, -3.7008), 2, new List<EntityImage>()
+                  locations[0], new GeoCoordinates(40.4182, -3.7008), 2, Random.Shared.NextDecimal(100, 150), new List<EntityImage>()
                   {
                       { new EntityImage(true, hotelMadridDeluxeSuiteImage!.Id) }
                   }),
@@ -173,7 +176,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een stijlvolle bungalow met een privétuin en uitzicht op de stad."),
                       new TranslatedText("es", "Un bungalow elegante con jardín privado y vista a la ciudad.")
                   },
-                  locations[1], new GeoCoordinates(41.3875, 2.1699), 4, new List<EntityImage>()
+                  locations[1], new GeoCoordinates(41.3875, 2.1699), 4, Random.Shared.NextDecimal(50, 100), new List<EntityImage>()
                   {
                       { new EntityImage(true, barcelonaBungalowImage!.Id) }
                   }),
@@ -188,7 +191,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een luxe suite met uitzicht op de Eiffeltoren."),
                       new TranslatedText("es", "Una suite de lujo con vista a la Torre Eiffel.")
                   },
-                  locations[2], new GeoCoordinates(48.8578, 2.2950), 2, new List<EntityImage>()
+                  locations[2], new GeoCoordinates(48.8578, 2.2950), 2, Random.Shared.NextDecimal(150, 200), new List<EntityImage>()
                   {
                       { new EntityImage(true, villaParisSuite!.Id) }
                   }),
@@ -203,7 +206,7 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een gezellige kamer met moderne voorzieningen en uitzicht op de stad."),
                       new TranslatedText("es", "Una habitación acogedora con comodidades modernas y vista a la ciudad.")
                   },
-                  locations[3], new GeoCoordinates(43.7122, 7.2608), 2, new List<EntityImage>()
+                  locations[3], new GeoCoordinates(43.7122, 7.2608), 2, Random.Shared.NextDecimal(80, 130), new List<EntityImage>()
                   {
                       { new EntityImage(true, niceGuesthouseRoom!.Id) }
                   })
@@ -214,6 +217,21 @@ namespace TravelAgency.Infrastructure.Data
             dbContext.Residences.AddRange(residences);
 
             await dbContext.SaveChangesAsync();
+
+            var reservationResult = await reservationService.CreateReservation(new Shared.Dto.CreateReservationDto()
+            {
+                AmountOfPeople = 2,
+                FlightIncluded = true,
+                ResidenceId = residences[Random.Shared.Next(0, residences.Length - 1)].Id,
+                Start = DateTime.Now.AddDays(1),
+                End = DateTime.Now.AddDays(8),
+                LocationFromCoordinates = new Shared.Dto.GeoCoordinatesDto(51.5846128, 4.7975691)
+            }, user);
+
+            if(reservationResult.ResultType != ReservationCreateResultType.Succeeded)
+            {
+                throw new Exception("Could not place initial reservation. " + reservationResult.ResultType);
+            }
         }
 
         private static async Task<Image?> UploadImageFromSeedingImages(string fileName, ApplicationUser user, IImageService imageService)
