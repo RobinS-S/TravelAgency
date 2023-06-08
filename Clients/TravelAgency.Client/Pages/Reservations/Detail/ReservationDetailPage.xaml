@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TravelAgency.Client.Pages.Reservations.Detail.ReservationDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Reservations.Detail"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="{Binding Reservation.Residence.Names, Converter={StaticResource TranslatedTextConverter}}"
+    x:DataType="local:ReservationDetailPageViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
+            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
+            <toolkit:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView x:Name="MainScrollView">
+            <VerticalStackLayout x:DataType="local:ReservationDetailPageViewModel">
+                <controls:ErrorReloadControl />
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.ColumnSpan="3"
+                        Aspect="AspectFit"
+                        Source="{Binding Reservation.Residence.Images, Converter={StaticResource ImagesListToPrimaryImageUrlConverter}}"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource TitleStyle}"
+                        Text="{Binding Reservation.Residence.Names, Converter={StaticResource TranslatedTextConverter}}" />
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="{Binding Reservation.Start}" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="-" />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="{Binding Reservation.End}" />
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="{localization:Translate SuitableFor,
+                                                      StringFormat='{0}:'}" />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="{Binding Reservation.AmountOfPeople}" />
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource SubtitleStyle}"
+                        Text="{Binding Reservation.Cost, StringFormat='EUR {0}'}" />
+
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Command="{Binding ViewResidenceDetailsCommand}"
+                        HorizontalOptions="Center"
+                        Text="{localization:Translate GoToResidence}" />
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Command="{Binding ViewFlightsDetailsCommand}"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding Reservation.Flights, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
+                        Text="{localization:Translate GoToFlightInfo}" />
+                    <Button
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Command="{Binding ViewOwnerDetailsCommand}"
+                        HorizontalOptions="Center"
+                        Text="{localization:Translate GoToOwner}" />
+                </Grid>
+
+                <controls:CrossPlatformMapControl
+                    x:Name="map"
+                    Margin="8,5,8,5"
+                    HeightRequest="600"
+                    MyLocationEnabled="False"
+                    MyLocationFollow="False" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

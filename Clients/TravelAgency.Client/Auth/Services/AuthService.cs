@@ -52,12 +52,6 @@ namespace TravelAgency.Client.Auth.Services
             return true;
         }
 
-        public async Task<bool> TestLogin()
-        {
-            var response = await _httpClient.GetAsync(ApiConfig.ApiTestAuthenticatedUrl);
-            return response.IsSuccessStatusCode;
-        }
-
         public async Task SetAuthResult(LoginResult result)
         {
             await HandleResult(result.IsError, result.AccessToken, result.RefreshToken);
@@ -72,19 +66,17 @@ namespace TravelAgency.Client.Auth.Services
         {
             var token = await GetAuthToken();
             LoadToken(token);
-            return token != null;
+            return !string.IsNullOrEmpty(token);
         }
 
         private void LoadToken(string? accessToken)
         {
             _httpClient.DefaultRequestHeaders.Remove("Authorization");
             _httpClient.DefaultRequestHeaders.Authorization = accessToken == null ? null : new AuthenticationHeaderValue("Bearer", accessToken);
-            var hasToken = accessToken != null;
-            if (_hasAuthToken != hasToken)
-            {
-                _hasAuthToken = hasToken;
-                this.AuthStatusChanged?.Invoke(this, _hasAuthToken);
-            }
+            var hasToken = !string.IsNullOrEmpty(accessToken);
+            if (_hasAuthToken == hasToken) return;
+            _hasAuthToken = hasToken;
+            this.AuthStatusChanged?.Invoke(this, _hasAuthToken);
         }
 
         private async Task HandleResult(bool isError, string accessToken, string refreshToken)
@@ -93,7 +85,7 @@ namespace TravelAgency.Client.Auth.Services
             {
                 LoadToken(accessToken);
                 await SecureStorage.Default.SetAsync("authToken", accessToken);
-                if (refreshToken != null)
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     await SecureStorage.Default.SetAsync("refreshToken", refreshToken);
                 }
@@ -104,7 +96,7 @@ namespace TravelAgency.Client.Auth.Services
             }
         }
 
-        private void ResetCredentials()
+        public void ResetCredentials()
         {
             SecureStorage.Default.Remove("authToken");
             SecureStorage.Default.Remove("refreshToken");
@@ -118,7 +110,7 @@ namespace TravelAgency.Client.Auth.Services
         public async Task<bool> RefreshToken()
         {
             var refreshToken = await GetRefreshToken();
-            if (refreshToken == null)
+            if (string.IsNullOrEmpty(refreshToken))
             {
                 return false;
             }

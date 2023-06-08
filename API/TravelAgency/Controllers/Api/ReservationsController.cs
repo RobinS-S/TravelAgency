@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TravelAgency.Application;
@@ -11,15 +13,15 @@ namespace TravelAgency.Controllers.Api
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
-    public class ReservationController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class ReservationsController : ControllerBase
     {
         private readonly UserService _userService;
         private readonly IReservationRepository _reservationRepository;
         private readonly ReservationService _reservationService;
         private readonly IMapper _mapper;
 
-        public ReservationController(IReservationRepository reservationRepository, ReservationService reservationService, IMapper mapper, UserService userService)
+        public ReservationsController(IReservationRepository reservationRepository, ReservationService reservationService, IMapper mapper, UserService userService)
         {
             _reservationRepository = reservationRepository;
             _reservationService = reservationService;

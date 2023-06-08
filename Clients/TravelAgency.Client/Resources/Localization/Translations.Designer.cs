@@ -61,6 +61,24 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calling is not supported on this platform!.
+        /// </summary>
+        internal static string CallingNotSupported {
+            get {
+                return ResourceManager.GetString("CallingNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail is not supported on this platform!.
+        /// </summary>
+        internal static string EmailNotSupported {
+            get {
+                return ResourceManager.GetString("EmailNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -282,6 +300,15 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string ViewResidences {
             get {
                 return ResourceManager.GetString("ViewResidences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have WhatsApp installed!.
+        /// </summary>
+        internal static string WhatsAppNotInstalled {
+            get {
+                return ResourceManager.GetString("WhatsAppNotInstalled", resourceCulture);
             }
         }
     }

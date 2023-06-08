@@ -86,6 +86,9 @@
 	  <Compile Update="Pages\Account\Account.xaml.cs">
 	    <DependentUpon>Account.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Account\Detail\ProfileDetailPage.xaml.cs">
+	    <DependentUpon>ProfileDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Countries\Controls\CountryListControl.xaml.cs">
 	    <DependentUpon>CountryListControl.xaml</DependentUpon>
 	  </Compile>
@@ -94,6 +97,15 @@
 	  </Compile>
 	  <Compile Update="Pages\Locations\LocationsPage.xaml.cs">
 	    <DependentUpon>LocationsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Reservations\Controls\ReservationListControl.xaml.cs">
+	    <DependentUpon>ReservationListControl.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Reservations\Detail\FlightDetailPage.xaml.cs">
+	    <DependentUpon>FlightDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Reservations\Detail\ReservationDetailPage.xaml.cs">
+	    <DependentUpon>ReservationDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Residences\Detail\ResidenceDetailPage.xaml.cs">
 	    <DependentUpon>ResidenceDetailPage.xaml</DependentUpon>
@@ -125,6 +137,9 @@
 	  <MauiXaml Update="Controls\ErrorReloadControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Account\Detail\ProfileDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Countries\CountriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -144,6 +159,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Locations\LocationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Reservations\Controls\ReservationListControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Reservations\Detail\FlightDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Reservations\Detail\ReservationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Reservations\ReservationsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Residences\Controls\ResidenceListControl.xaml">

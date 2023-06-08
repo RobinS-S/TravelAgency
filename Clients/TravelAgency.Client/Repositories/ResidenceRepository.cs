@@ -14,28 +14,28 @@ namespace TravelAgency.Client.Repositories
             _httpService = httpService;
         }
 
-        public async Task<IEnumerable<ResidenceDto>?> GetAllAsync()
+        public async Task<List<ResidenceDto>?> GetAllAsync()
         {
             var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}"));
             if (response != null)
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ResidenceDto>>();
+                    return await response.Content.ReadFromJsonAsync<List<ResidenceDto>>();
                 }
             }
 
             return null;
         }
 
-        public async Task<IEnumerable<ResidenceDto>?> GetAllByLocationIdAsync(long locationId)
+        public async Task<List<ResidenceDto>?> GetAllByLocationIdAsync(long locationId)
         {
             var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}/byLocation?locationId={locationId}"));
             if (response != null)
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<ResidenceDto>>();
+                    return await response.Content.ReadFromJsonAsync<List<ResidenceDto>>();
                 }
             }
 

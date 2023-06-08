@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using TravelAgency.Shared.Dto;
-
-namespace TravelAgency.Client.Pages.Countries
+﻿namespace TravelAgency.Client.Pages.Countries
 {
     public partial class CountriesPage : ContentPage
     {

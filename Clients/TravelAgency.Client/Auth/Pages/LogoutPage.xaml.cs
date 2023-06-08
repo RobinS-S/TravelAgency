@@ -7,10 +7,12 @@ namespace TravelAgency.Client.Auth.Pages;
 public partial class LogoutPage
 {
     private readonly AuthService _authService;
+    private readonly HttpService _httpService;
 
-    public LogoutPage(AuthService authService)
+    public LogoutPage(AuthService authService, HttpService httpService)
     {
         _authService = authService;
+        _httpService = httpService;
         InitializeComponent();
     }
 
@@ -22,7 +24,7 @@ public partial class LogoutPage
         try
         {
             var hasToken = await _authService.LoadTokenFromStorage();
-            if (hasToken || await _authService.TestLogin())
+            if (hasToken || await _httpService.TestLogin())
             {
                 var logoutResult = await _authService.Logout(
 #if WINDOWS

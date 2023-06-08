@@ -22,7 +22,7 @@ namespace TravelAgency.Client.Pages.Locations
         private CountryDto? _country;
 
         [ObservableProperty]
-        private ObservableCollection<LocationDto> _locationsList = new();
+        private List<LocationDto> _locationsList = new();
 
         public LocationsPageViewModel(LocationRepository locationRepository)
         {
@@ -36,7 +36,7 @@ namespace TravelAgency.Client.Pages.Locations
             var locations = Country == null ? await locationRepository.GetAllAsync() : await locationRepository.GetAllByCountryIdAsync(Country.Id);
             if (locations != null)
             {
-                LocationsList = new(locations);
+                LocationsList = locations;
             }
             ErrorStateEnabled = locations == null;
             IsRefreshing = false;

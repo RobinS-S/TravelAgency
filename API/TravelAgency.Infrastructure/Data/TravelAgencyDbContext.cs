@@ -10,16 +10,16 @@ using TravelAgency.Infrastructure.Data.Configuration.Generic;
 namespace TravelAgency.Infrastructure.Data
 {
     public class TravelAgencyDbContext : ApiAuthorizationDbContext<ApplicationUser>
-	{
-		public DbSet<Country> Countries { get; set; }
+    {
+        public DbSet<Country> Countries { get; set; } = null!;
 
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<Location> Locations { get; set; } = null!;
 
-        public DbSet<Residence> Residences { get; set; }
+        public DbSet<Residence> Residences { get; set; } = null!;
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Image> Images { get; set; } = null!;
 
-        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Reservation> Reservations { get; set; } = null!;
 
         public TravelAgencyDbContext(
 			DbContextOptions options,

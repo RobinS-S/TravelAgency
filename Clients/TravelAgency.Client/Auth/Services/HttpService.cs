@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace TravelAgency.Client.Auth.Services
 {
@@ -11,6 +15,27 @@ namespace TravelAgency.Client.Auth.Services
         {
             _httpClient = httpClient;
             _authService = authService;
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+        public async Task<bool> TestLogin()
+        {
+            try
+            {
+                var response = await GetResponseAsync(new Uri(ApiConfig.ApiTestAuthenticatedUrl));
+                if (response is not { IsSuccessStatusCode: true })
+                {
+                    _authService.ResetCredentials();
+                    return false;
+                }
+
+                return true;
+            }
+            catch
+            {
+            }
+            return false;
         }
 
         public async Task<HttpResponseMessage?> GetResponseAsync(Uri uri, CancellationToken cancellationToken = default)
@@ -18,13 +43,12 @@ namespace TravelAgency.Client.Auth.Services
             try
             {
                 var response = await _httpClient.GetAsync(uri, cancellationToken);
-
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Unauthorized:
                         {
                             var token = await AuthService.GetRefreshToken();
-                            if (token == null)
+                            if (string.IsNullOrEmpty(token))
                             {
                                 await _authService.StartLoginProcess();
                                 return null;
@@ -38,6 +62,47 @@ namespace TravelAgency.Client.Auth.Services
                             }
 
                             response = await _httpClient.GetAsync(uri, cancellationToken);
+                            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
+                            break;
+                        }
+                }
+
+                return response;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<HttpResponseMessage?> PostAsJsonAsync<TValue>([StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var response = await _httpClient.PostAsJsonAsync(requestUri, value, options, cancellationToken);
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.Unauthorized:
+                        {
+                            var token = await AuthService.GetRefreshToken();
+                            if (string.IsNullOrEmpty(token))
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
+
+                            var refreshed = await _authService.RefreshToken();
+                            if (!refreshed)
+                            {
+                                await _authService.StartLoginProcess();
+                                return null;
+                            }
+
+                            response = await _httpClient.PostAsJsonAsync(requestUri, value, options, cancellationToken);
                             if (response.StatusCode == HttpStatusCode.Unauthorized)
                             {
                                 await _authService.StartLoginProcess();

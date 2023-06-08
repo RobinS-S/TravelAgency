@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:AuthenticatedContentPage
+    x:Class="TravelAgency.Client.Pages.Reservations.ReservationsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Reservations"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:pages="using:TravelAgency.Client.Auth.Pages"
+    xmlns:reservationcontrols="using:TravelAgency.Client.Pages.Reservations.Controls"
+    Title="{localization:Translate PageReservationsTitle}"
+    x:DataType="local:ReservationsPageViewModel">
+    <VerticalStackLayout>
+        <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView x:Name="MainScrollView">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <controls:ErrorReloadControl Grid.Row="0" />
+                    <reservationcontrols:ReservationListControl Grid.Row="1" BindingContext="{Binding}" />
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </VerticalStackLayout>
+</pages:AuthenticatedContentPage>

@@ -14,14 +14,14 @@ namespace TravelAgency.Client.Repositories
             _httpService = httpService;
         }
 
-        public async Task<IEnumerable<CountryDto>?> GetAllAsync()
+        public async Task<List<CountryDto>?> GetAllAsync()
         {
             var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}"));
             if (response != null)
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<IEnumerable<CountryDto>>();
+                    return await response.Content.ReadFromJsonAsync<List<CountryDto>>();
                 }
             }
 

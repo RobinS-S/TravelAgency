@@ -3,8 +3,32 @@ using TravelAgency.Shared.Travel;
 
 namespace TravelAgency.Shared.Airports
 {
-    public class AirportsList
+    public class AirTravelInformation
     {
+        public static decimal EstimateFlightPrice(int minutes)
+        {
+            int hours = minutes / 60;
+
+            switch (hours)
+            {
+                case <= 3:
+                    // Short flight
+                    return 150;
+                case <= 6:
+                    // Medium flight
+                    return 300;
+                default:
+                {
+                    // Long flight
+                    const decimal baseRate = 600.0M;
+                    const decimal ratePerHour = 50.0M;
+
+                    decimal additionalPrice = ratePerHour * (decimal)Math.Log(hours - 6 + 1);
+                    return baseRate + additionalPrice;
+                }
+            }
+        }
+
         public static Airport GetNearestAirport(GeoCoordinatesDto coordinates)
         {
             Airport? nearestAirport = null;
@@ -49,7 +73,7 @@ namespace TravelAgency.Shared.Airports
             return degrees * Math.PI / 180;
         }
 
-        public static int CalculateFlightTravelTime(Airport sourceAirport, Airport targetAirport)
+        public static int CalculateFlightTravelTimeMinutes(Airport sourceAirport, Airport targetAirport)
         {
             double airspeed = 15;
 
@@ -60,6 +84,9 @@ namespace TravelAgency.Shared.Airports
 
             return travelTimeMinutes;
         }
+
+        public static Airport? GetAirportByIATACode(string code) => Airports
+            .SingleOrDefault(a => string.Equals(a.IATACode, code, StringComparison.CurrentCultureIgnoreCase));
 
         public static List<Airport> Airports = new()
         {

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TravelAgency.Client.Pages.Reservations.Detail.FlightDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Reservations.Detail"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Title="{localization:Translate PageFlightDetailTitle}"
+    x:DataType="local:ReservationDetailPageViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:AirportIATACodeConverter x:Key="AirportIATACodeConverter" />
+            <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator="," />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView x:Name="MainScrollView">
+        <VerticalStackLayout x:DataType="local:ReservationDetailPageViewModel">
+
+            <CollectionView
+                x:Name="ReservationCollection"
+                Margin="0,1"
+                ItemsLayout="VerticalGrid"
+                ItemsSource="{Binding Reservation.Flights}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dto:FlightDto">
+                        <Frame>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource TitleStyle}"
+                                    Text="{Binding FlightNumber}" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{Binding AirportCode, Converter={StaticResource AirportIATACodeConverter}}" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{localization:Translate To}" />
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{Binding DestinationAirportCode, Converter={StaticResource AirportIATACodeConverter}}" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource SubtitleStyle}"
+                                    Text="{Binding AirportCode}" />
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource SubtitleStyle}"
+                                    Text="{Binding DestinationAirportCode}" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{Binding FromDeparture}" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{localization:Translate Until}" />
+
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{Binding Until}" />
+
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{localization:Translate Chairs,
+                                                                  StringFormat='{0}:'}" />
+
+                                <Label
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    Style="{StaticResource DescriptionStyle}"
+                                    Text="{Binding Seats, Converter={StaticResource ListToStringConverter}}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <controls:CrossPlatformMapControl
+                x:Name="map"
+                Margin="8,5,8,5"
+                HeightRequest="600"
+                MyLocationEnabled="False"
+                MyLocationFollow="False" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
