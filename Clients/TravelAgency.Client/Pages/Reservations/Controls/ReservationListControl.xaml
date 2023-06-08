@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="TravelAgency.Client.Pages.Reservations.Controls.ReservationListControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:localization="using:TravelAgency.Client.Localization">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
+            <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <CollectionView
+        x:Name="ReservationCollection"
+        Margin="0,1"
+        ItemsLayout="VerticalGrid"
+        ItemsSource="{Binding ReservationsList}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="dto:ReservationDto">
+                <Frame HeightRequest="600" Style="{StaticResource ClickableStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            Aspect="AspectFit"
+                            Source="{Binding Residence.Images, Converter={StaticResource ImagesListToPrimaryImageUrlConverter}}"
+                            VerticalOptions="FillAndExpand" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource TitleStyle}"
+                            Text="{Binding Residence.Names, Converter={StaticResource TranslatedTextConverter}}" />
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="{Binding Start}" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="-" />
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="{Binding End}" />
+
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="{localization:Translate SuitableFor,
+                                                          StringFormat='{0}:'}" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="1" />
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="2"
+                            HorizontalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SubtitleStyle}"
+                            Text="EUR 0,00" />
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnItemTapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

@@ -38,20 +38,27 @@ namespace TravelAgency.Application.Services
                 return new ReservationCreateResult(ReservationCreateResultType.TimespanNotAvailable);
             }
 
-            bool isFlightIncludedMismatch = reservationDto.FlightIncluded ^ reservationDto.LocationFromCoordinates != null;
+            var isShorterThanOneDay = CalculateDaysBetween(reservationDto.Start, reservationDto.End) <= 0;
+            if (isShorterThanOneDay)
+            {
+                return new ReservationCreateResult(ReservationCreateResultType.TooShort);
+            }
+
+            var isFlightIncludedMismatch = reservationDto.FlightIncluded ^ reservationDto.LocationFromCoordinates != null;
             if (isFlightIncludedMismatch)
             {
                 return new ReservationCreateResult(ReservationCreateResultType.UnknownError);
             }
 
+            var price = residence.PricePerDay * CalculateDaysBetween(reservationDto.Start, reservationDto.End);
             List<Flight> flights = new();
             if (reservationDto.FlightIncluded && reservationDto.LocationFromCoordinates != null)
             {
-                var airport = AirportsList.GetNearestAirport(reservationDto.LocationFromCoordinates);
-                var destinationAirport = AirportsList.GetNearestAirport(new(residence.Coordinates.Latitude, residence.Coordinates.Longitude));
+                var airport = AirTravelInformation.GetNearestAirport(reservationDto.LocationFromCoordinates);
+                var destinationAirport = AirTravelInformation.GetNearestAirport(new(residence.Coordinates.Latitude, residence.Coordinates.Longitude));
 
-                int flightTravelTime = AirportsList.CalculateFlightTravelTime(airport, destinationAirport);
-                int randomOffset = Random.Shared.Next(10, 30);
+                var flightTravelTime = AirTravelInformation.CalculateFlightTravelTimeMinutes(airport, destinationAirport);
+                var randomOffset = Random.Shared.Next(10, 30);
 
                 var departureToTime = reservationDto.Start - TimeSpan.FromMinutes(flightTravelTime + 120 + randomOffset);
                 var arrivalToTime = departureToTime + TimeSpan.FromMinutes(flightTravelTime + Random.Shared.Next(5, 20));
@@ -78,12 +85,20 @@ namespace TravelAgency.Application.Services
                             .ToList(),
                         new Domain.GeoCoordinates(airport.GeoCoordinates.Latitude, airport.GeoCoordinates.Longitude),
                         tenant));
-            }
 
-            var reservation = new Reservation(residence, tenant, residence.Location.Owner, reservationDto.Start, reservationDto.End, 999.0m, flights);
+                price += reservationDto.AmountOfPeople * AirTravelInformation.EstimateFlightPrice(flightTravelTime);
+            }
+            // TODO: implement price on reservation or create invoice
+
+            var reservation = new Reservation(residence, tenant, residence.Location.Owner, reservationDto.Start, reservationDto.End, 999.0m, flights, reservationDto.AmountOfPeople);
             await reservationRepository.AddAsync(reservation);
             return new ReservationCreateResult(ReservationCreateResultType.Succeeded, reservation);
         }
 
+        public static int CalculateDaysBetween(DateTime date1, DateTime date2)
+        {
+            var span = date2.Subtract(date1);
+            return Math.Abs((int)span.TotalDays);
+        }
     }
 }

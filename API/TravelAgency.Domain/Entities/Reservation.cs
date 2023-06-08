@@ -24,11 +24,13 @@ namespace TravelAgency.Domain.Entities
 
         public ICollection<Flight> Flights { get; set; } = null!;
 
+        public int AmountOfPeople { get; set; }
+
         public Reservation()
         {
         }
 
-        public Reservation(Residence residence, ApplicationUser tenant, ApplicationUser owner, DateTime start, DateTime end, decimal cost, ICollection<Flight> flights)
+        public Reservation(Residence residence, ApplicationUser tenant, ApplicationUser owner, DateTime start, DateTime end, decimal cost, ICollection<Flight> flights, int amountOfPeople)
         {
             Residence = residence;
             Tenant = tenant;
@@ -37,6 +39,7 @@ namespace TravelAgency.Domain.Entities
             End = end;
             Cost = cost;
             Flights = flights;
+            AmountOfPeople = amountOfPeople;
         }
     }
 }

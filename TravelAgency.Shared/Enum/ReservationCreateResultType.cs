@@ -5,6 +5,7 @@
         Succeeded,
         TimespanNotAvailable,
         UnknownError,
-        AlreadyHaveActiveReservation
+        AlreadyHaveActiveReservation,
+        TooShort
     }
 }

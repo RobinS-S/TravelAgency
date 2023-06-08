@@ -41,7 +41,7 @@ namespace TravelAgency
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "TravelAgencyAPI"
-                    }
+                    },
                 }
             };
     }

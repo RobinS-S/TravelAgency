@@ -4,6 +4,8 @@ namespace TravelAgency.Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        public bool HasWhatsApp { get; set; }
+
         public override bool Equals(object? obj)
         {
             return obj is ApplicationUser user &&

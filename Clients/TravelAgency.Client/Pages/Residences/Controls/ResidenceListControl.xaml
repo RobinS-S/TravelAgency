@@ -5,13 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
-    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-    xmlns:locationconverters="clr-namespace:TravelAgency.Client.ValueConverters.Location">
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization">
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:ImagesListToPrimaryImageUrlConverter x:Key="ImagesListToPrimaryImageUrlConverter" />
             <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
-            <locationconverters:LocationTypeToStringConverter x:Key="LocationTypeToStringConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
 

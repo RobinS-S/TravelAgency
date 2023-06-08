@@ -8,11 +8,14 @@ using TravelAgency.Client.Auth.Pages;
 using TravelAgency.Client.Auth.Services;
 using TravelAgency.Client.Pages;
 using TravelAgency.Client.Pages.Account;
+using TravelAgency.Client.Pages.Account.Detail;
 using TravelAgency.Client.Pages.Countries;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Pages.Locations;
 using TravelAgency.Client.Pages.Locations.Detail;
 using TravelAgency.Client.Pages.Main;
+using TravelAgency.Client.Pages.Reservations;
+using TravelAgency.Client.Pages.Reservations.Detail;
 using TravelAgency.Client.Pages.Residences;
 using TravelAgency.Client.Pages.Residences.Detail;
 using TravelAgency.Client.Repositories;
@@ -69,8 +72,10 @@ namespace TravelAgency.Client
             builder.Services.AddSingleton<CountryRepository>();
             builder.Services.AddSingleton<LocationRepository>();
             builder.Services.AddSingleton<ResidenceRepository>();
+            builder.Services.AddSingleton<ReservationRepository>();
+            builder.Services.AddSingleton<AccountRepository>();
 
-            // Add all pages and viewmodels here for dependency injection to work
+            // Add all pages and view models here for dependency injection to work
             builder.Services.AddTransient<AuthenticatedContentPage>();
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<CountriesPage>();
@@ -85,6 +90,14 @@ namespace TravelAgency.Client
             builder.Services.AddTransient<ResidencesPageViewModel>();
             builder.Services.AddTransient<ResidenceDetailPage>();
             builder.Services.AddTransient<ResidenceDetailPageViewModel>();
+            builder.Services.AddTransient<ReservationsPage>();
+            builder.Services.AddTransient<ReservationsPageViewModel>();
+            builder.Services.AddTransient<ReservationDetailPage>();
+            builder.Services.AddTransient<ReservationDetailPageViewModel>();
+            builder.Services.AddTransient<FlightDetailPage>();
+            builder.Services.AddTransient<FlightDetailPageViewModel>();
+            builder.Services.AddTransient<ProfileDetailPage>();
+            builder.Services.AddTransient<ProfileDetailPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<AccountPage>();

@@ -15,16 +15,19 @@ namespace TravelAgency.Services
 
         public async Task<ApplicationUser> GetUserAsync(ClaimsPrincipal principal)
         {
-            var userId = principal.FindFirstValue("sub");
-            if (userId != null)
+            var userId = principal.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
             {
-                var user = await _userManager.FindByIdAsync(userId);
-                if (user != null)
-                {
-                    return user;
-                }
+                throw new InvalidOperationException();
             }
-            throw new InvalidOperationException();
+
+            var user = await _userManager.FindByIdAsync(userId);
+            return user ?? throw new InvalidOperationException();
+        }
+
+        public async Task<ApplicationUser?> GetUserByIdAsync(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
         }
 
         public async Task<IList<string>> GetUserRoles(ApplicationUser user) => await _userManager.GetRolesAsync(user);

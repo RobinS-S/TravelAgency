@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TravelAgency.Client.Pages.Account.Detail.ProfileDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
+    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
+    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
+    xmlns:local="clr-namespace:TravelAgency.Client.Pages.Account.Detail"
+    xmlns:localization="using:TravelAgency.Client.Localization"
+    Title="{localization:Translate ProfileDetailPageTitle}"
+    x:DataType="local:ProfileDetailPageViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary />
+    </ContentPage.Resources>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView x:Name="MainScrollView">
+            <VerticalStackLayout x:DataType="local:ProfileDetailPageViewModel">
+                <controls:ErrorReloadControl />
+
+                <Grid Margin="2,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource TitleStyle}"
+                        Text="{Binding Profile.Email}" />
+
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Command="{Binding SendEmailCommand}"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Text="{localization:Translate SendEmail}" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Style="{StaticResource TitleStyle}"
+                        Text="{Binding Profile.PhoneNumber, StringFormat='+{0}'}" />
+
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Command="{Binding CallCommand}"
+                        HorizontalOptions="Center"
+                        LineBreakMode="WordWrap"
+                        Text="{localization:Translate Call}" />
+
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Command="{Binding SendWhatsAppCommand}"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding Profile.HasWhatsApp}"
+                        LineBreakMode="WordWrap"
+                        Text="{localization:Translate SendWhatsApp}" />
+
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

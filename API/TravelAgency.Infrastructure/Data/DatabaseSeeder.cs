@@ -36,7 +36,9 @@ namespace TravelAgency.Infrastructure.Data
             var defaultUser = new ApplicationUser
             {
                 UserName = configuration.AdminUserEmail,
-                Email = configuration.AdminUserEmail
+                Email = configuration.AdminUserEmail,
+                PhoneNumber = configuration.AdminUserNumber,
+                HasWhatsApp = true
             };
 
             var user = await userManager.FindByEmailAsync(configuration.AdminUserEmail);

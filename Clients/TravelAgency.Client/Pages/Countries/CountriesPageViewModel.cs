@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
@@ -9,7 +8,7 @@ namespace TravelAgency.Client.Pages.Countries
 {
     public partial class CountriesPageViewModel : ObservableObject
     {
-        private readonly CountryRepository countryRepository;
+        private readonly CountryRepository _countryRepository;
 
         [ObservableProperty]
         private bool _isRefreshing;
@@ -18,21 +17,21 @@ namespace TravelAgency.Client.Pages.Countries
         private bool _errorStateEnabled;
 
         [ObservableProperty]
-        private ObservableCollection<CountryDto> _countriesList = new();
+        private List<CountryDto> _countriesList = new();
 
         public CountriesPageViewModel(CountryRepository countryRepository)
         {
-            this.countryRepository = countryRepository;
+            this._countryRepository = countryRepository;
         }
 
         [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
-            var countries = await countryRepository.GetAllAsync();
+            var countries = await _countryRepository.GetAllAsync();
             if (countries != null)
             {
-                CountriesList = new(countries);
+                CountriesList = countries;
             }
             ErrorStateEnabled = countries == null;
             IsRefreshing = false;

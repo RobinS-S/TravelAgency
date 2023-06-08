@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using TravelAgency.Client.Pages.Residences.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
@@ -22,7 +21,7 @@ namespace TravelAgency.Client.Pages.Residences
         private LocationDto? _location;
 
         [ObservableProperty]
-        private ObservableCollection<ResidenceDto> _residencesList = new();
+        private List<ResidenceDto> _residencesList = new();
 
         public ResidencesPageViewModel(ResidenceRepository residenceRepository)
         {
@@ -36,7 +35,7 @@ namespace TravelAgency.Client.Pages.Residences
             var residences = Location == null ? await residenceRepository.GetAllAsync() : await residenceRepository.GetAllByLocationIdAsync(Location.Id!.Value);
             if (residences != null)
             {
-                ResidencesList = new(residences);
+                ResidencesList = residences;
             }
             ErrorStateEnabled = residences == null;
             IsRefreshing = false;

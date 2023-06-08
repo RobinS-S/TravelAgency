@@ -12,6 +12,7 @@
     xmlns:locations="using:TravelAgency.Client.Pages.Locations"
     xmlns:login="using:TravelAgency.Client.Auth.Pages"
     xmlns:main="using:TravelAgency.Client.Pages.Main"
+    xmlns:reservations="using:TravelAgency.Client.Pages.Reservations"
     xmlns:residences="using:TravelAgency.Client.Pages.Residences"
     xmlns:services="clr-namespace:TravelAgency.Client.Services"
     x:DataType="services:SettingsService"
@@ -44,6 +45,12 @@
         ContentTemplate="{DataTemplate account:AccountPage}"
         FlyoutItemIsVisible="True"
         Route="account" />
+
+    <ShellContent
+        Title="{localization:Translate PageMyReservationsTitle}"
+        ContentTemplate="{DataTemplate reservations:ReservationsPage}"
+        FlyoutItemIsVisible="True"
+        Route="reservations" />
 
     <ShellContent
         x:Name="LoginContent"

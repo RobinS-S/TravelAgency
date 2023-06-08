@@ -1,11 +1,10 @@
-using Duende.IdentityServer.Models;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using TravelAgency.Application;
@@ -50,17 +49,29 @@ namespace TravelAgency
             builder.Services.AddRazorPages();
             builder.Services.AddControllers();
 
-            builder.Services.AddAuthentication()
-                .AddIdentityServerJwt();
+            builder.Services.AddAuthentication(options =>
+            {
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = builder.Configuration["AppUrl"];
+                    options.TokenValidationParameters.ValidateAudience = false;
 
-			builder.Services.AddIdentityServer(options =>
+                    options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+                });
+
+            builder.Services.AddIdentityServer(options =>
 			{
 				if (!builder.Environment.IsDevelopment()) return;
 				options.Events.RaiseErrorEvents = true;
 				options.Events.RaiseInformationEvents = true;
 				options.Events.RaiseFailureEvents = true;
 				options.Events.RaiseSuccessEvents = true;
-			})
+                options.UserInteraction.LoginUrl = "/Identity/Account/Login";
+                options.UserInteraction.AllowOriginInReturnUrl = true;
+                options.UserInteraction.LogoutUrl = "/Identity/Account/Logout";
+                options.UserInteraction.ErrorUrl = "/Identity/Account/Error";
+            })
 			.AddInMemoryIdentityResources(IdentityConfig.IdentityResources)
 			.AddInMemoryApiScopes(IdentityConfig.ApiScopes)
 			.AddInMemoryClients(IdentityConfig.Clients)
@@ -99,7 +110,7 @@ namespace TravelAgency
             app.UseRouting();
 
             app.UseIdentityServer();
-			app.UseAuthorization();
+            app.UseAuthorization();
 
 			await DatabaseSeeder.SeedDatabase(app.Services); // Ensure the roles and a default user exists
 
