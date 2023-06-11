@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 
 namespace TravelAgency.Client.Localization
 {
@@ -27,12 +28,20 @@ namespace TravelAgency.Client.Localization
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string translatedValue && parameter is string format)
+            var format = parameter as string ?? StringFormat ?? "{0}";
+            if (value is string translatedValue)
             {
-                return string.Format(format, translatedValue);
+                try
+                {
+                    return string.Format(format, translatedValue);
+                }
+                catch (FormatException)
+                {
+                    Debug.WriteLine($"Invalid string format: {format}");
+                }
             }
 
-            return Name ?? "";
+            return $"!{string.Format(format, Name)}!" ?? "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

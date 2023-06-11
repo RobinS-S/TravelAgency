@@ -13,5 +13,9 @@ namespace TravelAgency.Shared.Dto
             ResultType = result;
             Reservation = reservation;
         }
+
+        public ReservationCreateResultDto()
+        {
+        }
     }
 }

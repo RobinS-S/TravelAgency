@@ -8,11 +8,13 @@
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
     xmlns:local="clr-namespace:TravelAgency.Client.Pages.Locations.Detail"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    xmlns:location="clr-namespace:TravelAgency.Client.ValueConverters.Location"
     Title="{Binding Location.Names, Converter={StaticResource TranslatedTextConverter}}"
     x:DataType="local:LocationDetailPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
+            <location:LocationTypeToStringConverter x:Key="LocationTypeToStringConverter" />
             <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>

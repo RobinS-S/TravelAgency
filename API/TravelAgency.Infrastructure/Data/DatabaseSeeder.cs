@@ -227,7 +227,7 @@ namespace TravelAgency.Infrastructure.Data
                 ResidenceId = residences[Random.Shared.Next(0, residences.Length - 1)].Id,
                 Start = DateTime.Now.AddDays(1),
                 End = DateTime.Now.AddDays(8),
-                LocationFromCoordinates = new Shared.Dto.GeoCoordinatesDto(51.5846128, 4.7975691)
+                FromAirportIATACode = "AMS" // Amsterdam Schiphol
             }, user);
 
             if(reservationResult.ResultType != ReservationCreateResultType.Succeeded)

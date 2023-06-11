@@ -100,7 +100,7 @@
                         HorizontalOptions="Center"
                         LineBreakMode="WordWrap"
                         Style="{StaticResource SubtitleStyle}"
-                        Text="{Binding Reservation.Cost, StringFormat='EUR {0}'}" />
+                        Text="{Binding Reservation.Cost, StringFormat='€ {0:F2}'}" />
 
                     <Button
                         Grid.Row="4"

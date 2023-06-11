@@ -174,10 +174,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DangerStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Danger}" />
-    </Style>
-
     <Style TargetType="ListView">
         <Setter Property="SeparatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="RefreshControlColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
@@ -447,5 +443,13 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="IsClippedToBounds" Value="True" />
+    </Style>
+
+    <Style x:Key="DangerStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Danger}" />
+    </Style>
+
+    <Style x:Key="SuccessStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Success}" />
     </Style>
 </ResourceDictionary>

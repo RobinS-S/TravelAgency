@@ -74,6 +74,18 @@ namespace TravelAgency.Client.Repositories
             return null;
         }
 
+        public async Task<List<ReservationPickedSpotDto>?> GetAllBetweenAsync(long residenceId, DateTime start, DateTime end)
+        {
+            var response = await _httpService.GetResponseAsync(new Uri($"{ApiConfig.ApiUrl}/api/{EntityName}/between?residenceId={residenceId}&from={start}&until={end}"));
+            if (response == null) return null;
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<List<ReservationPickedSpotDto>>();
+            }
+
+            return null;
+        }
+
         public async Task<ReservationCreateResultDto?> CreateAsync(CreateReservationDto dto)
         {
             var response = await _httpService.PostAsJsonAsync($"{ApiConfig.ApiUrl}/api/{EntityName}", dto);

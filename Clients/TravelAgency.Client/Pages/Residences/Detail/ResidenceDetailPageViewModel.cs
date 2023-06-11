@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.UI.Maui;
+using TravelAgency.Client.Pages.Reservations.Create;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
 
@@ -9,7 +10,7 @@ namespace TravelAgency.Client.Pages.Residences.Detail
     [QueryProperty("Id", "id")]
     public partial class ResidenceDetailPageViewModel : ObservableObject
     {
-        private readonly ResidenceRepository residenceRepository;
+        private readonly ResidenceRepository _residenceRepository;
 
         [ObservableProperty]
         private ResidenceDto? _residence;
@@ -28,14 +29,14 @@ namespace TravelAgency.Client.Pages.Residences.Detail
 
         public ResidenceDetailPageViewModel(ResidenceRepository residenceRepository)
         {
-            this.residenceRepository = residenceRepository;
+            this._residenceRepository = residenceRepository;
         }
 
         [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
-            var residence = await residenceRepository.GetByIdAsync(Id);
+            var residence = await _residenceRepository.GetByIdAsync(Id);
             if (residence != null)
             {
                 Residence = residence;
@@ -48,5 +49,8 @@ namespace TravelAgency.Client.Pages.Residences.Detail
         {
             await LoadData();
         }
+
+        [RelayCommand]
+        public async Task ViewDetails() => await Shell.Current.GoToAsync(nameof(CreateReservationPage), new Dictionary<string, object> { { "residenceId", Residence!.Id! } });
     }
 }

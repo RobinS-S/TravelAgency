@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="TravelAgency.Client.Controls.DateTimePicker"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <DatePicker
+            x:Name="DatePicker"
+            Grid.Column="0"
+            Format="d"
+            HorizontalOptions="Fill"
+            PropertyChanged="OnDatePropertyChanged"
+            VerticalOptions="Fill" />
+
+        <TimePicker
+            x:Name="TimePicker"
+            Grid.Column="1"
+            Format="t"
+            HorizontalOptions="Fill"
+            PropertyChanged="OnTimePropertyChanged"
+            VerticalOptions="Fill" />
+    </Grid>
+
+</ContentView>

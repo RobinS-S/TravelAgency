@@ -15,6 +15,7 @@ using TravelAgency.Client.Pages.Locations;
 using TravelAgency.Client.Pages.Locations.Detail;
 using TravelAgency.Client.Pages.Main;
 using TravelAgency.Client.Pages.Reservations;
+using TravelAgency.Client.Pages.Reservations.Create;
 using TravelAgency.Client.Pages.Reservations.Detail;
 using TravelAgency.Client.Pages.Residences;
 using TravelAgency.Client.Pages.Residences.Detail;
@@ -98,6 +99,8 @@ namespace TravelAgency.Client
             builder.Services.AddTransient<FlightDetailPageViewModel>();
             builder.Services.AddTransient<ProfileDetailPage>();
             builder.Services.AddTransient<ProfileDetailPageViewModel>();
+            builder.Services.AddTransient<CreateReservationPage>();
+            builder.Services.AddTransient<CreateReservationPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<LogoutPage>();
             builder.Services.AddTransient<AccountPage>();

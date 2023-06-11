@@ -16,7 +16,7 @@ namespace TravelAgency.Client.Pages.Locations
 
         protected override async void OnParentSet()
         {
-            base.OnAppearing();
+            base.OnParentSet();
 
             await _viewModel.LoadDataCommand.ExecuteAsync(null);
         }

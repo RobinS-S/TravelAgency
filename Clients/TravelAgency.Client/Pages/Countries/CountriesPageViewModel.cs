@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Repositories;
@@ -17,7 +19,7 @@ namespace TravelAgency.Client.Pages.Countries
         private bool _errorStateEnabled;
 
         [ObservableProperty]
-        private List<CountryDto> _countriesList = new();
+        private ObservableCollection<CountryDto> _countriesList = new();
 
         public CountriesPageViewModel(CountryRepository countryRepository)
         {
@@ -31,7 +33,7 @@ namespace TravelAgency.Client.Pages.Countries
             var countries = await _countryRepository.GetAllAsync();
             if (countries != null)
             {
-                CountriesList = countries;
+                CountriesList = countries.ToObservableCollection();
             }
             ErrorStateEnabled = countries == null;
             IsRefreshing = false;

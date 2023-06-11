@@ -17,7 +17,7 @@ public partial class ReservationsPage : AuthenticatedContentPage
         InitializeComponent();
     }
 
-    protected override async void OnParentSet()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 

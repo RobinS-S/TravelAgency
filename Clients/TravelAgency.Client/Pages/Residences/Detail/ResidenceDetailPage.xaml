@@ -7,6 +7,7 @@
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
     xmlns:local="clr-namespace:TravelAgency.Client.Pages.Residences.Detail"
+    xmlns:localization="using:TravelAgency.Client.Localization"
     Title="{Binding Residence.Names, Converter={StaticResource TranslatedTextConverter}}"
     x:DataType="local:ResidenceDetailPageViewModel">
     <ContentPage.Resources>
@@ -19,7 +20,6 @@
     <RefreshView IsRefreshing="{Binding IsRefreshing}">
         <ScrollView x:Name="MainScrollView">
             <VerticalStackLayout x:DataType="local:ResidenceDetailPageViewModel">
-                <controls:ErrorReloadControl />
 
                 <CarouselView
                     HeightRequest="400"
@@ -56,12 +56,19 @@
                     Style="{StaticResource DescriptionStyle}"
                     Text="{Binding Residence.Descriptions, Converter={StaticResource TranslatedTextConverter}}" />
 
+                <Button
+                    Command="{Binding ViewDetailsCommand}"
+                    HorizontalOptions="Center"
+                    Text="{localization:Translate ReserveNow}" />
+
                 <controls:CrossPlatformMapControl
                     x:Name="map"
                     Margin="8,5,8,5"
                     HeightRequest="600"
                     MyLocationEnabled="False"
                     MyLocationFollow="False" />
+
+                <controls:ErrorReloadControl />
             </VerticalStackLayout>
         </ScrollView>
     </RefreshView>

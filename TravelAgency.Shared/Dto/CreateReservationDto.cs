@@ -8,7 +8,7 @@
 
         public DateTime End { get; set; }
 
-        public GeoCoordinatesDto? LocationFromCoordinates { get; set; }
+        public string? FromAirportIATACode { get; set; }
 
         public int AmountOfPeople { get; set; }
 

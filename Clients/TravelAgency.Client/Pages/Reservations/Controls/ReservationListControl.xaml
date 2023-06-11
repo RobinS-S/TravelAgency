@@ -95,7 +95,7 @@
                             HorizontalOptions="Center"
                             LineBreakMode="WordWrap"
                             Style="{StaticResource SubtitleStyle}"
-                            Text="EUR 0,00" />
+                            Text="{Binding Cost, StringFormat='€ {0:F2}'}" />
                     </Grid>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnItemTapped" />
