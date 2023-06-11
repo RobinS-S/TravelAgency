@@ -17,6 +17,7 @@ namespace TravelAgency.Application.Mappings
             CreateMap<TranslatedText, TranslatedTextDto>();
             CreateMap<GeoCoordinates, GeoCoordinatesDto>();
             CreateMap<ReservationCreateResult, ReservationCreateResultDto>();
+            CreateMap<Reservation, ReservationPickedSpotDto>();
 
             CreateMap<Flight, FlightDto>()
                 .ForMember(f => f.Seats, b => b.MapFrom(s => s.Seats.Select(s => s.SeatNumber)));

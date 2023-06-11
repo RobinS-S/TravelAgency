@@ -23,14 +23,12 @@ namespace TravelAgency.Client.Auth.Services
         {
             try
             {
-                var response = await GetResponseAsync(new Uri(ApiConfig.ApiTestAuthenticatedUrl));
-                if (response is not { IsSuccessStatusCode: true })
-                {
-                    _authService.ResetCredentials();
-                    return false;
-                }
+                var response = await _httpClient.GetAsync(new Uri(ApiConfig.ApiTestAuthenticatedUrl));
+                if (response.StatusCode is not (HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden)) return true;
 
-                return true;
+                _authService.ResetCredentials();
+                return false;
+
             }
             catch
             {

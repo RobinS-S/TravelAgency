@@ -6,7 +6,6 @@ using CommunityToolkit.Maui.Core;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Client.Resources.Localization;
 using TravelAgency.Shared.Dto;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TravelAgency.Client.Pages.Account.Detail
 {

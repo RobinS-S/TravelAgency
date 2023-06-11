@@ -3,6 +3,7 @@ using TravelAgency.Client.Pages.Account.Detail;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Pages.Locations;
 using TravelAgency.Client.Pages.Locations.Detail;
+using TravelAgency.Client.Pages.Reservations.Create;
 using TravelAgency.Client.Pages.Reservations.Detail;
 using TravelAgency.Client.Pages.Residences;
 using TravelAgency.Client.Pages.Residences.Detail;
@@ -32,6 +33,7 @@ namespace TravelAgency.Client.Pages
             Routing.RegisterRoute(nameof(ReservationDetailPage), typeof(ReservationDetailPage));
             Routing.RegisterRoute(nameof(FlightDetailPage), typeof(FlightDetailPage));
             Routing.RegisterRoute(nameof(ProfileDetailPage), typeof(ProfileDetailPage));
+            Routing.RegisterRoute(nameof(CreateReservationPage), typeof(CreateReservationPage));
         }
 
         protected override async void OnAppearing()

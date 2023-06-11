@@ -11,11 +11,13 @@ namespace TravelAgency.Application.Services
     {
         private readonly IReservationRepository reservationRepository;
         private readonly IResidenceRepository residenceRepository;
+        private readonly ILocationRepository _locationRepository;
 
-        public ReservationService(IReservationRepository reservationRepository, IResidenceRepository residenceRepository)
+        public ReservationService(IReservationRepository reservationRepository, IResidenceRepository residenceRepository, ILocationRepository locationRepository)
         {
             this.reservationRepository = reservationRepository;
             this.residenceRepository = residenceRepository;
+            _locationRepository = locationRepository;
         }
 
         public async Task<ReservationCreateResult> CreateReservation(CreateReservationDto reservationDto, ApplicationUser tenant)
@@ -26,14 +28,16 @@ namespace TravelAgency.Application.Services
                 return new ReservationCreateResult(ReservationCreateResultType.UnknownError);
             }
 
+            var location = await _locationRepository.GetByIdAsync(residence.LocationId);
+
             var activeReservation = await reservationRepository.GetActiveByTenantIdAsync(tenant.Id);
             if (activeReservation != null)
             {
                 return new ReservationCreateResult(ReservationCreateResultType.AlreadyHaveActiveReservation);
             }
 
-            var reservationsInTimeframe = await reservationRepository.GetAllByResidenceIdAndBetweenAsync(reservationDto.ResidenceId, reservationDto.Start, reservationDto.End);
-            if (reservationsInTimeframe.Any())
+            var reservationsInTimeFrame = await reservationRepository.GetAllByResidenceIdAndBetweenAsync(reservationDto.ResidenceId, reservationDto.Start, reservationDto.End);
+            if (reservationsInTimeFrame.Any())
             {
                 return new ReservationCreateResult(ReservationCreateResultType.TimespanNotAvailable);
             }
@@ -44,7 +48,7 @@ namespace TravelAgency.Application.Services
                 return new ReservationCreateResult(ReservationCreateResultType.TooShort);
             }
 
-            var isFlightIncludedMismatch = reservationDto.FlightIncluded ^ reservationDto.LocationFromCoordinates != null;
+            var isFlightIncludedMismatch = reservationDto.FlightIncluded && string.IsNullOrWhiteSpace(reservationDto.FromAirportIATACode);
             if (isFlightIncludedMismatch)
             {
                 return new ReservationCreateResult(ReservationCreateResultType.UnknownError);
@@ -52,9 +56,14 @@ namespace TravelAgency.Application.Services
 
             var price = residence.PricePerDay * CalculateDaysBetween(reservationDto.Start, reservationDto.End);
             List<Flight> flights = new();
-            if (reservationDto.FlightIncluded && reservationDto.LocationFromCoordinates != null)
+            if (reservationDto.FlightIncluded && reservationDto.FromAirportIATACode != null)
             {
-                var airport = AirTravelInformation.GetNearestAirport(reservationDto.LocationFromCoordinates);
+                var airport = AirTravelInformation.GetAirportByIATACode(reservationDto.FromAirportIATACode);
+                if (airport == null)
+                {
+                    return new ReservationCreateResult(ReservationCreateResultType.UnknownError);
+                }
+
                 var destinationAirport = AirTravelInformation.GetNearestAirport(new(residence.Coordinates.Latitude, residence.Coordinates.Longitude));
 
                 var flightTravelTime = AirTravelInformation.CalculateFlightTravelTimeMinutes(airport, destinationAirport);
@@ -88,9 +97,8 @@ namespace TravelAgency.Application.Services
 
                 price += reservationDto.AmountOfPeople * AirTravelInformation.EstimateFlightPrice(flightTravelTime);
             }
-            // TODO: implement price on reservation or create invoice
 
-            var reservation = new Reservation(residence, tenant, residence.Location.Owner, reservationDto.Start, reservationDto.End, 999.0m, flights, reservationDto.AmountOfPeople);
+            var reservation = new Reservation(residence, tenant, location!.Owner, reservationDto.Start, reservationDto.End, price, flights, reservationDto.AmountOfPeople);
             await reservationRepository.AddAsync(reservation);
             return new ReservationCreateResult(ReservationCreateResultType.Succeeded, reservation);
         }

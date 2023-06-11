@@ -373,7 +373,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Image", b =>
@@ -396,7 +396,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Images");
+                    b.ToTable("Images", (string)null);
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Location", b =>
@@ -426,7 +426,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Reservation", b =>
@@ -466,7 +466,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Residence", b =>
@@ -492,7 +492,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Residences");
+                    b.ToTable("Residences", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -548,7 +548,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Country", b =>
                 {
-                    b.OwnsMany("TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Country.Images#TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
                         {
                             b1.Property<long>("CountryId")
                                 .HasColumnType("bigint");
@@ -567,7 +567,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasIndex("ImageId");
 
-                            b1.ToTable("Countries_Images");
+                            b1.ToTable("Countries_Images", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CountryId");
@@ -607,7 +607,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.TranslatedText", "Descriptions", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Location.Descriptions#TravelAgency.Domain.Entities.TranslatedText", "Descriptions", b1 =>
                         {
                             b1.Property<long>("LocationId")
                                 .HasColumnType("bigint");
@@ -628,13 +628,13 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasKey("LocationId", "Id");
 
-                            b1.ToTable("Locations_Descriptions");
+                            b1.ToTable("Locations_Descriptions", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("LocationId");
                         });
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Location.Images#TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
                         {
                             b1.Property<long>("LocationId")
                                 .HasColumnType("bigint");
@@ -653,7 +653,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasIndex("ImageId");
 
-                            b1.ToTable("Locations_Images");
+                            b1.ToTable("Locations_Images", (string)null);
 
                             b1.HasOne("TravelAgency.Domain.Entities.Image", null)
                                 .WithMany()
@@ -665,7 +665,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                                 .HasForeignKey("LocationId");
                         });
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.TranslatedText", "Names", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Location.Names#TravelAgency.Domain.Entities.TranslatedText", "Names", b1 =>
                         {
                             b1.Property<long>("LocationId")
                                 .HasColumnType("bigint");
@@ -686,7 +686,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasKey("LocationId", "Id");
 
-                            b1.ToTable("Locations_Names");
+                            b1.ToTable("Locations_Names", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("LocationId");
@@ -723,7 +723,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.Flight", "Flights", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Reservation.Flights#TravelAgency.Domain.Entities.Flight", "Flights", b1 =>
                         {
                             b1.Property<long>("ReservationId")
                                 .HasColumnType("bigint");
@@ -764,7 +764,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasIndex("OwnerId");
 
-                            b1.ToTable("Flight");
+                            b1.ToTable("Flight", (string)null);
 
                             b1.HasOne("TravelAgency.Domain.Entities.ApplicationUser", "Owner")
                                 .WithMany()
@@ -775,7 +775,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ReservationId");
 
-                            b1.OwnsMany("TravelAgency.Domain.Entities.FlightSeat", "Seats", b2 =>
+                            b1.OwnsMany("TravelAgency.Domain.Entities.Reservation.Flights#TravelAgency.Domain.Entities.Flight.Seats#TravelAgency.Domain.Entities.FlightSeat", "Seats", b2 =>
                                 {
                                     b2.Property<long>("FlightReservationId")
                                         .HasColumnType("bigint");
@@ -794,7 +794,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                                     b2.HasKey("FlightReservationId", "FlightId", "Id");
 
-                                    b2.ToTable("FlightSeat");
+                                    b2.ToTable("FlightSeat", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("FlightReservationId", "FlightId");
@@ -822,7 +822,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.TranslatedText", "Descriptions", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Residence.Descriptions#TravelAgency.Domain.Entities.TranslatedText", "Descriptions", b1 =>
                         {
                             b1.Property<long>("ResidenceId")
                                 .HasColumnType("bigint");
@@ -843,13 +843,13 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasKey("ResidenceId", "Id");
 
-                            b1.ToTable("Residences_Descriptions");
+                            b1.ToTable("Residences_Descriptions", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ResidenceId");
                         });
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Residence.Images#TravelAgency.Domain.Entities.EntityImage", "Images", b1 =>
                         {
                             b1.Property<long>("ResidenceId")
                                 .HasColumnType("bigint");
@@ -868,7 +868,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasIndex("ImageId");
 
-                            b1.ToTable("Residences_Images");
+                            b1.ToTable("Residences_Images", (string)null);
 
                             b1.HasOne("TravelAgency.Domain.Entities.Image", null)
                                 .WithMany()
@@ -880,7 +880,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
                                 .HasForeignKey("ResidenceId");
                         });
 
-                    b.OwnsMany("TravelAgency.Domain.Entities.TranslatedText", "Names", b1 =>
+                    b.OwnsMany("TravelAgency.Domain.Entities.Residence.Names#TravelAgency.Domain.Entities.TranslatedText", "Names", b1 =>
                         {
                             b1.Property<long>("ResidenceId")
                                 .HasColumnType("bigint");
@@ -901,7 +901,7 @@ namespace TravelAgency.Infrastructure.Data.Migrations
 
                             b1.HasKey("ResidenceId", "Id");
 
-                            b1.ToTable("Residences_Names");
+                            b1.ToTable("Residences_Names", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ResidenceId");

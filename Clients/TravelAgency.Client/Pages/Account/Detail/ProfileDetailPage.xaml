@@ -4,8 +4,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
-    xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
-    xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
     xmlns:local="clr-namespace:TravelAgency.Client.Pages.Account.Detail"
     xmlns:localization="using:TravelAgency.Client.Localization"
     Title="{localization:Translate ProfileDetailPageTitle}"

@@ -41,9 +41,7 @@ namespace TravelAgency.Infrastructure.Repositories
         public async Task<IEnumerable<Reservation>> GetAllByResidenceIdAndBetweenAsync(long residenceId, DateTime start, DateTime end)
         {
             return await dbContext.Reservations
-                .Include(r => r.Flights)
-                .Include(r => r.Residence)
-                .Where(r => r.Id == residenceId && r.Start >= start && r.End <= end).ToListAsync();
+                .Where(r => r.ResidenceId == residenceId && (r.Start >= start || r.End <= end)).ToListAsync();
         }
 
         public async Task<IEnumerable<Reservation>> GetAllByResidenceIdAsync(long residenceId)

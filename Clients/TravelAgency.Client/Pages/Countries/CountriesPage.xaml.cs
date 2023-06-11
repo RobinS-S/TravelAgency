@@ -6,17 +6,22 @@
 
         public CountriesPage(CountriesPageViewModel viewModel)
         {
-            _viewModel = viewModel;
-            BindingContext = _viewModel;
 
             InitializeComponent();
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
 
-        protected override async void OnParentSet()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             await _viewModel.LoadDataCommand.ExecuteAsync(null);
+        }
+
+        protected override async void OnParentSet()
+        {
+            base.OnParentSet();
         }
     }
 }

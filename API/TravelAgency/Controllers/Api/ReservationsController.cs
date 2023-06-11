@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -121,6 +120,16 @@ namespace TravelAgency.Controllers.Api
             return Ok(_mapper.Map<IEnumerable<ReservationDto>>(reservations));
         }
 
+        [AllowAnonymous]
+        [HttpGet("between")]
+        [ProducesResponseType(typeof(IEnumerable<ReservationPickedSpotDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ReservationPickedSpotDto>> GetAllBetween([FromQuery] long residenceId, [FromQuery] DateTime from, [FromQuery] DateTime until)
+        {
+            var reservations = await _reservationRepository.GetAllByResidenceIdAndBetweenAsync(residenceId, from, until);
+            return Ok(_mapper.Map<IEnumerable<ReservationPickedSpotDto>>(reservations));
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(ReservationCreateResultDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -132,7 +141,7 @@ namespace TravelAgency.Controllers.Api
                 return BadRequest();
             }
 
-            var result = _reservationService.CreateReservation(dto, user);
+            var result = await _reservationService.CreateReservation(dto, user);
             return Ok(_mapper.Map<ReservationCreateResultDto>(result));
         }
     }
