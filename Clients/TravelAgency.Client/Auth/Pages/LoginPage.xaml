@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TravelAgency.Client.Auth.Pages.LoginPage"
-             Title="Login">
+<ContentPage
+    x:Class="TravelAgency.Client.Auth.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
+    Title="{localization:Translate LoginPageTitle}">
     <VerticalStackLayout>
         <WebView x:Name="WebViewInstance" />
     </VerticalStackLayout>

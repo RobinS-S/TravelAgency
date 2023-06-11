@@ -13,6 +13,29 @@ namespace TravelAgency.Client.Controls
         {
             _mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
             Map = _mapControl.Map!;
+            this.PinClicked += CrossPlatformMapControl_PinClicked;
+        }
+
+        private void CrossPlatformMapControl_PinClicked(object? sender, PinClickedEventArgs e)
+        {
+            e.Handled = true;
+            var googleMapsUrl =
+                $"https://www.google.com/maps/search/?api=1&query={e.Pin.Position.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{e.Pin.Position.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    if (await Launcher.CanOpenAsync(googleMapsUrl))
+                    {
+                        await Launcher.OpenAsync(googleMapsUrl);
+                    }
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            });
         }
 
         public Pin AddPin(double latitude, double longitude, Color c, float scale = 0.7F, string label = "Pin", string address = "", bool focus = true, int resolution = 6)

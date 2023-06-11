@@ -163,7 +163,9 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een ruime suite met een kingsize bed en een prachtig uitzicht op de stad."),
                       new TranslatedText("es", "Una suite espaciosa con una cama king-size y vistas impresionantes de la ciudad.")
                   },
-                  locations[0], new GeoCoordinates(40.4182, -3.7008), 2, Random.Shared.NextDecimal(100, 150), new List<EntityImage>()
+                  locations[0], new GeoCoordinates(40.4182, -3.7008), 2, Random.Shared.NextDecimal(100, 150),
+                  new AddressInfo("Spain", "Madrid", "Community of Madrid", "28004", "Calle de Gran Via, 28"),
+                  new List<EntityImage>()
                   {
                       { new EntityImage(true, hotelMadridDeluxeSuiteImage!.Id) }
                   }),
@@ -178,7 +180,9 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een stijlvolle bungalow met een privétuin en uitzicht op de stad."),
                       new TranslatedText("es", "Un bungalow elegante con jardín privado y vista a la ciudad.")
                   },
-                  locations[1], new GeoCoordinates(41.3875, 2.1699), 4, Random.Shared.NextDecimal(50, 100), new List<EntityImage>()
+                  locations[1], new GeoCoordinates(41.3875, 2.1699), 4, Random.Shared.NextDecimal(50, 100),
+                  new AddressInfo("Spain", "Barcelona", null, "08002", "Passeig de Gracia, 43"),
+                  new List<EntityImage>()
                   {
                       { new EntityImage(true, barcelonaBungalowImage!.Id) }
                   }),
@@ -193,7 +197,9 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een luxe suite met uitzicht op de Eiffeltoren."),
                       new TranslatedText("es", "Una suite de lujo con vista a la Torre Eiffel.")
                   },
-                  locations[2], new GeoCoordinates(48.8578, 2.2950), 2, Random.Shared.NextDecimal(150, 200), new List<EntityImage>()
+                  locations[2], new GeoCoordinates(48.8578, 2.2950), 2, Random.Shared.NextDecimal(150, 200),
+                  new AddressInfo("France", "Paris", "Île-de-France", "75008", "Avenue des Champs-Élysées, 101"),
+                  new List<EntityImage>()
                   {
                       { new EntityImage(true, villaParisSuite!.Id) }
                   }),
@@ -208,7 +214,9 @@ namespace TravelAgency.Infrastructure.Data
                       new TranslatedText("nl", "Een gezellige kamer met moderne voorzieningen en uitzicht op de stad."),
                       new TranslatedText("es", "Una habitación acogedora con comodidades modernas y vista a la ciudad.")
                   },
-                  locations[3], new GeoCoordinates(43.7122, 7.2608), 2, Random.Shared.NextDecimal(80, 130), new List<EntityImage>()
+                  locations[3], new GeoCoordinates(43.7122, 7.2608), 2, Random.Shared.NextDecimal(80, 130),
+                  new AddressInfo("France", "Nice", "Provence-Alpes-Côte d'Azur", "06000", "Rue de France, 148"),
+                  new List<EntityImage>()
                   {
                       { new EntityImage(true, niceGuesthouseRoom!.Id) }
                   })

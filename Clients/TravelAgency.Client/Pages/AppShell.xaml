@@ -5,11 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:account="using:TravelAgency.Client.Pages.Account"
     xmlns:countries="using:TravelAgency.Client.Pages.Countries"
-    xmlns:createreservation="using:TravelAgency.Client.Pages.Reservations.Create"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     xmlns:locations="using:TravelAgency.Client.Pages.Locations"
     xmlns:login="using:TravelAgency.Client.Auth.Pages"
-    xmlns:main="using:TravelAgency.Client.Pages.Main"
     xmlns:reservations="using:TravelAgency.Client.Pages.Reservations"
     xmlns:residences="using:TravelAgency.Client.Pages.Residences"
     xmlns:services="clr-namespace:TravelAgency.Client.Services"
@@ -31,12 +29,6 @@
         Title="{localization:Translate PageResidencesTitle}"
         ContentTemplate="{DataTemplate residences:ResidencesPage}"
         FlyoutItemIsVisible="True" />
-
-    <ShellContent
-        Title="{localization:Translate PageMainTitle}"
-        ContentTemplate="{DataTemplate main:MainPage}"
-        FlyoutItemIsVisible="True"
-        Route="main" />
 
     <ShellContent
         Title="{localization:Translate PageAccountTitle}"
