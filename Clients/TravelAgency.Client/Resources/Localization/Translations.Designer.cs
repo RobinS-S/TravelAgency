@@ -61,6 +61,24 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount of people.
+        /// </summary>
+        internal static string AmountOfPeople {
+            get {
+                return ResourceManager.GetString("AmountOfPeople", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Call.
+        /// </summary>
+        internal static string Call {
+            get {
+                return ResourceManager.GetString("Call", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calling is not supported on this platform!.
         /// </summary>
         internal static string CallingNotSupported {
@@ -70,11 +88,38 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chairs.
+        /// </summary>
+        internal static string Chairs {
+            get {
+                return ResourceManager.GetString("Chairs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Reservation.
+        /// </summary>
+        internal static string CreateReservationPage {
+            get {
+                return ResourceManager.GetString("CreateReservationPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail is not supported on this platform!.
         /// </summary>
         internal static string EmailNotSupported {
             get {
                 return ResourceManager.GetString("EmailNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        internal static string EndDateTime {
+            get {
+                return ResourceManager.GetString("EndDateTime", resourceCulture);
             }
         }
         
@@ -93,6 +138,42 @@ namespace TravelAgency.Client.Resources.Localization {
         internal static string ErrorLoadingPage {
             get {
                 return ResourceManager.GetString("ErrorLoadingPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to flightinfo.
+        /// </summary>
+        internal static string GoToFlightInfo {
+            get {
+                return ResourceManager.GetString("GoToFlightInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to owner.
+        /// </summary>
+        internal static string GoToOwner {
+            get {
+                return ResourceManager.GetString("GoToOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to residence.
+        /// </summary>
+        internal static string GoToResidence {
+            get {
+                return ResourceManager.GetString("GoToResidence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include flight.
+        /// </summary>
+        internal static string IncludeFlight {
+            get {
+                return ResourceManager.GetString("IncludeFlight", resourceCulture);
             }
         }
         
@@ -196,6 +277,15 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flight Detail.
+        /// </summary>
+        internal static string PageFlightDetailTitle {
+            get {
+                return ResourceManager.GetString("PageFlightDetailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locations.
         /// </summary>
         internal static string PageLocationsTitle {
@@ -232,11 +322,83 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Reservations.
+        /// </summary>
+        internal static string PageMyReservationsTitle {
+            get {
+                return ResourceManager.GetString("PageMyReservationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Residences.
         /// </summary>
         internal static string PageResidencesTitle {
             get {
                 return ResourceManager.GetString("PageResidencesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Place reservation.
+        /// </summary>
+        internal static string PlaceReservation {
+            get {
+                return ResourceManager.GetString("PlaceReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile details.
+        /// </summary>
+        internal static string ProfileDetailPageTitle {
+            get {
+                return ResourceManager.GetString("ProfileDetailPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reserved spots.
+        /// </summary>
+        internal static string ReservedSpots {
+            get {
+                return ResourceManager.GetString("ReservedSpots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reserve now.
+        /// </summary>
+        internal static string ReserveNow {
+            get {
+                return ResourceManager.GetString("ReserveNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send email.
+        /// </summary>
+        internal static string SendEmail {
+            get {
+                return ResourceManager.GetString("SendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Whatsapp.
+        /// </summary>
+        internal static string SendWhatsApp {
+            get {
+                return ResourceManager.GetString("SendWhatsApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string StartDateTime {
+            get {
+                return ResourceManager.GetString("StartDateTime", resourceCulture);
             }
         }
         
@@ -277,11 +439,47 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Timeslot conflict.
+        /// </summary>
+        internal static string TimeSlotConflictError {
+            get {
+                return ResourceManager.GetString("TimeSlotConflictError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        internal static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total price.
+        /// </summary>
+        internal static string TotalPrice {
+            get {
+                return ResourceManager.GetString("TotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Try again.
         /// </summary>
         internal static string TryAgain {
             get {
                 return ResourceManager.GetString("TryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Until.
+        /// </summary>
+        internal static string Until {
+            get {
+                return ResourceManager.GetString("Until", resourceCulture);
             }
         }
         

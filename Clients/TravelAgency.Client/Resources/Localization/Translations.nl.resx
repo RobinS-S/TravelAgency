@@ -117,17 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AmountOfPeople" xml:space="preserve">
+    <value>Aantal personen</value>
+  </data>
+  <data name="Call" xml:space="preserve">
+    <value>Bel</value>
+  </data>
   <data name="CallingNotSupported" xml:space="preserve">
     <value>Bellen wordt op dit platform niet ondersteund!</value>
   </data>
+  <data name="Chairs" xml:space="preserve">
+    <value>Stoelen</value>
+  </data>
+  <data name="CreateReservationPage" xml:space="preserve">
+    <value>Maak Reservering</value>
+  </data>
   <data name="EmailNotSupported" xml:space="preserve">
     <value>E-mail wordt op dit platform niet ondersteund!</value>
+  </data>
+  <data name="EndDateTime" xml:space="preserve">
+    <value>Eind</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Foutmelding</value>
   </data>
   <data name="ErrorLoadingPage" xml:space="preserve">
     <value>Sorry, er is een fout opgetreden tijdens het laden van deze pagina.</value>
+  </data>
+  <data name="GoToFlightInfo" xml:space="preserve">
+    <value>Ga naar vluchtinfo</value>
+  </data>
+  <data name="GoToOwner" xml:space="preserve">
+    <value>Ga naar eigenaar</value>
+  </data>
+  <data name="GoToResidence" xml:space="preserve">
+    <value>Ga naar plaats</value>
+  </data>
+  <data name="IncludeFlight" xml:space="preserve">
+    <value>Inclusief vlucht</value>
   </data>
   <data name="Languages" xml:space="preserve">
     <value>Talen</value>
@@ -162,6 +189,9 @@
   <data name="PageCountriesTitle" xml:space="preserve">
     <value>Landen</value>
   </data>
+  <data name="PageFlightDetailTitle" xml:space="preserve">
+    <value>Vlucht Detail</value>
+  </data>
   <data name="PageLocationsTitle" xml:space="preserve">
     <value>Locaties</value>
   </data>
@@ -174,8 +204,32 @@
   <data name="PageMainTitle" xml:space="preserve">
     <value>Hoofdpagina</value>
   </data>
+  <data name="PageMyReservationsTitle" xml:space="preserve">
+    <value>Mijn Reserveringen</value>
+  </data>
   <data name="PageResidencesTitle" xml:space="preserve">
     <value>Verblijven</value>
+  </data>
+  <data name="PlaceReservation" xml:space="preserve">
+    <value>Plaats reservering</value>
+  </data>
+  <data name="ProfileDetailPageTitle" xml:space="preserve">
+    <value>Profiel details</value>
+  </data>
+  <data name="ReservedSpots" xml:space="preserve">
+    <value>Gereserveerde plekken</value>
+  </data>
+  <data name="ReserveNow" xml:space="preserve">
+    <value>Reserveer nu</value>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Verstuur email</value>
+  </data>
+  <data name="SendWhatsApp" xml:space="preserve">
+    <value>Verstuur Whatsapp</value>
+  </data>
+  <data name="StartDateTime" xml:space="preserve">
+    <value>Start</value>
   </data>
   <data name="SuitableFor" xml:space="preserve">
     <value>Geschikte hoeveelheid personen</value>
@@ -189,8 +243,20 @@
   <data name="Theme.Unspecified" xml:space="preserve">
     <value>Volg systeemthema</value>
   </data>
+  <data name="TimeSlotConflictError" xml:space="preserve">
+    <value>Tijdsvenster conflict</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Naar</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Totaal</value>
+  </data>
   <data name="TryAgain" xml:space="preserve">
     <value>Probeer opnieuw</value>
+  </data>
+  <data name="Until" xml:space="preserve">
+    <value>Tot</value>
   </data>
   <data name="ViewLocations" xml:space="preserve">
     <value>Bekijk locaties</value>
