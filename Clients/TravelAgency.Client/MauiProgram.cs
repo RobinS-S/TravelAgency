@@ -13,7 +13,6 @@ using TravelAgency.Client.Pages.Countries;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Pages.Locations;
 using TravelAgency.Client.Pages.Locations.Detail;
-using TravelAgency.Client.Pages.Main;
 using TravelAgency.Client.Pages.Reservations;
 using TravelAgency.Client.Pages.Reservations.Create;
 using TravelAgency.Client.Pages.Reservations.Detail;
@@ -78,7 +77,6 @@ namespace TravelAgency.Client
 
             // Add all pages and view models here for dependency injection to work
             builder.Services.AddTransient<AuthenticatedContentPage>();
-            builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<CountriesPage>();
             builder.Services.AddTransient<CountriesPageViewModel>();
             builder.Services.AddTransient<LocationsPage>();

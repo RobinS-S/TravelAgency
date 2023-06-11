@@ -35,6 +35,7 @@ namespace TravelAgency.Infrastructure.Data
                 builder.ApplyConfiguration<IImageOwningEntity>(typeof(ImageOwningEntityTypeConfiguration<>), entityType.ClrType);
                 builder.ApplyConfiguration<IGeolocationOwningEntity>(typeof(GeolocationOwningEntityTypeConfiguration<>), entityType.ClrType);
                 builder.ApplyConfiguration<IUserOwnedEntity>(typeof(UserOwnedEntityTypeConfiguration<>), entityType.ClrType);
+                builder.ApplyConfiguration<IAddressOwningEntity>(typeof(AddressOwningEntityTypeConfiguration<>), entityType.ClrType);
             }
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

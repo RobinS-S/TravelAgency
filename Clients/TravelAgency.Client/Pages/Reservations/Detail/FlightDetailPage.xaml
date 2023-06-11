@@ -22,8 +22,8 @@
         <VerticalStackLayout x:DataType="local:ReservationDetailPageViewModel">
 
             <CollectionView
-                x:Name="ReservationCollection"
                 Margin="0,1"
+                HorizontalOptions="Fill"
                 ItemsLayout="VerticalGrid"
                 ItemsSource="{Binding Reservation.Flights}">
                 <CollectionView.ItemTemplate>
@@ -31,6 +31,7 @@
                         <Frame>
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -49,6 +50,13 @@
                                     LineBreakMode="WordWrap"
                                     Style="{StaticResource TitleStyle}"
                                     Text="{Binding FlightNumber}" />
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Command="{Binding BindingContext.OpenAirportLocationForFlightCommand, Source={x:Reference MainScrollView}}"
+                                    CommandParameter="{Binding .}"
+                                    FontAttributes="Bold"
+                                    Text="{localization:Translate GoToAirport}" />
 
                                 <Label
                                     Grid.Row="1"
@@ -120,17 +128,17 @@
 
                                 <Label
                                     Grid.Row="4"
-                                    Grid.Column="1"
+                                    Grid.Column="0"
                                     FontAttributes="Bold"
                                     HorizontalOptions="Center"
-                                    LineBreakMode="WordWrap"
                                     Style="{StaticResource DescriptionStyle}"
                                     Text="{localization:Translate Chairs,
                                                                   StringFormat='{0}:'}" />
 
                                 <Label
                                     Grid.Row="4"
-                                    Grid.Column="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
                                     HorizontalOptions="Center"
                                     LineBreakMode="WordWrap"
                                     Style="{StaticResource DescriptionStyle}"

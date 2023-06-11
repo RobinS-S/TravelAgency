@@ -9,7 +9,7 @@
         public const string Scopes = "openid offline_access profile TravelAgencyAPI";
         public const string CustomProtocolRedirectUri = "travelagency://callback";
         public const string AppShellDefaultPageAfterLogin = "//account";
-        public const string AppShellDefaultPageAnonymous = "//main";
+        public const string AppShellDefaultPageAnonymous = "//countries";
 #else
 #endif
     }

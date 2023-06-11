@@ -2,7 +2,7 @@
 
 namespace TravelAgency.Domain.Entities
 {
-    public class Residence : Entity, IImageOwningEntity, IGeolocationOwningEntity
+    public class Residence : Entity, IImageOwningEntity, IGeolocationOwningEntity, IAddressOwningEntity
     {
         public ICollection<TranslatedText> Names { get; set; } = null!;
 
@@ -20,9 +20,11 @@ namespace TravelAgency.Domain.Entities
 
         public decimal PricePerDay { get; set; }
 
+        public AddressInfo? Address { get; set; }
+
         public Residence() { }
 
-        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, int suitableFor, decimal pricePerDay, ICollection<EntityImage>? images = null)
+        public Residence(ICollection<TranslatedText> names, ICollection<TranslatedText> descriptions, Location location, GeoCoordinates coordinates, int suitableFor, decimal pricePerDay, AddressInfo? addressInfo = null, ICollection<EntityImage>? images = null)
         {
             Names = names;
             Descriptions = descriptions;
@@ -30,6 +32,7 @@ namespace TravelAgency.Domain.Entities
             Coordinates = coordinates;
             SuitableFor = suitableFor;
             PricePerDay = pricePerDay;
+            Address = addressInfo;
             Images = images ?? new HashSet<EntityImage>();
         }
     }

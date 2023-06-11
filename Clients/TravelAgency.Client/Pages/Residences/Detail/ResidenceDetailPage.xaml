@@ -3,6 +3,7 @@
     x:Class="TravelAgency.Client.Pages.Residences.Detail.ResidenceDetailPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:controls="clr-namespace:TravelAgency.Client.Controls"
     xmlns:converters="clr-namespace:TravelAgency.Client.ValueConverters"
     xmlns:dto="clr-namespace:TravelAgency.Shared.Dto;assembly=TravelAgency.Shared"
@@ -14,6 +15,7 @@
         <ResourceDictionary>
             <converters:ImageIdToImageLinkConverter x:Key="ImageIdToImageLinkConverter" />
             <converters:TranslatedTextConverter x:Key="TranslatedTextConverter" />
+            <behaviors:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -60,6 +62,13 @@
                     Command="{Binding ViewDetailsCommand}"
                     HorizontalOptions="Center"
                     Text="{localization:Translate ReserveNow}" />
+
+                <Label
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding Residence.Address, Converter={StaticResource IsNotNullConverter}}"
+                    Style="{StaticResource SubtitleStyle}"
+                    Text="{Binding Residence.Address}" />
 
                 <controls:CrossPlatformMapControl
                     x:Name="map"
