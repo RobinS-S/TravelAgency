@@ -12,6 +12,8 @@ namespace TravelAgency.Client.Auth.Services
         private bool _loggingIn;
         private bool _hasAuthToken;
         public event EventHandler<bool>? AuthStatusChanged;
+        public const string AuthTokenStorageKey = "authToken";
+        public const string RefreshTokenStorageKey = "refreshToken";
 
         public AuthService(HttpClient httpClient)
         {
@@ -69,7 +71,7 @@ namespace TravelAgency.Client.Auth.Services
             return !string.IsNullOrEmpty(token);
         }
 
-        private void LoadToken(string? accessToken)
+        public void LoadToken(string? accessToken)
         {
             _httpClient.DefaultRequestHeaders.Remove("Authorization");
             _httpClient.DefaultRequestHeaders.Authorization = accessToken == null ? null : new AuthenticationHeaderValue("Bearer", accessToken);
@@ -84,10 +86,10 @@ namespace TravelAgency.Client.Auth.Services
             if (!isError)
             {
                 LoadToken(accessToken);
-                await SecureStorage.Default.SetAsync("authToken", accessToken);
+                await SecureStorage.Default.SetAsync(AuthTokenStorageKey, accessToken);
                 if (!string.IsNullOrEmpty(accessToken))
                 {
-                    await SecureStorage.Default.SetAsync("refreshToken", refreshToken);
+                    await SecureStorage.Default.SetAsync(RefreshTokenStorageKey, refreshToken);
                 }
             }
             else
@@ -98,14 +100,14 @@ namespace TravelAgency.Client.Auth.Services
 
         public void ResetCredentials()
         {
-            SecureStorage.Default.Remove("authToken");
-            SecureStorage.Default.Remove("refreshToken");
+            SecureStorage.Default?.Remove(AuthTokenStorageKey);
+            SecureStorage.Default?.Remove(RefreshTokenStorageKey);
             LoadToken(null);
             _hasAuthToken = false;
         }
 
-        public static async Task<string> GetAuthToken() => await SecureStorage.Default.GetAsync("authToken");
-        public static async Task<string> GetRefreshToken() => await SecureStorage.Default.GetAsync("refreshToken");
+        public async Task<string> GetAuthToken() => await SecureStorage.Default.GetAsync(AuthTokenStorageKey);
+        public async Task<string> GetRefreshToken() => await SecureStorage.Default.GetAsync(RefreshTokenStorageKey);
 
         public async Task<bool> RefreshToken()
         {
