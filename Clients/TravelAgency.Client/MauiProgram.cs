@@ -49,9 +49,9 @@ namespace TravelAgency.Client
 
             builder.Services.AddSingleton(new HttpClient(
 #if DEBUG
-                    new NonSecureHttpMessageHandler()) // This ignores HTTPS certificate validation errors, for example self-signed ones
+                    new NonSecureHttpMessageHandler() // This ignores HTTPS certificate validation errors, for example self-signed ones
 #endif
-            );
+            ));
 
             // Authentication and API services
             builder.Services.AddSingleton<AuthService>();
