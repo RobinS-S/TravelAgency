@@ -45,7 +45,7 @@ namespace TravelAgency.Client.Auth.Services
                 {
                     case HttpStatusCode.Unauthorized:
                         {
-                            var token = await AuthService.GetRefreshToken();
+                            var token = await _authService.GetRefreshToken();
                             if (string.IsNullOrEmpty(token))
                             {
                                 await _authService.StartLoginProcess();
@@ -86,7 +86,7 @@ namespace TravelAgency.Client.Auth.Services
                 {
                     case HttpStatusCode.Unauthorized:
                         {
-                            var token = await AuthService.GetRefreshToken();
+                            var token = await _authService.GetRefreshToken();
                             if (string.IsNullOrEmpty(token))
                             {
                                 await _authService.StartLoginProcess();
