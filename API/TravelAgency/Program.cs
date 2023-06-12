@@ -1,8 +1,7 @@
-using Duende.IdentityServer;
+using Azure.Storage;
+using Azure.Storage.Blobs;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Validation;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -25,8 +24,7 @@ namespace TravelAgency
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-
+            // Services
 			builder.Services.Configure<Config>(builder.Configuration)
 				.AddScoped(sp => sp.GetRequiredService<IOptionsSnapshot<Config>>().Value);
 
@@ -98,15 +96,24 @@ namespace TravelAgency
                 builder.Services.AddSwaggerGen();
                 builder.Services.AddScoped<IImageService, LocalImageService>();
             }
+            else
+            {
+                var azureStorageName = builder.Configuration.GetValue<string?>("AzureStorageName");
+                var azureStorageKey = builder.Configuration.GetValue<string?>("AzureStorageKey");
+                if (string.IsNullOrWhiteSpace(azureStorageKey) || string.IsNullOrWhiteSpace(azureStorageName))
+                {
+                    throw new Exception(
+                        "You must specify AzureStorageName and AzureStorageKey in configuration as this is a production environment with no way of storing files.");
+                }
+
+                builder.Services.AddSingleton(GetBlobServiceClient(azureStorageName, azureStorageKey));
+                builder.Services.AddScoped<IImageService, AzureBlobImageService>();
+            }
 
             var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-
 			app.UseHttpsRedirection();
-
 			app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseIdentityServer();
@@ -139,5 +146,16 @@ namespace TravelAgency
 
 			await app.RunAsync();
 		}
-	}
+
+        public static BlobServiceClient GetBlobServiceClient(string accountName, string key)
+        {
+            var sharedKeyCredential = new StorageSharedKeyCredential(accountName, key);
+
+            var client = new BlobServiceClient(
+                new Uri($"https://{accountName}.blob.core.windows.net"),
+                sharedKeyCredential);
+
+            return client;
+        }
+    }
 }

@@ -129,6 +129,18 @@
   <data name="Chairs" xml:space="preserve">
     <value>Chairs</value>
   </data>
+  <data name="CreateReservationError.AlreadyHaveActiveReservation" xml:space="preserve">
+    <value>You already have an active reservation!</value>
+  </data>
+  <data name="CreateReservationError.TimespanNotAvailable" xml:space="preserve">
+    <value>This timespan is invalid or already taken</value>
+  </data>
+  <data name="CreateReservationError.TooShort" xml:space="preserve">
+    <value>You need to reserve at least for one day</value>
+  </data>
+  <data name="CreateReservationError.UnknownError" xml:space="preserve">
+    <value>Unknown error while placing reservation</value>
+  </data>
   <data name="CreateReservationPage" xml:space="preserve">
     <value>Create Reservation</value>
   </data>
@@ -144,8 +156,11 @@
   <data name="ErrorLoadingPage" xml:space="preserve">
     <value>Sorry, an error occurred while loading this page.</value>
   </data>
+  <data name="GoToAirport" xml:space="preserve">
+    <value>Navigate to airport</value>
+  </data>
   <data name="GoToFlightInfo" xml:space="preserve">
-    <value>Go to flightinfo</value>
+    <value>Go to flight info</value>
   </data>
   <data name="GoToOwner" xml:space="preserve">
     <value>Go to owner</value>
@@ -181,7 +196,7 @@
     <value>Login was cancelled</value>
   </data>
   <data name="LogoutCancelled" xml:space="preserve">
-    <value>Logout was cancelled</value>
+    <value>Logging out was cancelled</value>
   </data>
   <data name="PageAccountTitle" xml:space="preserve">
     <value>My account</value>

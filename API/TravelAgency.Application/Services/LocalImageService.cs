@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.IO;
 using TravelAgency.Application.Helpers;
 using TravelAgency.Application.Services.Interfaces;
 using TravelAgency.Domain.Entities;

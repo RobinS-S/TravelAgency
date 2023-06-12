@@ -24,6 +24,9 @@ namespace TravelAgency.Infrastructure.Data
             var imageService = scope.ServiceProvider.GetRequiredService<IImageService>();
             var reservationService = scope.ServiceProvider.GetRequiredService<ReservationService>();
             var adminRoleName = Roles.AdminRoleName;
+
+            await dbContext.Database.MigrateAsync();
+
             var dataExists = await dbContext.Users.AnyAsync();
 
             var roleExist = await roleManager.RoleExistsAsync(adminRoleName);
@@ -32,6 +35,7 @@ namespace TravelAgency.Infrastructure.Data
             if (string.IsNullOrWhiteSpace(configuration.AdminUserEmail) || string.IsNullOrWhiteSpace(configuration.AdminUserPassword))
                 throw new Exception(
                     "You need to provide a default user account which will be created with the Admin role, keys: AppSettings:AdminUserEmail and AppSettings:AdminUserPassword");
+
 
             var defaultUser = new ApplicationUser
             {
@@ -246,17 +250,16 @@ namespace TravelAgency.Infrastructure.Data
 
         private static async Task<Image?> UploadImageFromSeedingImages(string fileName, ApplicationUser user, IImageService imageService)
         {
-            string imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seeding\\Images");
-            string imagePath = Path.Combine(imageFolderPath, fileName);
+            var imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.Combine("Seeding", "Images"));
+            var imagePath = Path.Combine(imageFolderPath, fileName);
 
-            if (File.Exists(imagePath))
+            if (!File.Exists(imagePath)) return null;
+
+            var imageData = await File.ReadAllBytesAsync(imagePath);
+            var formFile = CreateIFormFile(fileName, imageData);
+            if(formFile != null)
             {
-                byte[] imageData = await File.ReadAllBytesAsync(imagePath);
-                var formFile = CreateIFormFile(fileName, imageData);
-                if(formFile != null)
-                {
-                    return await imageService.AddImage(formFile, user);
-                }
+                return await imageService.AddImage(formFile, user);
             }
 
             return null;
