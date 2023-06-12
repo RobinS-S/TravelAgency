@@ -4,12 +4,12 @@ namespace TravelAgency.Client.Pages.Locations.Controls;
 
 public partial class LocationListControl : ContentView
 {
-	public LocationListControl()
-	{
-		InitializeComponent();
+    public LocationListControl()
+    {
+        InitializeComponent();
 
         SizeChanged += LocationListControl_SizeChanged;
-	}
+    }
 
     private void LocationListControl_SizeChanged(object? sender, EventArgs e)
     {

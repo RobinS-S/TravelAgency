@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using TravelAgency.Client.Pages.Locations.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
@@ -10,7 +9,7 @@ namespace TravelAgency.Client.Pages.Locations
     [QueryProperty("Country", "country")]
     public partial class LocationsPageViewModel : ObservableObject
     {
-        private readonly LocationRepository locationRepository;
+        private readonly LocationRepository _locationRepository;
 
         [ObservableProperty]
         private bool _isRefreshing;
@@ -26,17 +25,22 @@ namespace TravelAgency.Client.Pages.Locations
 
         public LocationsPageViewModel(LocationRepository locationRepository)
         {
-            this.locationRepository = locationRepository;
+            this._locationRepository = locationRepository;
         }
 
         [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
-            var locations = Country == null ? await locationRepository.GetAllAsync() : await locationRepository.GetAllByCountryIdAsync(Country.Id);
+            var locations = Country == null ? await _locationRepository.GetAllAsync() : await _locationRepository.GetAllByCountryIdAsync(Country.Id);
             if (locations != null)
             {
                 LocationsList = locations;
+                if (OperatingSystem.IsAndroid())
+                {
+                    await Task.Delay(250);
+                    LocationsList = locations;
+                }
             }
             ErrorStateEnabled = locations == null;
             IsRefreshing = false;

@@ -12,15 +12,15 @@ namespace TravelAgency.Client.Auth.Pages
             _authService = authService;
         }
 
-        protected override async void OnParentSet()
+        protected override void OnParentSet()
         {
             base.OnParentSet();
 
-            await StartLogin();
+            StartLogin();
             _isTokenCheckPerformed = true;
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
@@ -28,7 +28,7 @@ namespace TravelAgency.Client.Auth.Pages
             {
                 Content.IsVisible = false;
 
-                await StartLogin();
+                StartLogin();
 
                 _isTokenCheckPerformed = true;
             }

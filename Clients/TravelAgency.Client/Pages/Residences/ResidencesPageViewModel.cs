@@ -36,6 +36,11 @@ namespace TravelAgency.Client.Pages.Residences
             if (residences != null)
             {
                 ResidencesList = residences;
+                if (OperatingSystem.IsAndroid())
+                {
+                    await Task.Delay(250);
+                    ResidencesList = residences;
+                }
             }
             ErrorStateEnabled = residences == null;
             IsRefreshing = false;

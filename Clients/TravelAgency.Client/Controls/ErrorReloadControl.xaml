@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-             x:Class="TravelAgency.Client.Controls.ErrorReloadControl">
+<ContentView
+    x:Class="TravelAgency.Client.Controls.ErrorReloadControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:localization="clr-namespace:TravelAgency.Client.Localization">
     <StackLayout>
-        <Label Style="{StaticResource DangerStyle}" Text="{localization:Translate ErrorLoadingPage}" IsVisible="{Binding ErrorStateEnabled}" HorizontalTextAlignment="Center" />
-        <Button Command="{Binding LoadDataCommand}"  Text="{localization:Translate TryAgain}" IsVisible="{Binding ErrorStateEnabled}" HorizontalOptions="Center" />
+        <Label
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding ErrorStateEnabled}"
+            Style="{StaticResource DangerStyle}"
+            Text="{localization:Translate ErrorLoadingPage}" />
+        <Button
+            Command="{Binding LoadDataCommand}"
+            HorizontalOptions="Center"
+            IsVisible="{Binding ErrorStateEnabled}"
+            Text="{localization:Translate TryAgain}" />
     </StackLayout>
 </ContentView>

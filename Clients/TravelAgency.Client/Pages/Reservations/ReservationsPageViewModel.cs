@@ -32,6 +32,11 @@ namespace TravelAgency.Client.Pages.Reservations
             if (reservations != null)
             {
                 ReservationsList = reservations.OrderByDescending(r => r.Start).ToList();
+                if (OperatingSystem.IsAndroid())
+                {
+                    await Task.Delay(250);
+                    ReservationsList = reservations.OrderByDescending(r => r.Start).ToList();
+                }
             }
             ErrorStateEnabled = reservations == null;
             IsRefreshing = false;

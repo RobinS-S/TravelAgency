@@ -10,7 +10,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
     [QueryProperty("Id", "id")]
     public partial class CountryDetailPageViewModel : ObservableObject
     {
-        private readonly CountryRepository countryRepository;
+        private readonly CountryRepository _countryRepository;
 
         [ObservableProperty]
         private CountryDto? _country;
@@ -29,14 +29,14 @@ namespace TravelAgency.Client.Pages.Countries.Detail
 
         public CountryDetailPageViewModel(CountryRepository countryRepository)
         {
-            this.countryRepository = countryRepository;
+            this._countryRepository = countryRepository;
         }
 
         [RelayCommand]
         private async Task LoadData()
         {
             IsRefreshing = true;
-            var country = await countryRepository.GetByIdAsync(Id);
+            var country = await _countryRepository.GetByIdAsync(Id);
             if (country != null)
             {
                 Country = country;
@@ -48,7 +48,7 @@ namespace TravelAgency.Client.Pages.Countries.Detail
         [RelayCommand]
         private async Task ViewLocations()
         {
-            if(Country != null)
+            if (Country != null)
             {
                 await Shell.Current.GoToAsync(nameof(LocationsPage), new Dictionary<string, object> { { "country", Country } });
             }

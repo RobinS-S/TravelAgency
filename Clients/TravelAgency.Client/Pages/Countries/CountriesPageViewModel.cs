@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Maui.Core.Extensions;
+﻿using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using TravelAgency.Client.Pages.Countries.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Shared.Dto;
@@ -31,12 +31,17 @@ namespace TravelAgency.Client.Pages.Countries
         {
             IsRefreshing = true;
             var countries = await _countryRepository.GetAllAsync();
+            ErrorStateEnabled = countries == null;
+            IsRefreshing = false;
             if (countries != null)
             {
                 CountriesList = countries.ToObservableCollection();
+                if (OperatingSystem.IsAndroid())
+                {
+                    await Task.Delay(250);
+                    CountriesList = countries.ToObservableCollection();
+                }
             }
-            ErrorStateEnabled = countries == null;
-            IsRefreshing = false;
         }
 
         [RelayCommand]

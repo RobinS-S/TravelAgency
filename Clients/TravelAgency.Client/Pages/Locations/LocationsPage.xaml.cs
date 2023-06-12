@@ -1,6 +1,4 @@
-﻿ using TravelAgency.Shared.Dto;
-
-namespace TravelAgency.Client.Pages.Locations
+﻿namespace TravelAgency.Client.Pages.Locations
 {
     public partial class LocationsPage : ContentPage
     {

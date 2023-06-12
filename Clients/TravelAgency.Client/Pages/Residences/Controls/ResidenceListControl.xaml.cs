@@ -4,12 +4,12 @@ namespace TravelAgency.Client.Pages.Residences.Controls;
 
 public partial class ResidenceListControl : ContentView
 {
-	public ResidenceListControl()
-	{
-		InitializeComponent();
+    public ResidenceListControl()
+    {
+        InitializeComponent();
 
         SizeChanged += ResidenceListControl_SizeChanged;
-	}
+    }
 
     private void ResidenceListControl_SizeChanged(object? sender, EventArgs e)
     {
