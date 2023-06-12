@@ -4,10 +4,10 @@ namespace TravelAgency.Client.Pages.Reservations.Controls;
 
 public partial class ReservationListControl : ContentView
 {
-	public ReservationListControl()
-	{
-		InitializeComponent();
-	}
+    public ReservationListControl()
+    {
+        InitializeComponent();
+    }
 
     private async void OnItemTapped(object sender, EventArgs e)
     {

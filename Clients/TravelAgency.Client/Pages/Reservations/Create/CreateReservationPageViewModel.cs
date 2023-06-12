@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.Generic;
 using TravelAgency.Client.Pages.Reservations.Detail;
 using TravelAgency.Client.Repositories;
 using TravelAgency.Client.Resources.Localization;
@@ -8,7 +7,6 @@ using TravelAgency.Client.Services;
 using TravelAgency.Shared.Airports;
 using TravelAgency.Shared.Dto;
 using TravelAgency.Shared.Enum;
-using TravelAgency.Shared.Travel;
 
 namespace TravelAgency.Client.Pages.Reservations.Create
 {
@@ -41,11 +39,11 @@ namespace TravelAgency.Client.Pages.Reservations.Create
         private bool _isValid;
 
         [ObservableProperty]
-        private bool _isTimeSlotTaken;
+        private bool _isTimeSlotTaken = true;
 
         [ObservableProperty]
         private DateTime _start = DateTime.Now;
-        
+
         [ObservableProperty]
         private DateTime _end = DateTime.Now;
 

@@ -18,10 +18,5 @@
 
             await _viewModel.LoadDataCommand.ExecuteAsync(null);
         }
-
-        protected override async void OnParentSet()
-        {
-            base.OnParentSet();
-        }
     }
 }

@@ -10,19 +10,12 @@
     xmlns:reservationcontrols="using:TravelAgency.Client.Pages.Reservations.Controls"
     Title="{localization:Translate PageMyReservationsTitle}"
     x:DataType="local:ReservationsPageViewModel">
-    <VerticalStackLayout>
-        <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
-            <ScrollView x:Name="MainScrollView">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <controls:ErrorReloadControl Grid.Row="0" />
-                    <reservationcontrols:ReservationListControl Grid.Row="1" BindingContext="{Binding}" />
-                </Grid>
-            </ScrollView>
-        </RefreshView>
-    </VerticalStackLayout>
+    <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <ScrollView x:Name="MainScrollView">
+            <VerticalStackLayout>
+                <controls:ErrorReloadControl />
+                <reservationcontrols:ReservationListControl BindingContext="{Binding}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
 </pages:AuthenticatedContentPage>

@@ -8,7 +8,7 @@ namespace TravelAgency.Client.ValueConverters.Location
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is LocationType)
+            if (value is LocationType)
             {
                 return LocalizationResourceManager.Instance[$"LocationType.{value}"];
             }

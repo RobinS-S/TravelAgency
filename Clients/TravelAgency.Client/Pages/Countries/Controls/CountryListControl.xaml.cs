@@ -4,9 +4,9 @@ namespace TravelAgency.Client.Pages.Countries.Controls;
 
 public partial class CountryListControl : ContentView
 {
-	public CountryListControl()
-	{
-		InitializeComponent();
+    public CountryListControl()
+    {
+        InitializeComponent();
 
         SizeChanged += CountriesPage_SizeChanged;
     }

@@ -9,5 +9,7 @@
             HorizontalOptions="Center"
             Text="Welcome, logged in user!"
             VerticalOptions="Center" />
+
+        <Image Source="logo.png" />
     </VerticalStackLayout>
 </pages:AuthenticatedContentPage>

@@ -43,7 +43,7 @@ namespace TravelAgency.Client.Pages
             await _authService.LoadTokenFromStorage();
             if (_authService.HasAuthToken)
             {
-                 await _httpService.TestLogin();
+                await _httpService.TestLogin();
             }
         }
     }
