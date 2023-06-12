@@ -4,8 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
-    Title="{localization:Translate LoginPageTitle}">
+    Title="{localization:Translate PageLogoutTitle}">
     <VerticalStackLayout>
-        <WebView x:Name="WebViewInstance" />
+        <WebView x:Name="WebViewInstance" HorizontalOptions="Fill" />
     </VerticalStackLayout>
 </ContentPage>

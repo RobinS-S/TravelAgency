@@ -129,6 +129,18 @@
   <data name="Chairs" xml:space="preserve">
     <value>Stoelen</value>
   </data>
+  <data name="CreateReservationError.AlreadyHaveActiveReservation" xml:space="preserve">
+    <value>Je hebt al een actieve reservering!</value>
+  </data>
+  <data name="CreateReservationError.TimespanNotAvailable" xml:space="preserve">
+    <value>Dit tijdsbestek is ongeldig of al gekozen</value>
+  </data>
+  <data name="CreateReservationError.TooShort" xml:space="preserve">
+    <value>Je moet minstens voor een dag reserveren!</value>
+  </data>
+  <data name="CreateReservationError.UnknownError" xml:space="preserve">
+    <value>Onbekende fout opgetreden bij plaatsen reservering</value>
+  </data>
   <data name="CreateReservationPage" xml:space="preserve">
     <value>Maak Reservering</value>
   </data>
@@ -143,6 +155,9 @@
   </data>
   <data name="ErrorLoadingPage" xml:space="preserve">
     <value>Sorry, er is een fout opgetreden tijdens het laden van deze pagina.</value>
+  </data>
+  <data name="GoToAirport" xml:space="preserve">
+    <value>Navigeer naar vliegveld</value>
   </data>
   <data name="GoToFlightInfo" xml:space="preserve">
     <value>Ga naar vluchtinfo</value>
@@ -206,6 +221,9 @@
   </data>
   <data name="PageMyReservationsTitle" xml:space="preserve">
     <value>Mijn Reserveringen</value>
+  </data>
+  <data name="PageReservationsTitle" xml:space="preserve">
+    <value>Mijn reserveringen</value>
   </data>
   <data name="PageResidencesTitle" xml:space="preserve">
     <value>Verblijven</value>

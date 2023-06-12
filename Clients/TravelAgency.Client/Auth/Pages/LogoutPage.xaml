@@ -6,6 +6,6 @@
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     Title="{localization:Translate LogoutPageTitle}">
     <VerticalStackLayout>
-        <WebView x:Name="WebViewInstance" />
+        <WebView x:Name="WebViewInstance" HorizontalOptions="Fill" />
     </VerticalStackLayout>
 </ContentPage>

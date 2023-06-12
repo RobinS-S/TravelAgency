@@ -8,7 +8,7 @@
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     xmlns:pages="using:TravelAgency.Client.Auth.Pages"
     xmlns:reservationcontrols="using:TravelAgency.Client.Pages.Reservations.Controls"
-    Title="{localization:Translate PageReservationsTitle}"
+    Title="{localization:Translate PageMyReservationsTitle}"
     x:DataType="local:ReservationsPageViewModel">
     <VerticalStackLayout>
         <RefreshView Command="{Binding LoadDataCommand}" IsRefreshing="{Binding IsRefreshing}">

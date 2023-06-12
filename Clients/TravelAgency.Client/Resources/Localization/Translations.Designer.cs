@@ -97,6 +97,42 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You already have an active reservation!.
+        /// </summary>
+        internal static string CreateReservationError_AlreadyHaveActiveReservation {
+            get {
+                return ResourceManager.GetString("CreateReservationError.AlreadyHaveActiveReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This timespan is invalid or already taken.
+        /// </summary>
+        internal static string CreateReservationError_TimespanNotAvailable {
+            get {
+                return ResourceManager.GetString("CreateReservationError.TimespanNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to reserve at least for one day.
+        /// </summary>
+        internal static string CreateReservationError_TooShort {
+            get {
+                return ResourceManager.GetString("CreateReservationError.TooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error while placing reservation.
+        /// </summary>
+        internal static string CreateReservationError_UnknownError {
+            get {
+                return ResourceManager.GetString("CreateReservationError.UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Reservation.
         /// </summary>
         internal static string CreateReservationPage {
@@ -142,7 +178,16 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go to flightinfo.
+        ///   Looks up a localized string similar to Navigate to airport.
+        /// </summary>
+        internal static string GoToAirport {
+            get {
+                return ResourceManager.GetString("GoToAirport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to flight info.
         /// </summary>
         internal static string GoToFlightInfo {
             get {
@@ -250,7 +295,7 @@ namespace TravelAgency.Client.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout was cancelled.
+        ///   Looks up a localized string similar to Logging out was cancelled.
         /// </summary>
         internal static string LogoutCancelled {
             get {
