@@ -10,7 +10,7 @@
     xmlns:localization="clr-namespace:TravelAgency.Client.Localization"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Title="{localization:Translate PageFlightDetailTitle}"
-    x:DataType="local:ReservationDetailPageViewModel">
+    x:DataType="local:FlightDetailPageViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:AirportIATACodeConverter x:Key="AirportIATACodeConverter" />
@@ -19,13 +19,13 @@
     </ContentPage.Resources>
 
     <ScrollView x:Name="MainScrollView">
-        <VerticalStackLayout x:DataType="local:ReservationDetailPageViewModel">
+        <VerticalStackLayout x:DataType="local:FlightDetailPageViewModel">
 
             <CollectionView
                 Margin="0,1"
                 HorizontalOptions="Fill"
                 ItemsLayout="VerticalGrid"
-                ItemsSource="{Binding Reservation.Flights}">
+                ItemsSource="{Binding Flights}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="dto:FlightDto">
                         <Frame>
