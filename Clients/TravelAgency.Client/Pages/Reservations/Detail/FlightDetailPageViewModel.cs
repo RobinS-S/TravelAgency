@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.UI.Maui;
+using System;
 using TravelAgency.Shared.Airports;
 using TravelAgency.Shared.Dto;
 
@@ -11,6 +12,9 @@ namespace TravelAgency.Client.Pages.Reservations.Detail
     {
         [ObservableProperty]
         private ReservationDto? _reservation;
+
+        [ObservableProperty]
+        private List<FlightDto>? _flights;
 
         [ObservableProperty]
         private List<Pin> _pins = new();
@@ -28,14 +32,21 @@ namespace TravelAgency.Client.Pages.Reservations.Detail
 
             try
             {
-                if (await Launcher.CanOpenAsync(googleMapsUrl))
-                {
-                    await Launcher.OpenAsync(googleMapsUrl);
-                }
+                await Browser.Default.OpenAsync(googleMapsUrl, BrowserLaunchMode.SystemPreferred);
             }
             catch (Exception)
             {
                 // ignored
+            }
+        }
+
+        async partial void OnReservationChanged(ReservationDto? value)
+        {
+            Flights = value?.Flights?.ToList();
+            if (OperatingSystem.IsAndroid())
+            {
+                await Task.Delay(250);
+                Flights = value?.Flights?.ToList();
             }
         }
     }
